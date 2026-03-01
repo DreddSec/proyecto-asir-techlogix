@@ -317,10 +317,9 @@ proyecto-asir-techlogix/
 
 ## 👤 Autor
 
-**Viktor Paulauskis**
-
-- *Proyecto Final* - Ciclo Formativo ASIR (Administración de Sistemas Informáticos en Red) impartido por ***CEAC***
-
+Nombre: Viktor Paulauskis
+Ciclo Formativo: ASIR (Administración de Sistemas Informáticos en Red)
+Impartido por: CEAC
 ---
 
 ## 📄 Licencia
