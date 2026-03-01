@@ -89,7 +89,7 @@ La empresa **TechLogix**, dedicada a la gestión logística, ha decidido moderni
 | 50 | WIFI_GUESTS | 192.168.50.0/24 | Red WiFi invitados (aislada) |
 | 60 | SECURITY | 192.168.60.0/24 | VPN y servicios de seguridad |
 | 70 | MONITORING | 192.168.70.0/24 | Monitorización centralizada |
-| 100 | DMZ | 192.168.100.0/24 | Zona desmilitarizada |
+| 100 | DMZ | 192.168.100.0/24 | Web (Zona Desmilitarizada) |
 
 ---
 
