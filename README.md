@@ -193,7 +193,6 @@ La empresa **TechLogix**, dedicada a la gestión logística, ha decidido moderni
 
 - Instalado en pfSense monitorizando interfaces: WAN, LAN, DMZ, VPN
 - Reglas VRT + Community Rules activadas
-- Modo IPS: Bloqueo automático de amenazas detectadas
 - Protección contra escaneos de puertos y ataques DDoS
 
 ### Hardening de Servidores (Automatizado con Ansible)
