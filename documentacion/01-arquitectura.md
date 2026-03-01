@@ -27,10 +27,9 @@ Se ha implementado una **topología en estrella** con pfSense como núcleo centr
                                           │   (NAT Network) │
                                           └────────┬────────┘
                                                    │
-                                                   │ WAN: 10.10.10.4
+                                                   │ WAN
                                           ┌────────┴────────┐
-                                          │    pfSense      │
-                                          │   CE 2.7.x      │
+                                          │    pfSense      │                                                      
                                           │                 │
                                           │  • Firewall     │
                                           │  • Router       │
@@ -43,7 +42,7 @@ Se ha implementado una **topología en estrella** con pfSense como núcleo centr
   ┌────┴────┐    ┌─────┴─────┐   ┌─────┴─────┐ ┌───┴───┐ ┌─────┴─────┐   ┌─────┴─────┐   ┌─────┴─────┐
   │ VLAN 10 │    │  VLAN 20  │   │  VLAN 30  │ │VLAN 40│ │  VLAN 50  │   │  VLAN 60  │   │  VLAN 70  │
   │  ADMIN  │    │   PROD    │   │    IT     │ │SERVERS│ │WIFI GUEST │   │ SECURITY  │   │MONITORING │
-  │         │    │           │   │  .        │ │       │ │           │   │           │   │           │
+  │         │    │           │   │           │ │       │ │           │   │           │   │           │
   └────┬────┘    └─────┬─────┘   └─────┬─────┘ └───┬───┘ └───────────┘   └─────┬─────┘   └─────┬─────┘
        │               │               │           │                           │               │
   ┌────┴────┐    ┌─────┴─────┐   ┌─────┴─────┐ ┌───┴───┐                   ┌────┴────┐    ┌────┴────┐
@@ -56,7 +55,7 @@ Se ha implementado una **topología en estrella** con pfSense como núcleo centr
                                               ┌────┴────┐
                                               │VLAN 100 │
                                               │   DMZ   │
-                                              │.100.0/24│
+                                              │         │
                                               └────┬────┘
                                                    │
                                               ┌────┴────┐
@@ -91,7 +90,7 @@ Aislamiento de equipos de administradores con acceso privilegiado a todos los re
 Departamento de producción con acceso limitado a servidor de archivos (SMB) y servicios de dominio.
 
 **VLAN 30 - IT:**
-Personal técnico con acceso a servidores vía SSH, SMB y herramientas de monitorización.
+Personal técnico con acceso a DMZ y servidores vía SSH, SMB y herramientas de monitorización.
 
 **VLAN 40 - SERVERS:**
 Red de servidores internos protegida. Solo accesible desde VLANs autorizadas en puertos específicos.
@@ -114,15 +113,15 @@ Zona desmilitarizada para servicios públicos (web). Aislada de la red interna.
 
 ### 1.4.1 Servidores
 
-| Servidor | Hostname | IP | VLAN | MAC Address |
-|----------|----------|-----|------|-------------|
-| Controlador Dominio 1 | SRV-DC01 | 192.168.40.10 | 40 | Dinámica VBox |
-| Controlador Dominio 2 | SRV-DC02 | 192.168.40.14 | 40 | Dinámica VBox |
-| Servidor Archivos | SRV-FILE01 | 192.168.40.12 | 40 | Dinámica VBox |
-| Servidor Backup | SRV-BAK01 | 192.168.40.13 | 40 | Dinámica VBox |
-| Servidor Web | SRV-WEB01 | 192.168.100.8 | 100 | Dinámica VBox |
-| Servidor Seguridad | SRV-SEC01 | 192.168.60.10 | 60 | Dinámica VBox |
-| Servidor Monitorización | SRV-MON01 | 192.168.70.10 | 70 | Dinámica VBox |
+| Servidor | Hostname | IP | VLAN |
+|----------|----------|-----|------|
+| Controlador Dominio 1 | SRV-DC01 | 192.168.40.10 | 40 |
+| Controlador Dominio 2 | SRV-DC02 | 192.168.40.14 | 40 |
+| Servidor Archivos | SRV-FILE01 | 192.168.40.12 | 40 |
+| Servidor Backup | SRV-BAK01 | 192.168.40.13 | 40 |
+| Servidor Web | SRV-WEB01 | 192.168.100.8 | 100 |
+| Servidor Seguridad | SRV-SEC01 | 192.168.60.10 | 60 |
+| Servidor Monitorización | SRV-MON01 | 192.168.70.10 | 70 |
 
 ### 1.4.2 Clientes
 
@@ -138,12 +137,12 @@ Zona desmilitarizada para servicios públicos (web). Aislada de la red interna.
 |--------|-----|----------|---------|
 | pfSense WAN | 10.10.10.4 | em0 | Conexión Internet |
 | pfSense LAN | 192.168.40.1 | em1 | Gateway VLAN Servers |
-| pfSense OPT1 | 192.168.100.1 | em1.100 | Gateway DMZ |
-| pfSense OPT2 | 192.168.60.1 | em1.60 | Gateway Security |
-| pfSense OPT3 | 192.168.70.1 | em1.70 | Gateway Monitoring |
-| pfSense OPT4 | 192.168.10.1 | em1.10 | Gateway Admin |
-| pfSense OPT5 | 192.168.20.1 | em1.20 | Gateway Prod |
-| pfSense OPT6 | 192.168.30.1 | em1.30 | Gateway IT |
+| pfSense OPT1 | 192.168.100.1 | em2 | Gateway DMZ |
+| pfSense OPT2 | 192.168.60.1 | em3 | Gateway Security |
+| pfSense OPT3 | 192.168.70.1 | em4 | Gateway Monitoring |
+| pfSense OPT4 | 192.168.10.1 | em5 | Gateway Admin |
+| pfSense OPT5 | 192.168.20.1 | em6 | Gateway Prod |
+| pfSense OPT6 | 192.168.30.1 | em7 | Gateway IT |
 
 ---
 
@@ -151,8 +150,8 @@ Zona desmilitarizada para servicios públicos (web). Aislada de la red interna.
 
 ### 1.5.1 Plataforma
 
-- **Hipervisor:** Oracle VirtualBox 7.0
-- **Host:** Windows/Linux con 32GB RAM
+- **Hipervisor:** Oracle VirtualBox 7.0+
+- **Host:** Windows con 32GB RAM
 - **Almacenamiento:** SSD 500GB+
 
 ### 1.5.2 Configuración de Red en VirtualBox
@@ -231,15 +230,13 @@ Usuario Remoto → Internet → pfSense:1194 → NAT → SRV-SEC01:1194
 ### 1.7.2 Consideraciones Futuras
 
 Para un entorno de producción real se recomienda:
-- *CARP*/*VRRP* para redundancia de pfSense
+- CARP/VRRP para redundancia de pfSense
 - Cluster de almacenamiento (GlusterFS, Ceph)
 - Balanceador de carga para servicios web
 
 ---
 
 ## 1.8 Conclusiones
-
-La arquitectura implementada cumple con los siguientes requisitos:
 
 - ✅ **Segmentación:** 8 VLANs con propósitos diferenciados y securizados
 - ✅ **Seguridad:** Firewall perimetral con pfSense + IDS y firewalls host-based (UFW)
