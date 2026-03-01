@@ -312,10 +312,10 @@ proyecto-asir-techlogix/
 
 ## 👤 Autor
 
-**[Tu Nombre]**
+**Viktor Paulauskis**
 
 - Proyecto Final ASIR
-- [Nombre del Centro Educativo]
+- **CEAC**
 - Año: 2025-2026
 
 ---
