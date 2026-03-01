@@ -1,7 +1,6 @@
 # 🏢 TechLogix - Infraestructura de Red Empresarial
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Estado-Completado-brightgreen" alt="Estado">
   <img src="https://img.shields.io/badge/Plataforma-Ubuntu%20Server%2024.04-orange" alt="Plataforma">
   <img src="https://img.shields.io/badge/Virtualizaci%C3%B3n-VirtualBox-blue" alt="Virtualización">
   <img src="https://img.shields.io/badge/Firewall-pfSense-red" alt="Firewall">
