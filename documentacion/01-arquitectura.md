@@ -2,7 +2,7 @@
 
 ## 1.1 Introducción
 
-Este documento describe la arquitectura de red diseñada e implementada para la empresa TechLogix, una compañía dedicada a la gestión logística que requiere una infraestructura moderna, segura y escalable.
+Este documento describe la arquitectura de red diseñada e implementada para la empresa ***TechLogix***, una compañía dedicada a la gestión logística que requiere una infraestructura moderna, segura y escalable.
 
 La arquitectura sigue un modelo de defensa en profundidad con múltiples capas de seguridad, segmentación mediante VLANs, y servicios centralizados para facilitar la administración.
 
@@ -43,12 +43,12 @@ Se ha implementado una **topología en estrella** con pfSense como núcleo centr
   ┌────┴────┐    ┌─────┴─────┐   ┌─────┴─────┐ ┌───┴───┐ ┌─────┴─────┐   ┌─────┴─────┐   ┌─────┴─────┐
   │ VLAN 10 │    │  VLAN 20  │   │  VLAN 30  │ │VLAN 40│ │  VLAN 50  │   │  VLAN 60  │   │  VLAN 70  │
   │  ADMIN  │    │   PROD    │   │    IT     │ │SERVERS│ │WIFI GUEST │   │ SECURITY  │   │MONITORING │
-  │ .10.0/24│    │  .20.0/24 │   │  .30.0/24 │ │.40.0/24│ │  .50.0/24 │   │  .60.0/24 │   │  .70.0/24 │
+  │         │    │           │   │  .        │ │       │ │           │   │           │   │           │
   └────┬────┘    └─────┬─────┘   └─────┬─────┘ └───┬───┘ └───────────┘   └─────┬─────┘   └─────┬─────┘
        │               │               │           │                           │               │
   ┌────┴────┐    ┌─────┴─────┐   ┌─────┴─────┐ ┌───┴───┐                   ┌────┴────┐    ┌────┴────┐
   │CLI-WIN  │    │  Equipos  │   │ CLI-IT    │ │ DC01  │                   │ SEC01   │    │ MON01   │
-  │ ADMIN   │    │   Prod    │   │ Debian    │ │ DC02  │                   │ OpenVPN │    │ Zabbix  │
+  │ ADMIN   │    │Produccion │   │ Debian    │ │ DC02  │                   │ OpenVPN │    │ Zabbix  │
   │         │    │           │   │           │ │FILE01 │                   │         │    │ Grafana │
   └─────────┘    └───────────┘   └───────────┘ │BAK01  │                   └─────────┘    │ Ansible │
                                                └───┬───┘                                  └─────────┘
@@ -91,7 +91,7 @@ Aislamiento de equipos de administradores con acceso privilegiado a todos los re
 Departamento de producción con acceso limitado a servidor de archivos (SMB) y servicios de dominio.
 
 **VLAN 30 - IT:**
-Personal técnico con acceso a servidores vía SSH, SMB, y herramientas de monitorización.
+Personal técnico con acceso a servidores vía SSH, SMB y herramientas de monitorización.
 
 **VLAN 40 - SERVERS:**
 Red de servidores internos protegida. Solo accesible desde VLANs autorizadas en puertos específicos.
@@ -100,7 +100,7 @@ Red de servidores internos protegida. Solo accesible desde VLANs autorizadas en 
 Red completamente aislada para invitados. Solo permite acceso a Internet (HTTP/HTTPS y DNS). Bloqueada de toda red interna.
 
 **VLAN 60 - SECURITY:**
-Servicios de seguridad (OpenVPN). Acceso controlado hacia recursos internos.
+Servicios de seguridad (OpenVPN). Acceso controlado hacia recursos internos mediante protocolo VPN.
 
 **VLAN 70 - MONITORING:**
 Servidor de monitorización con acceso de sondeo (polling) a todos los servidores.
@@ -185,7 +185,7 @@ Todas las máquinas virtuales utilizan **Redes Internas (Internal Network)** con
 
 ## 1.6 Flujo de Tráfico
 
-### 1.6.1 Tráfico Norte-Sur (Internet)
+### 1.6.1 Tráfico hacia Internet
 
 ```
 Cliente Interno → pfSense (NAT) → Internet
@@ -195,7 +195,7 @@ Cliente Interno → pfSense (NAT) → Internet
               Reglas Firewall
 ```
 
-### 1.6.2 Tráfico Este-Oeste (Entre VLANs)
+### 1.6.2 Tráfico entre VLANs
 
 ```
 VLAN Admin → pfSense → Reglas Firewall → VLAN Servers
@@ -231,7 +231,7 @@ Usuario Remoto → Internet → pfSense:1194 → NAT → SRV-SEC01:1194
 ### 1.7.2 Consideraciones Futuras
 
 Para un entorno de producción real se recomienda:
-- CARP/VRRP para redundancia de pfSense
+- *CARP*/*VRRP* para redundancia de pfSense
 - Cluster de almacenamiento (GlusterFS, Ceph)
 - Balanceador de carga para servicios web
 
@@ -239,10 +239,10 @@ Para un entorno de producción real se recomienda:
 
 ## 1.8 Conclusiones
 
-La arquitectura implementada cumple con los requisitos de:
+La arquitectura implementada cumple con los siguientes requisitos:
 
-- ✅ **Segmentación:** 8 VLANs con propósitos diferenciados
-- ✅ **Seguridad:** Firewall perimetral + IDS + firewalls host-based
-- ✅ **Escalabilidad:** Diseño modular permite agregar VLANs y servidores
+- ✅ **Segmentación:** 8 VLANs con propósitos diferenciados y securizados
+- ✅ **Seguridad:** Firewall perimetral con pfSense + IDS y firewalls host-based (UFW)
+- ✅ **Escalabilidad:** Diseño modular permitiendo agregar VLANs y servidores
 - ✅ **Administración:** Gestión centralizada desde VLAN de monitorización
 - ✅ **Acceso remoto:** VPN con autenticación contra Active Directory
