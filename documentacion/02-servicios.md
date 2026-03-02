@@ -44,13 +44,11 @@ TECHLOGIX.LOCAL
 │       └── laura.fernandez
 │
 ├── OU=Grupos
-│   ├── GRP_Administracion
-│   ├── GRP_IT
-│   └── GRP_Produccion
-│
-└── OU=Equipos
-    ├── OU=Servidores
-    └── OU=Clientes
+    ├── GRP_Administracion
+    ├── GRP_IT
+    └── GRP_Produccion
+
+
 ```
 
 ### 2.2.4 Usuarios del Sistema
