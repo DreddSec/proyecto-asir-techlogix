@@ -62,24 +62,6 @@ TECHLOGIX.LOCAL
 | pedro.sanchez | Pedro Sánchez | Producción | GRP_Produccion |
 | laura.fernandez | Laura Fernández | Producción | GRP_Produccion |
 
-### 2.2.5 Comandos de Administración
-
-```bash
-# Listar usuarios
-samba-tool user list
-
-# Crear usuario
-samba-tool user create nombre.apellido --given-name="Nombre" --surname="Apellido"
-
-# Añadir usuario a grupo
-samba-tool group addmembers "GRP_IT" david.garcia
-
-# Listar miembros de grupo
-samba-tool group listmembers "GRP_IT"
-
-# Verificar replicación
-samba-tool drs showrepl
-```
 
 ### 2.2.6 Archivos de Configuración
 
@@ -89,9 +71,12 @@ samba-tool drs showrepl
 [global]
     workgroup = TECHLOGIX
     realm = TECHLOGIX.LOCAL
-    netbios name = DC01
+    netbios name = SRV-DC01
     server role = active directory domain controller
     dns forwarder = 192.168.40.1
+    bind interfaces only = yes
+    interfaces = lo 192.168.40.10/24
+    ldap server require strong auth = no
     
     # Permitir autenticación LDAP sin cifrar (para OpenVPN)
     ldap server require strong auth = no
@@ -123,7 +108,7 @@ samba-tool drs showrepl
               ▼                             ▼
     ┌─────────────────┐           ┌─────────────────┐
     │    Consultas    │           │    Consultas    │
-    │    Externas     │           │  techlogix.local│
+    │    Externas     │           │ techlogix.local │
     │   (google.com)  │           │                 │
     └────────┬────────┘           └────────┬────────┘
              │                             │
@@ -157,40 +142,23 @@ Para que las consultas del dominio interno se resuelvan correctamente:
 | srv-sec01.techlogix.local | A | 192.168.60.10 |
 | srv-mon01.techlogix.local | A | 192.168.70.10 |
 
-### 2.3.4 Verificación DNS
-
-```bash
-# Desde cualquier servidor
-nslookup techlogix.local
-nslookup dc01.techlogix.local
-nslookup google.com
-
-# Verificar servidor DNS usado
-cat /etc/resolv.conf
-```
-
 ---
 
 ## 2.4 DHCP
 
 ### 2.4.1 Configuración por VLAN
 
-El servicio DHCP se proporciona desde pfSense para cada VLAN de clientes:
+El servicio DHCP se proporciona desde DC01/02 para cada VLAN de clientes:
 
 | VLAN | Rango DHCP | Gateway | DNS |
 |------|------------|---------|-----|
 | ADMIN (10) | 192.168.10.100 - .200 | 192.168.10.1 | 192.168.40.10 |
 | PROD (20) | 192.168.20.100 - .200 | 192.168.20.1 | 192.168.40.10 |
 | IT (30) | 192.168.30.100 - .200 | 192.168.30.1 | 192.168.40.10 |
-| WIFI_GUESTS (50) | 192.168.50.100 - .200 | 192.168.50.1 | 8.8.8.8 |
+| WIFI_GUESTS (50) | 192.168.50.10 - .200 | 192.168.50.1 | 8.8.8.8 |
 
-**Nota:** WIFI_GUESTS usa DNS público (8.8.8.8) para evitar acceso a resolución de nombres internos.
+ **WIFI_GUESTS** usa *DNS público* (8.8.8.8) para evitar acceso a resolución de nombres internos.
 
-### 2.4.2 Reservas DHCP
-
-Los servidores utilizan IP estática configurada directamente en el sistema operativo, no reservas DHCP.
-
----
 
 ## 2.5 Servidor de Archivos (SMB)
 
@@ -215,67 +183,75 @@ SRV-FILE01 actúa como servidor de archivos utilizando Samba integrado con el do
 ```ini
 [global]
     workgroup = TECHLOGIX
-    security = ADS
     realm = TECHLOGIX.LOCAL
+    security = ADS
+    log level = 3 auth:5
+    log file = /var/log/samba/log.%m
+    max log size = 50000
     
     # Winbind
     winbind use default domain = yes
     winbind enum users = yes
     winbind enum groups = yes
-    
+    winbind separator = +
+
     # Mapeo de IDs
     idmap config * : backend = tdb
     idmap config * : range = 3000-7999
     idmap config TECHLOGIX : backend = rid
     idmap config TECHLOGIX : range = 10000-999999
+    template shell = /bin/bash
 
 [Comun]
     path = /srv/compartido/comun
     browseable = yes
     read only = no
     valid users = @"TECHLOGIX\Domain Users"
-    create mask = 0660
-    directory mask = 0770
+    create mask = 0664
+    directory mask = 0775
 
 [Administracion]
     path = /srv/compartido/administracion
     browseable = yes
     read only = no
-    valid users = +"TECHLOGIX\GRP_Administracion"
+    valid users = @"TECHLOGIX+GRP_Administracion"
     create mask = 0660
     directory mask = 0770
+    audit = yes
 
 [IT]
     path = /srv/compartido/it
     browseable = yes
     read only = no
-    valid users = +"TECHLOGIX\GRP_IT"
+    valid users = @"TECHLOGIX+GRP_IT"
     create mask = 0660
     directory mask = 0770
+    audit = yes
 
 [Produccion]
     path = /srv/compartido/produccion
     browseable = yes
     read only = no
-    valid users = +"TECHLOGIX\GRP_Produccion"
+    valid users = @"TECHLOGIX+GRP_Produccion"
     create mask = 0660
     directory mask = 0770
+    audit = yes
 ```
 
 ### 2.5.4 Permisos de Sistema de Archivos
 
 ```bash
 # Propietarios y grupos
-chown root:grp_administracion /srv/compartido/administracion
-chown root:grp_it /srv/compartido/it
-chown root:grp_produccion /srv/compartido/produccion
-chown root:"domain users" /srv/compartido/comun
+root:grp_administracion /srv/compartido/administracion
+root:grp_it /srv/compartido/it
+root:grp_produccion /srv/compartido/produccion
+root:domain users /srv/compartido/comun
 
 # Permisos
-chmod 2770 /srv/compartido/administracion
-chmod 2770 /srv/compartido/it
-chmod 2770 /srv/compartido/produccion
-chmod 2775 /srv/compartido/comun
+drwxrws--- /srv/compartido/administracion
+drwxrws--- /srv/compartido/it
+drwxrws--- /srv/compartido/produccion
+drwxrwsr-x /srv/compartido/comun
 ```
 
 ### 2.5.5 Acceso desde Clientes
@@ -299,7 +275,7 @@ mount -t cifs //192.168.40.12/IT /mnt/it -o user=david.garcia
 
 ### 2.6.1 Descripción
 
-vsftpd configurado en SRV-FILE01 para transferencias de archivos, principalmente utilizado por personal IT mediante acceso VPN.
+Configurado en SRV-FILE01 *vsftpd* para transferencias de archivos seguras, principalmente utilizado por personal IT mediante acceso VPN.
 
 ### 2.6.2 Configuración
 
@@ -321,21 +297,13 @@ allow_writeable_chroot=YES
 secure_chroot_dir=/var/run/vsftpd/empty
 pam_service_name=vsftpd
 pasv_enable=YES
-pasv_min_port=40000
-pasv_max_port=50000
-```
-
-### 2.6.3 Usuario FTP
-
-```bash
-# Crear usuario local para FTP
-useradd -m -d /srv/compartido/it -s /bin/bash ftpdavid
-echo "ftpdavid:password" | chpasswd
+pasv_min_port=10000
+pasv_max_port=10100
 ```
 
 ### 2.6.4 Acceso via VPN
 
-Los usuarios IT conectan mediante VPN y acceden al servidor FTP:
+Los usuarios IT conectan mediante *VPN* y acceden al servidor FTP:
 
 ```bash
 # Desde cliente VPN (IP 10.8.0.x)
