@@ -306,6 +306,9 @@ pasv_max_port=10100
 Los usuarios IT conectan mediante *VPN* y acceden al servidor FTP:
 
 ```bash
+# Conexion conarchivo .opvn del cliente
+sudo openvpn --config david-vpn.ovpn
+
 # Desde cliente VPN (IP 10.8.0.x)
 ftp 192.168.40.12
 ```
