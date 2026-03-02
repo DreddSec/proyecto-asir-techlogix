@@ -143,6 +143,7 @@ Zona desmilitarizada para servicios públicos (web). Aislada de la red interna.
 | pfSense OPT4 | 192.168.10.1 | em5 | Gateway Admin |
 | pfSense OPT5 | 192.168.20.1 | em6 | Gateway Prod |
 | pfSense OPT6 | 192.168.30.1 | em7 | Gateway IT |
+| pfsense OPT7 | 192.168.50.1 | em8 | Gateway WIFI_GUESTS |
 
 ---
 
@@ -151,8 +152,7 @@ Zona desmilitarizada para servicios públicos (web). Aislada de la red interna.
 ### 1.5.1 Plataforma
 
 - **Hipervisor:** Oracle VirtualBox 7.0+
-- **Host:** Windows con 32GB RAM
-- **Almacenamiento:** SSD 500GB+
+- **Host:** Windows
 
 ### 1.5.2 Configuración de Red en VirtualBox
 
@@ -171,14 +171,14 @@ Todas las máquinas virtuales utilizan **Redes Internas (Internal Network)** con
 
 | Servidor | RAM | CPU | Disco | Notas |
 |----------|-----|-----|-------|-------|
-| pfSense | 1 GB | 1 | 20 GB | FreeBSD |
-| DC01 | 2 GB | 2 | 40 GB | Samba AD |
-| DC02 | 2 GB | 2 | 40 GB | Samba AD réplica |
-| FILE01 | 1 GB | 1 | 40 GB | SMB + FTP |
-| BAK01 | 2 GB | 2 | 40 GB + RAID 5 | Bacula |
-| WEB01 | 1 GB | 1 | 40 GB | LAMP + WordPress |
-| SEC01 | 1 GB | 1 | 20 GB | OpenVPN |
-| MON01 | 2 GB | 2 | 40 GB | Zabbix + Grafana |
+| pfSense | 2 GB | 1 | 20 GB | FreeBSD |
+| DC01 | 2 GB | 1 | 100 GB | Samba AD |
+| DC02 | 2 GB | 1 | 40 GB | Samba AD réplica |
+| FILE01 | 2 GB | 1 | 100 GB | SMB + FTP |
+| BAK01 | 2 GB | 1 | 40 GB/RAID 5 | Bacula |
+| WEB01 | 2 GB | 1 | 40 GB | LAMP + WordPress |
+| SEC01 | 2 GB | 1 | 40 GB | OpenVPN |
+| MON01 | 2 GB | 2 | 50 GB | Zabbix + Grafana |
 
 ---
 
@@ -225,7 +225,7 @@ Usuario Remoto → Internet → pfSense:1194 → NAT → SRV-SEC01:1194
 |----------|----------|------------|------|
 | Active Directory | DC01 | DC02 | Replicación Samba |
 | DNS | DC01 | DC02 | Integrado con AD |
-| Almacenamiento Backup | RAID 5 | Google Drive | 3-2-1 Strategy |
+| Almacenamiento Backup | RAID 5 | Google Drive | Estrategia 3-2-1 |
 
 ### 1.7.2 Consideraciones Futuras
 
@@ -238,8 +238,8 @@ Para un entorno de producción real se recomienda:
 
 ## 1.8 Conclusiones
 
-- ✅ **Segmentación:** 8 VLANs con propósitos diferenciados y securizados
+- ✅ **Segmentación:** 9 VLANs con propósitos diferenciados y securizados
 - ✅ **Seguridad:** Firewall perimetral con pfSense + IDS y firewalls host-based (UFW)
 - ✅ **Escalabilidad:** Diseño modular permitiendo agregar VLANs y servidores
-- ✅ **Administración:** Gestión centralizada desde VLAN de monitorización
+- ✅ **Administración:** Gestión centralizada desde la VLAN de monitorización
 - ✅ **Acceso remoto:** VPN con autenticación contra Active Directory
