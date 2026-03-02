@@ -22,7 +22,6 @@ Se ha implementado un dominio Active Directory utilizando **Samba 4** como alter
 | Parámetro | Valor |
 |-----------|-------|
 | Nombre de Dominio | TECHLOGIX.LOCAL |
-| Nivel Funcional | Windows Server 2008 R2 |
 | Controlador Primario | SRV-DC01 (192.168.40.10) |
 | Controlador Secundario | SRV-DC02 (192.168.40.14) |
 
