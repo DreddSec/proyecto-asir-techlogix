@@ -65,7 +65,7 @@ TECHLOGIX.LOCAL
 
 ### 2.2.6 Archivos de Configuración
 
-**Ubicación:** `/etc/samba/smb.conf`
+**Ubicación: DC01** `/etc/samba/smb.conf`
 
 ```ini
 [global]
@@ -77,6 +77,7 @@ TECHLOGIX.LOCAL
     bind interfaces only = yes
     interfaces = lo 192.168.40.10/24
     ldap server require strong auth = no
+    encrypt password = yes
     
     # Permitir autenticación LDAP sin cifrar (para OpenVPN)
     ldap server require strong auth = no
