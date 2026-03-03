@@ -51,14 +51,6 @@ Este documento describe el sistema de monitorización implementado en TechLogix 
 | Base de Datos | MySQL 8.0 |
 | URL | http://192.168.70.10/zabbix |
 
-### 5.3.2 Credenciales por Defecto
-
-| Usuario | Contraseña | Rol |
-|---------|------------|-----|
-| Admin | zabbix | Super Admin |
-
-**Nota:** Se recomienda cambiar la contraseña tras el primer acceso.
-
 ### 5.3.3 Instalación
 
 ```bash
