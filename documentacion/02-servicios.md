@@ -134,8 +134,8 @@ Para que las consultas del dominio interno se resuelvan correctamente:
 
 | Registro | Tipo | Valor |
 |----------|------|-------|
-| dc01.techlogix.local | A | 192.168.40.10 |
-| dc02.techlogix.local | A | 192.168.40.14 |
+| srv-dc01.techlogix.local | A | 192.168.40.10 |
+| srv-dc02.techlogix.local | A | 192.168.40.14 |
 | srv-file01.techlogix.local | A | 192.168.40.12 |
 | srv-bak01.techlogix.local | A | 192.168.40.13 |
 | srv-web01.techlogix.local | A | 192.168.100.8 |
