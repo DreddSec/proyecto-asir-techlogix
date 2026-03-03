@@ -641,8 +641,7 @@ La implementación de Ansible ha permitido:
 - ✅ Aplicar hardening consistente en todos los servidores
 - ✅ Reducir tiempo de configuración de horas a minutos
 - ✅ Garantizar configuraciones homogéneas
-- ✅ Documentar la infraestructura como código
-- ✅ Facilitar la recuperación ante desastres
+- ✅ Manipular la infraestructura como código
 
 ---
 
