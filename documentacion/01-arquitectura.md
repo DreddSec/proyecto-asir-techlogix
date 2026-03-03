@@ -41,15 +41,15 @@ Se ha implementado una **topología en estrella** con pfSense como núcleo centr
        │               │               │           │           │               │               │
   ┌────┴────┐    ┌─────┴─────┐   ┌─────┴─────┐ ┌───┴───┐ ┌─────┴─────┐   ┌─────┴─────┐   ┌─────┴─────┐
   │ VLAN 10 │    │  VLAN 20  │   │  VLAN 30  │ │VLAN 40│ │  VLAN 50  │   │  VLAN 60  │   │  VLAN 70  │
-  │  ADMIN  │    │   PROD    │   │    IT     │ │SERVERS│ │WIFI GUEST │   │ SECURITY  │   │MONITORING │
+  │  ADMIN  │    │   PROD    │   │    IT     │ │SERVERS│ │WIFI GUEST │   │    SEC    │   │    MON    │
   │         │    │           │   │           │ │       │ │           │   │           │   │           │
   └────┬────┘    └─────┬─────┘   └─────┬─────┘ └───┬───┘ └───────────┘   └─────┬─────┘   └─────┬─────┘
        │               │               │           │                           │               │
   ┌────┴────┐    ┌─────┴─────┐   ┌─────┴─────┐ ┌───┴───┐                   ┌────┴────┐    ┌────┴────┐
-  │CLI-WIN  │    │  Equipos  │   │ CLI-IT    │ │ DC01  │                   │ SEC01   │    │ MON01   │
-  │ ADMIN   │    │Produccion │   │ Debian    │ │ DC02  │                   │ OpenVPN │    │ Zabbix  │
+  │CLI-ADMIN│    │  Equipos  │   │  CLI-IT   │ │ DC01  │                   │ SEC01   │    │ MON01   │
+  │ Windows │    │Produccion │   │  Debian   │ │ DC02  │                   │ OpenVPN │    │ Zabbix  │
   │         │    │           │   │           │ │FILE01 │                   │         │    │ Grafana │
-  └─────────┘    └───────────┘   └───────────┘ │BAK01  │                   └─────────┘    │ Ansible │
+  └─────────┘    └───────────┘   └───────────┘ │ BAK01 │                   └─────────┘    │ Ansible │
                                                └───┬───┘                                  └─────────┘
                                                    │
                                               ┌────┴────┐
@@ -59,7 +59,7 @@ Se ha implementado una **topología en estrella** con pfSense como núcleo centr
                                               └────┬────┘
                                                    │
                                               ┌────┴────┐
-                                              │ WEB01   │
+                                              │  WEB01  │
                                               │WordPress│
                                               └─────────┘
 ```
@@ -77,8 +77,8 @@ Se ha implementado una **topología en estrella** con pfSense como núcleo centr
 | 30 | IT | 192.168.30.0/24 | 192.168.30.1 | Departamento técnico |
 | 40 | SERVERS | 192.168.40.0/24 | 192.168.40.1 | Servidores internos |
 | 50 | WIFI_GUESTS | 192.168.50.0/24 | 192.168.50.1 | Red WiFi invitados |
-| 60 | SECURITY | 192.168.60.0/24 | 192.168.60.1 | VPN y seguridad |
-| 70 | MONITORING | 192.168.70.0/24 | 192.168.70.1 | Monitorización |
+| 60 | SEC | 192.168.60.0/24 | 192.168.60.1 | VPN y seguridad |
+| 70 | MON | 192.168.70.0/24 | 192.168.70.1 | Monitorización |
 | 100 | DMZ | 192.168.100.0/24 | 192.168.100.1 | Zona desmilitarizada |
 
 ### 1.3.2 Justificación de la Segmentación
@@ -98,10 +98,10 @@ Red de servidores internos protegida. Solo accesible desde VLANs autorizadas en 
 **VLAN 50 - WIFI_GUESTS:**
 Red completamente aislada para invitados. Solo permite acceso a Internet (HTTP/HTTPS y DNS). Bloqueada de toda red interna.
 
-**VLAN 60 - SECURITY:**
+**VLAN 60 - SEC:**
 Servicios de seguridad (OpenVPN). Acceso controlado hacia recursos internos mediante protocolo VPN.
 
-**VLAN 70 - MONITORING:**
+**VLAN 70 - MON:**
 Servidor de monitorización con acceso de sondeo (polling) a todos los servidores.
 
 **VLAN 100 - DMZ:**
