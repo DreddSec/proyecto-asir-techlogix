@@ -76,7 +76,6 @@ TECHLOGIX.LOCAL
     dns forwarder = 192.168.40.1
     bind interfaces only = yes
     interfaces = lo 192.168.40.10/24
-    ldap server require strong auth = no
     encrypt password = yes
     
     # Permitir autenticación LDAP sin cifrar (para OpenVPN)
