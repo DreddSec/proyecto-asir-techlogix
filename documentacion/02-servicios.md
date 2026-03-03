@@ -311,6 +311,7 @@ sudo openvpn --config david-vpn.ovpn
 
 # Desde cliente VPN (IP 10.8.0.x)
 ftp 192.168.40.12
+smbclient //192.168.40.12/
 ```
 
 ---
