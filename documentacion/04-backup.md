@@ -32,22 +32,22 @@ La regla 3-2-1 establece:
          │ (Puerto 9102)
          ▼
 ┌─────────────────┐
-│   COPIA 1       │
+│     COPIA 1     │
 │   (Original)    │
 │                 │
-│ Datos en cada   │
-│ servidor        │
+│                 │
+│                 │
 └────────┬────────┘
          │
          │ Red interna
          │
          ▼
 ┌─────────────────┐
-│   COPIA 2       │
-│   (Local)       │
+│    COPIA 2      │
+│    (Local)      │
 │                 │
-│ SRV-BAK01       │
-│ RAID 5          │
+│   SRV-BAK01     │
+│    RAID 5       │
 │ /raid5/bacula   │
 └────────┬────────┘
          │
@@ -55,12 +55,12 @@ La regla 3-2-1 establece:
          │
          ▼
 ┌─────────────────┐
-│   COPIA 3       │
-│   (Cloud)       │
+│     COPIA 3     │
+│     (Cloud)     │
 │                 │
-│ Google Drive    │
-│ TechLogix-      │
-│ Backups/        │
+│  Google Drive   │
+│     gdrive:     │
+│ backups/bacula  │
 └─────────────────┘
 ```
 
@@ -463,15 +463,6 @@ else
 fi
 ```
 
-### 4.7.2 Alertas
-
-Los errores de backup generan alertas en:
-- Zabbix (monitorización de servicios)
-- Email (si está configurado)
-- Logs del sistema
-
----
-
 ## 4.8 Volúmenes de Backup
 
 ### 4.8.1 Estado Actual
@@ -495,7 +486,7 @@ El sistema de backup implementado cumple con:
 
 - ✅ **Estrategia 3-2-1:** 3 copias, 2 medios, 1 offsite
 - ✅ **Automatización:** Backups programados sin intervención
-- ✅ **Redundancia local:** RAID 5 protege contra fallo de disco
+- ✅ **Redundancia local:** RAID 5 protege contra fallo de 1 disco
 - ✅ **Offsite:** Google Drive para recuperación ante desastres
 - ✅ **Granularidad:** Full, Diferencial, Incremental
 - ✅ **Monitorización:** Alertas y verificación de integridad
