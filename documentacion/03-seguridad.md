@@ -142,16 +142,16 @@ Reglas similares a OPT4 con acceso restringido a AD y SMB.
 - **Modo:** IPS (bloqueo activo)
 - **Interfaces monitorizadas:** WAN, LAN, OPT1 (DMZ), OPT2 (VPN)
 
-### 3.4.2 Reglas Activadas
+### 3.4.2 Reglas Activadas (IPS Policy)
 
-| Categoría | Descripción |
+- Politicas IPS predefenidas en las siguientes interfaces:
+
+| Interfaz | Politica |
 |-----------|-------------|
-| snort_community | Reglas de la comunidad |
-| emerging-scan | Detección de escaneos |
-| emerging-dos | Ataques DDoS |
-| emerging-exploit | Exploits conocidos |
-| emerging-web_server | Ataques web |
-| emerging-policy | Violaciones de política |
+| WAN | Connectivity |
+| LAN | Balancend |
+| DMZ | Balanced |
+| OPT2 | Balanced |
 
 ### 3.4.3 Preprocesadores
 
@@ -169,14 +169,6 @@ Sensitivity Level: Medium
 Detect Scan Type: All
 Memory Cap: 10000000
 ```
-
-### 3.4.5 Acciones Automáticas
-
-- IPs maliciosas se bloquean automáticamente
-- Tiempo de bloqueo: Configurable
-- Lista de IPs bloqueadas visible en Services → Snort → Blocked
-
----
 
 ## 3.5 VPN (OpenVPN)
 
@@ -218,7 +210,7 @@ Memory Cap: 10000000
 
 ### 3.5.3 Restricción de Acceso
 
-Solo los miembros del grupo **GRP_IT** pueden conectar via VPN. Otros usuarios del dominio son rechazados.
+Solo los miembros del grupo **GRP_IT** pueden conectarse via VPN. Otros usuarios del dominio son rechazados.
 
 ### 3.5.4 Certificados
 
@@ -394,7 +386,6 @@ systemctl disable cups
 ```bash
 ufw default deny incoming
 ufw default allow outgoing
-ufw enable
 ```
 
 ### 3.7.2 Reglas por Servidor
@@ -498,7 +489,7 @@ ufw allow 10051/tcp comment "Zabbix Server"
 La implementación de seguridad sigue las mejores prácticas:
 
 - ✅ **Defensa en profundidad:** Múltiples capas de seguridad
-- ✅ **Mínimo privilegio:** Solo se permite lo estrictamente necesario
+- ✅ **Mínimo privilegio:** Solo se conceden los permisos necesarios
 - ✅ **Segmentación:** VLANs aíslan diferentes zonas de confianza
 - ✅ **Monitorización:** IDS activo + logs de auditoría
 - ✅ **Automatización:** Hardening consistente via Ansible
