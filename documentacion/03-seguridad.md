@@ -20,13 +20,13 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 ┌─────────────────────────────────────────────────────────────────┐
 │                      CAPA 2: SEGMENTACIÓN                       │
 │                    VLANs + Reglas Inter-VLAN                    │
-│                    Aislamiento de Zonas                         │
+│                     Aislamiento de Zonas                        │
 └─────────────────────────────────────────────────────────────────┘
                                 │
 ┌─────────────────────────────────────────────────────────────────┐
 │                        CAPA 3: HOST                             │
 │              UFW (Firewall) + Fail2ban + Auditd                 │
-│                   Hardening SSH + PAM                           │
+│                     Hardening SSH + PAM                         │
 └─────────────────────────────────────────────────────────────────┘
                                 │
 ┌─────────────────────────────────────────────────────────────────┐
