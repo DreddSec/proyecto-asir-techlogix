@@ -57,7 +57,7 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 #### WAN (Internet)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
-| Pass | UDP | * | WAN Address | 1194 | OpenVPN NAT |
+| Pass | UDP | * | 192.168.60.10 | 1194 | OpenVPN NAT Port Forward |
 
 #### LAN (Servers - 192.168.40.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
