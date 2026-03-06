@@ -75,11 +75,11 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 |--------|-----------|--------|---------|--------|-------------|
 | Block | * | OPT1 | LAN net | * | Block to Servers |
 | Block | * | OPT1 | OPT2-6 | * | Block to VLANs |
-| Pass | TCP | OPT1 | OPT3 | 10051 | Zabbix |
-| Pass | TCP/UDP | OPT1 | * | 443 | HTTPS |
+| Pass | TCP | OPT1 | OPT3 | 10051 | Zabbix Agent |
+| Pass | TCP/UDP | OPT1 | * | 443,80 | HTTPS,HTTP |
 | Pass | UDP | OPT1 | * | 53 | DNS |
 | Pass | TCP | OPT1 | * | 80 | HTTP |
-| Block | * | OPT1 | * | * | Block resto |
+| Pass | TCP | 192.168.40.13 | OPT1 | 9102 | Bacula FD |
 
 #### OPT2 (Security/VPN - 192.168.60.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
@@ -91,7 +91,7 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | TCP | OPT2 | * | 80,443 | HTTP/S |
 | Pass | UDP | OPT2 | * | 53 | DNS |
 | Pass | UDP | * | * | 1194 | OpenVPN |
-| Block | * | OPT2 | * | * | Block resto |
+
 
 #### OPT3 (Monitoring - 192.168.70.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
