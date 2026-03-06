@@ -163,9 +163,10 @@ Director {
   QueryFile = "/etc/bacula/scripts/query.sql"
   WorkingDirectory = "/var/lib/bacula"
   PidDirectory = "/run/bacula"
-  Maximum Concurrent Jobs = 10
+  Maximum Concurrent Jobs = 20
   Password = "[DIRECTOR_PASSWORD]"
   Messages = Daemon
+  DirAddress = 192.168.40.13
 }
 
 # Catálogo MySQL
