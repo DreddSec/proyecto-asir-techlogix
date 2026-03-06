@@ -256,39 +256,6 @@ Autenticación mediante claves SSH desde usuario `ansible` hacia `sysadmin` en t
 
 ---
 
-## 📂 Estructura del Repositorio
-
-```
-proyecto-asir-techlogix/
-│
-├── README.md
-├── LICENSE
-│
-├── documentacion/
-│   ├── 01-arquitectura.md
-│   ├── 02-servicios.md
-│   ├── 03-seguridad.md
-│   ├── 04-backup.md
-│   ├── 05-monitorizacion.md
-│   └── memoria-proyecto.pdf
-│
-├── configuraciones/
-│   ├── samba-ad/
-│   ├── openvpn/
-│   ├── bacula/
-│   └── firewall/
-│
-├── automatizaciones/
-│   ├── scripts/
-│   └── ansible/
-│
-└── diagramas/
-    ├── topologia-red.png
-    └── packet-tracer/
-```
-
----
-
 ## 🚀 Tecnologías Utilizadas
 
 <p align="center">
