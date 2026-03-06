@@ -121,6 +121,7 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
 | Block | * | OPT4 subnets | OPT1 subnets | * | Block → DMZ |
+| Pass | TCP/UDP | OPT4 subnets | LAN subnets | 67-68 | DHCP |
 | Pass | TCP/UDP | OPT4 subnets | 192.168.40.10 | 53 | DNS → DC01 |
 | Pass | TCP/UDP | OPT4 subnets | 192.168.40.10 | 88 | Kerberos → DC01 |
 | Pass | TCP | OPT4 subnets | 192.168.40.10 | 389 | LDAP → DC01 |
@@ -137,6 +138,7 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
 | Block | * | OPT5 subnets | OPT1 subnets | * | Block → DMZ |
+| Pass | TCP/UDP | OPT5 subnets | LAN subnets | 67-68 | DHCP |
 | Pass | TCP/UDP | OPT5 subnets | 192.168.40.10 | 53 | DNS → DC01 |
 | Pass | TCP/UDP | OPT5 subnets | 192.168.40.10 | 88 | Kerberos → DC01 |
 | Pass | TCP | OPT5 subnets | 192.168.40.10 | 389 | LDAP → DC01 |
@@ -153,6 +155,7 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
 | Block | * | OPT6 subnets | OPT1 subnets | * | Block → DMZ |
+| Pass | TCP/UDP | OPT4 subnets | LAN subnets | 67-68 | DHCP |
 | Pass | TCP/UDP | OPT6 subnets | 192.168.40.10 | 53 | DNS → DC01 |
 | Pass | TCP/UDP | OPT6 subnets | 192.168.40.10 | 88 | Kerberos → DC01 |
 | Pass | TCP | OPT6 subnets | 192.168.40.10 | 389 | LDAP → DC01 |
