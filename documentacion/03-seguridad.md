@@ -73,13 +73,17 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 #### OPT1 (DMZ - 192.168.100.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
-| Block | * | OPT1 | LAN net | * | Block to Servers |
-| Block | * | OPT1 | OPT2-6 | * | Block to VLANs |
-| Pass | TCP | OPT1 | OPT3 | 10051 | Zabbix Agent |
-| Pass | TCP/UDP | OPT1 | * | 443,80 | HTTPS,HTTP |
-| Pass | UDP | OPT1 | * | 53 | DNS |
-| Pass | TCP | OPT1 | * | 80 | HTTP |
-| Pass | TCP | 192.168.40.13 | OPT1 | 9102 | Bacula FD |
+| Block | TCP | OPT1 subnets | OPT3 subnets | * | Block VLAN MON |
+| Block | TCP | OPT1 subnets | OPT2 subnets | * | Block VLAN SEC |
+| Block | TCP | OPT1 subnets | OPT5 subnets | * | Block VLAN PROD |
+| Block | TCP | OPT1 subnets | OPT4 subnets | * | Block VLAN ADMIN |
+| Block | TCP | OPT1 subnets | OPT6 subnets | * | Block VLAN IT |
+| Block | TCP | OPT1 subnets | LAN subnets | * | Block to Servers |
+| Pass | TCP | OPT1 subnets | OPT3 subnets | 10051 | Zabbix Agent |
+| Pass | TCP/UDP | OPT1 subnets | * | 443 | HTTPS |
+| Pass | UDP | OPT1 subnets | * | 53 | DNS |
+| Pass | TCP | OPT1 subnets | * | 80 | HTTP |
+| Pass | TCP | 192.168.40.13 | OPT1 subnets | 9102 | Bacula FD |
 
 #### OPT2 (Security/VPN - 192.168.60.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
