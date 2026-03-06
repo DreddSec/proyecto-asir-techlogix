@@ -75,7 +75,7 @@ La regla 3-2-1 establece:
 | IP | 192.168.40.13 |
 | Sistema Operativo | Ubuntu Server 24.04 |
 | RAM | 2 GB |
-| Almacenamiento Sistema | 40 GB |
+| Almacenamiento Sistema | 200 GB *(160GB utilies)* |
 | Almacenamiento RAID | 5 x 40 GB (RAID 5) |
 | Capacidad Útil RAID | ~160 GB |
 
