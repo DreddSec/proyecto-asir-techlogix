@@ -58,18 +58,17 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
 | Pass | UDP | * | WAN Address | 1194 | OpenVPN NAT |
-| Block | * | * | * | * | Default deny |
 
 #### LAN (Servers - 192.168.40.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
 | Pass | * | * | LAN Address | 443,80,22 | Anti-Lockout |
 | Pass | TCP/UDP | LAN net | * | 123 | NTP |
-| Pass | TCP | LAN net | OPT3 | 10051 | Zabbix |
+| Pass | TCP | LAN net | OPT3 | 10051 | Zabbix Agent|
 | Pass | UDP | LAN net | * | 53 | DNS |
 | Pass | TCP | LAN net | * | 80,443 | HTTP/S |
 | Pass | TCP | 192.168.40.13 | LAN net | 9101-9104 | Bacula |
-| Block | * | LAN net | * | * | Block resto |
+| Pass | TCP | 192.168.40.12 | OPT2 | 389,445,21 | LDAP,SMB,FTP |
 
 #### OPT1 (DMZ - 192.168.100.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
