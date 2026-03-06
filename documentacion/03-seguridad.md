@@ -134,7 +134,7 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | UDP | OPT4 subnets | * | 53 | DNS general |
 | Pass | TCP | OPT4 subnets | * | 443 | HTTPS |
 
-#### OPT5 (Producción ' 192.168.20.0/24)
+#### OPT5 (Producción - 192.168.20.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
 | Block | * | OPT5 subnets | OPT1 subnets | * | Block → DMZ |
@@ -454,10 +454,10 @@ ufw allow 445/tcp comment "SMB"
 ufw allow 139/tcp comment "NetBIOS"
 ufw allow 137/udp comment "NetBIOS Name"
 ufw allow 138/udp comment "NetBIOS Datagram"
-ufw allow 135/tcp comment "RPC"
+ufw allow 135/tcp comment "RPC Endpoint Mapper"
 ufw allow from 192.168.40.0/24 to any port 49152:65535 proto tcp comment "RPC Dynamic"
-ufw allow from 192.168.70.10 to any port 10050 proto tcp comment "Zabbix"
-ufw allow 9101:9104/tcp comment "Bacula"
+ufw allow from 192.168.70.10 to any port 10050 proto tcp comment "Zabbix Agent"
+ufw allow from 192.168.40.13 to any port 9101:9104 proto tcp comment "Bacula"
 ```
 
 #### Servidor de Archivos (FILE01)
@@ -465,11 +465,14 @@ ufw allow 9101:9104/tcp comment "Bacula"
 ```bash
 ufw allow 2222/tcp comment "SSH"
 ufw allow 21/tcp comment "FTP"
-ufw allow 40000:50000/tcp comment "FTP Pasivo"
+ufw allow 10000:10100/tcp comment "FTP Pasivo"
 ufw allow from 192.168.10.0/24 to any port 445 proto tcp comment "SMB Admin"
-ufw allow from 192.168.10.0/24 to any port 139 proto tcp comment "NetBIOS Admin"
-ufw allow from 192.168.70.10 to any port 10050 proto tcp comment "Zabbix"
-ufw allow 9101:9104/tcp comment "Bacula"
+ufw allow from 192.168.50.0/24 to any port 445 proto tcp comment "SMB IT"
+ufw allow from 192.168.20.0/24 to any port 445 proto tcp comment "SMB Produccion"
+ufw allow from 10.8.0.0/24 to any port 445 proto tcp comment "SMB VPN"
+ufw allow from 10.8.0.0/24 to any port 21 proto tcp comment "FTP VPN"
+ufw allow from 192.168.70.10 to any port 10050 proto tcp comment "Zabbix Agent"
+ufw allow from 192.168.40.13 to any port 9101:9104 proto tcp comment "Bacula"
 ```
 
 #### Servidor VPN (SEC01)
@@ -478,8 +481,8 @@ ufw allow 9101:9104/tcp comment "Bacula"
 ufw allow 2222/tcp comment "SSH"
 ufw allow 1194/udp comment "OpenVPN"
 ufw allow in on tun0 comment "VPN Traffic"
-ufw allow from 192.168.70.10 to any port 10050 proto tcp comment "Zabbix"
-ufw allow 9101:9104/tcp comment "Bacula"
+ufw allow from 192.168.70.10 to any port 10050 proto tcp comment "Zabbix Agent"
+ufw allow from 192.168.40.13 to any port 9101:9104 proto tcp comment "Bacula"
 ```
 
 #### Servidor Web (WEB01)
@@ -499,19 +502,25 @@ ufw allow from 192.168.40.13 to any port 9102 proto tcp comment "Bacula"
 ufw allow 2222/tcp comment "SSH"
 ufw allow from 192.168.40.0/24 to any port 9101 proto tcp comment "Bacula Director"
 ufw allow from 192.168.40.0/24 to any port 9102 proto tcp comment "Bacula FD"
-ufw allow from 192.168.40.0/24 to any port 9103 proto tcp comment "Bacula SD"
-ufw allow from 192.168.70.10 to any port 10050 proto tcp comment "Zabbix"
+ufw allow from 192.168.40.0/24 to any port 9103 proto tcp comment "Bacula SD desde LAN"
+ufw allow from 192.168.100.0/24 to any port 9103 proto tcp comment "Bacula SD desde DMZ"
+ufw allow from 192.168.60.0/24 to any port 9103 proto tcp comment "Bacula SD desde SEC"
+ufw allow from 192.168.70.0/24 to any port 9103 proto tcp comment "Bacula SD desde MON"
+ufw allow from 192.168.70.10 to any port 10050 proto tcp comment "Zabbix Agent"
 ```
 
 #### Servidor Monitorización (MON01)
 
 ```bash
 ufw allow 2222/tcp comment "SSH"
-ufw allow from 192.168.40.0/24 to any port 80 proto tcp comment "Zabbix Web"
-ufw allow from 192.168.40.0/24 to any port 3000 proto tcp comment "Grafana"
-ufw allow from 192.168.10.0/24 to any port 80 proto tcp comment "Zabbix Admin"
+ufw allow from 192.168.40.0/24 to any port 80 proto tcp comment "Zabbix Web LAN"
+ufw allow from 192.168.40.0/24 to any port 3000 proto tcp comment "Grafana LAN"
+ufw allow from 192.168.10.0/24 to any port 80 proto tcp comment "Zabbix Web Admin"
 ufw allow from 192.168.10.0/24 to any port 3000 proto tcp comment "Grafana Admin"
-ufw allow 10051/tcp comment "Zabbix Server"
+ufw allow from 192.168.50.0/24 to any port 80 proto tcp comment "Zabbix Web IT"
+ufw allow from 192.168.50.0/24 to any port 3000 proto tcp comment "Grafana IT"
+ufw allow 10051/tcp comment "Zabbix Server active checks"
+ufw allow from 192.168.40.13 to any port 9101:9104 proto tcp comment "Bacula"
 ```
 
 ---
@@ -541,5 +550,5 @@ La implementación de seguridad sigue las mejores prácticas:
 - ✅ **Mínimo privilegio:** Solo se conceden los permisos necesarios
 - ✅ **Segmentación:** VLANs aíslan diferentes zonas de confianza
 - ✅ **Monitorización:** IDS activo + logs de auditoría
-- ✅ **Automatización:** Hardening consistente via Ansible
+- ✅ **Seguridad:** Hardening consistente de servidores
 - ✅ **Actualizaciones:** Parches de seguridad automáticos
