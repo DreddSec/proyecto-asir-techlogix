@@ -62,79 +62,122 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 #### LAN (Servers - 192.168.40.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
-| Pass | * | * | LAN Address | 443,80,22 | Anti-Lockout |
-| Pass | TCP/UDP | LAN net | * | 123 | NTP |
-| Pass | TCP | LAN net | OPT3 | 10051 | Zabbix Agent|
-| Pass | UDP | LAN net | * | 53 | DNS |
-| Pass | TCP | LAN net | * | 80,443 | HTTP/S |
-| Pass | TCP | 192.168.40.13 | LAN net | 9101-9104 | Bacula |
-| Pass | TCP | 192.168.40.12 | OPT2 | 389,445,21 | LDAP,SMB,FTP |
+| Pass | * | * | LAN Address | 443, 80, 22 | Anti-Lockout pfSense |
+| Pass | TCP/UDP | LAN subnets | * | 123 | NTP |
+| Pass | TCP | LAN subnets | OPT3 subnets | 10051 | Zabbix active checks (servidores → MON01) |
+| Pass | UDP | LAN subnets | * | 53 | DNS |
+| Pass | TCP | LAN subnets | * | 80, 443 | HTTP/HTTPS (actualizaciones) |
+| Pass | TCP | 192.168.40.13 | OPT1 subnets | 9102 | Bacula Director → FD WEB01 |
+| Pass | TCP | 192.168.40.13 | OPT2 subnets | 9102 | Bacula Director → FD SEC01 |
+| Pass | TCP | 192.168.40.13 | OPT3 subnets | 9102 | Bacula Director → FD MON01 |
 
 #### OPT1 (DMZ - 192.168.100.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
-| Block | TCP | OPT1 subnets | OPT3 subnets | * | Block VLAN MON |
-| Block | TCP | OPT1 subnets | OPT2 subnets | * | Block VLAN SEC |
-| Block | TCP | OPT1 subnets | OPT5 subnets | * | Block VLAN PROD |
-| Block | TCP | OPT1 subnets | OPT4 subnets | * | Block VLAN ADMIN |
-| Block | TCP | OPT1 subnets | OPT6 subnets | * | Block VLAN IT |
-| Block | TCP | OPT1 subnets | LAN subnets | * | Block to Servers |
-| Pass | TCP | OPT1 subnets | OPT3 subnets | 10051 | Zabbix Agent |
-| Pass | TCP/UDP | OPT1 subnets | * | 443 | HTTPS |
+| Block | * | OPT1 subnets | LAN subnets | * | Block → Servers |
+| Block | * | OPT1 subnets | OPT2 subnets | * | Block → VPN/SEC |
+| Block | * | OPT1 subnets | OPT3 subnets | * | Block → MON |
+| Block | * | OPT1 subnets | OPT4 subnets | * | Block → ADMIN |
+| Block | * | OPT1 subnets | OPT5 subnets | * | Block → PROD |
+| Block | * | OPT1 subnets | OPT6 subnets | * | Block → IT |
+| Pass | TCP | OPT1 subnets | 192.168.40.13 | 9103 | Bacula FD → SD (WEB01 → BAK01) |
+| Pass | TCP | OPT1 subnets | OPT3 subnets | 10051 | Zabbix active checks (WEB01 → MON01) |
 | Pass | UDP | OPT1 subnets | * | 53 | DNS |
 | Pass | TCP | OPT1 subnets | * | 80 | HTTP |
-| Pass | TCP | 192.168.40.13 | OPT1 subnets | 9102 | Bacula FD |
+| Pass | TCP | OPT1 subnets | * | 443 | HTTPS |
 
 #### OPT2 (Security/VPN - 192.168.60.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
-| Pass | TCP | OPT2 | OPT3 | 10051 | Zabbix Agent |
-| Pass | TCP | 10.8.0.0/24 | 192.168.40.12 | 21 | VPN to FTP |
-| Pass | TCP/UDP | * | * | 9101-9102 | Bacula |
-| Pass | TCP/UDP | OPT2 | 192.168.40.10 | 389,636 | LDAP Auth |
-| Pass | TCP | OPT2 | * | 80,443 | HTTP/S |
-| Pass | UDP | OPT2 | * | 53 | DNS |
-| Pass | UDP | * | * | 1194 | OpenVPN |
-
+| Pass | ICMP | OPT2 subnets | 192.168.40.10 | * | ICMP → DC01 |
+| Pass | TCP/UDP | OPT2 subnets | 192.168.40.10 | 88 | Kerberos → DC01 |
+| Pass | TCP/UDP | OPT2 subnets | 192.168.40.10 | 389 | LDAP → DC01 |
+| Pass | TCP/UDP | OPT2 subnets | 192.168.40.10 | 636 | LDAPS → DC01 |
+| Pass | TCP/UDP | OPT2 subnets | 192.168.40.10 | 53 | DNS → DC01 |
+| Pass | TCP | OPT2 subnets | 192.168.40.12 | 445 | SMB → FILE01 |
+| Pass | TCP | OPT2 subnets | 192.168.40.12 | 21 | FTP → FILE01 |
+| Pass | TCP | OPT2 subnets | OPT3 subnets | 10051 | Zabbix active checks (SEC01 → MON01) |
+| Pass | TCP | OPT2 subnets | 192.168.40.13 | 9103 | Bacula FD → SD (SEC01 → BAK01) |
+| Pass | UDP | OPT2 subnets | * | 53 | DNS general |
+| Pass | TCP | OPT2 subnets | * | 80 | HTTP |
+| Pass | TCP | OPT2 subnets | * | 443 | HTTPS |
 
 #### OPT3 (Monitoring - 192.168.70.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
-| Pass | TCP | OPT3 | LAN net | 10050 | Zabbix Polling |
-| Pass | TCP | OPT3 | * | 587 | SMTP Alertas |
-| Pass | TCP | OPT3 | OPT2 | 2222 | SSH Ansible SEC |
-| Pass | TCP | OPT3 | OPT1 | 2222 | SSH Ansible DMZ |
-| Pass | TCP | OPT3 | LAN net | 2222 | SSH Ansible |
-| Pass | UDP | OPT3 | * | 53 | DNS |
-| Pass | TCP | OPT3 | * | 80,443 | HTTP/S |
-| Pass | TCP/UDP | OPT3 | * | 10050 | Zabbix |
-| Block | * | OPT3 | * | * | Block resto |
+| Pass | TCP | OPT3 subnets | LAN subnets | 10050 | Zabbix polling → Servers |
+| Pass | TCP | OPT3 subnets | OPT1 subnets | 10050 | Zabbix polling → WEB01 |
+| Pass | TCP | OPT3 subnets | OPT2 subnets | 10050 | Zabbix polling → SEC01 |
+| Pass | TCP | OPT3 subnets | LAN subnets | 2222 | SSH Ansible → Servers |
+| Pass | TCP | OPT3 subnets | OPT1 subnets | 2222 | SSH Ansible → WEB01 |
+| Pass | TCP | OPT3 subnets | OPT2 subnets | 2222 | SSH Ansible → SEC01 |
+| Pass | TCP | OPT3 subnets | 192.168.40.13 | 9103 | Bacula FD → SD (MON01 → BAK01) |
+| Pass | TCP | OPT3 subnets | * | 587 | SMTP alertas |
+| Pass | UDP | OPT3 subnets | * | 53 | DNS |
+| Pass | TCP | OPT3 subnets | * | 80 | HTTP |
+| Pass | TCP | OPT3 subnets | * | 443 | HTTPS |
 
 #### OPT4 (Admin - 192.168.10.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
-| Pass | TCP/UDP | OPT4 | LAN net | 67-68 | DHCP |
-| Block | * | OPT4 | OPT1 | * | Block DMZ |
-| Pass | TCP | OPT4 | 192.168.40.10 | 88 | Kerberos |
-| Pass | TCP | OPT4 | 192.168.40.10 | 53,389,445,464,636 | AD |
-| Pass | TCP | OPT4 | 192.168.40.12 | 445 | SMB |
-| Pass | TCP | OPT4 | OPT3 | 80,3000 | Zabbix/Grafana |
-| Pass | UDP | OPT4 | * | 53 | DNS |
-| Pass | TCP | OPT4 | * | 443 | HTTPS |
-| Block | * | OPT4 | * | * | Block resto |
+| Block | * | OPT4 subnets | OPT1 subnets | * | Block → DMZ |
+| Pass | TCP/UDP | OPT4 subnets | 192.168.40.10 | 53 | DNS → DC01 |
+| Pass | TCP/UDP | OPT4 subnets | 192.168.40.10 | 88 | Kerberos → DC01 |
+| Pass | TCP | OPT4 subnets | 192.168.40.10 | 389 | LDAP → DC01 |
+| Pass | TCP | OPT4 subnets | 192.168.40.10 | 636 | LDAPS → DC01 |
+| Pass | TCP/UDP | OPT4 subnets | 192.168.40.10 | 464 | Kerberos pwd change → DC01 |
+| Pass | TCP | OPT4 subnets | 192.168.40.10 | 445 | SMB → DC01 |
+| Pass | TCP | OPT4 subnets | 192.168.40.12 | 445 | SMB → FILE01 |
+| Pass | TCP | OPT4 subnets | OPT3 subnets | 80 | Zabbix Web → MON01 |
+| Pass | TCP | OPT4 subnets | OPT3 subnets | 3000 | Grafana → MON01 |
+| Pass | UDP | OPT4 subnets | * | 53 | DNS general |
+| Pass | TCP | OPT4 subnets | * | 443 | HTTPS |
 
-#### OPT5 (Producción) y OPT6 (IT)
-Reglas similares a OPT4 con acceso restringido a AD y SMB.
-
-#### WIFI_GUESTS (192.168.50.0/24)
+#### OPT5 (Producción)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
-| Block | * | WIFI_GUESTS | 192.168.0.0/16 | * | Block privado |
-| Block | * | WIFI_GUESTS | 10.0.0.0/8 | * | Block VPN |
-| Pass | UDP | WIFI_GUESTS | * | 53 | DNS |
-| Pass | TCP | WIFI_GUESTS | * | 80,443 | Internet |
-| Block | * | WIFI_GUESTS | * | * | Block resto |
+| Block | * | OPT5 subnets | OPT1 subnets | * | Block → DMZ |
+| Pass | TCP/UDP | OPT5 subnets | 192.168.40.10 | 53 | DNS → DC01 |
+| Pass | TCP/UDP | OPT5 subnets | 192.168.40.10 | 88 | Kerberos → DC01 |
+| Pass | TCP | OPT5 subnets | 192.168.40.10 | 389 | LDAP → DC01 |
+| Pass | TCP | OPT5 subnets | 192.168.40.10 | 636 | LDAPS → DC01 |
+| Pass | TCP/UDP | OPT5 subnets | 192.168.40.10 | 464 | Kerberos pwd change → DC01 |
+| Pass | TCP | OPT5 subnets | 192.168.40.10 | 445 | SMB → DC01 |
+| Pass | TCP | OPT5 subnets | 192.168.40.12 | 445 | SMB → FILE01 |
+| Pass | UDP | OPT5 subnets | * | 53 | DNS general |
+| Pass | TCP | OPT5 subnets | * | 80 | HTTP |
+| Pass | TCP | OPT5 subnets | * | 443 | HTTPS |
 
+#### OPT6 (IT — 192.168.50.0/24)
+
+| Acción | Protocolo | Origen | Destino | Puerto | Descripción |
+|--------|-----------|--------|---------|--------|-------------|
+| Block | * | OPT6 subnets | OPT1 subnets | * | Block → DMZ |
+| Pass | TCP/UDP | OPT6 subnets | 192.168.40.10 | 53 | DNS → DC01 |
+| Pass | TCP/UDP | OPT6 subnets | 192.168.40.10 | 88 | Kerberos → DC01 |
+| Pass | TCP | OPT6 subnets | 192.168.40.10 | 389 | LDAP → DC01 |
+| Pass | TCP | OPT6 subnets | 192.168.40.10 | 636 | LDAPS → DC01 |
+| Pass | TCP/UDP | OPT6 subnets | 192.168.40.10 | 464 | Kerberos pwd change → DC01 |
+| Pass | TCP | OPT6 subnets | 192.168.40.10 | 445 | SMB → DC01 |
+| Pass | TCP | OPT6 subnets | 192.168.40.12 | 445 | SMB → FILE01 |
+| Pass | TCP | OPT6 subnets | LAN subnets | 2222 | SSH → Servers (gestión IT) |
+| Pass | TCP | OPT6 subnets | OPT3 subnets | 80 | Zabbix Web → MON01 |
+| Pass | TCP | OPT6 subnets | OPT3 subnets | 3000 | Grafana → MON01 |
+| Pass | UDP | OPT6 subnets | * | 53 | DNS general |
+| Pass | TCP | OPT6 subnets | * | 80 | HTTP |
+| Pass | TCP | OPT6 subnets | * | 443 | HTTPS |
+
+
+#### OPT7 (WiFi Guests — 192.168.80.0/24)
+
+| Acción | Protocolo | Origen | Destino | Puerto | Descripción |
+|--------|-----------|--------|---------|--------|-------------|
+| Block | * | OPT7 subnets | 192.168.0.0/16 | * | Block → red privada |
+| Block | * | OPT7 subnets | 10.0.0.0/8 | * | Block → VPN |
+| Pass | UDP | OPT7 subnets | * | 53 | DNS internet |
+| Pass | TCP | OPT7 subnets | * | 80 | HTTP |
+| Pass | TCP | OPT7 subnets | * | 443 | HTTPS |
+| Block | * | OPT7 subnets | * | * | Block resto (catch-all) |
 ---
 
 ## 3.4 Sistema de Detección de Intrusiones (Snort)
@@ -142,7 +185,7 @@ Reglas similares a OPT4 con acceso restringido a AD y SMB.
 ### 3.4.1 Configuración General
 
 - **Ubicación:** Integrado en pfSense
-- **Modo:** IPS (bloqueo activo)
+- **Modo:** IDS
 - **Interfaces monitorizadas:** WAN, LAN, OPT1 (DMZ), OPT2 (VPN)
 
 ### 3.4.2 Reglas Activadas (IPS Policy)
