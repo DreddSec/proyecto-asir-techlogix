@@ -86,8 +86,8 @@ La regla 3-2-1 establece:
 cat /proc/mdstat
 
 # Ejemplo de salida
-md0 : active raid5 sdf1[4] sde1[3] sdd1[2] sdc1[1] sdb1[0]
-      167772160 blocks super 1.2 level 5, 512k chunk, algorithm 2 [5/5] [UUUUU]
+md0 : active raid5 sde1[3] sdc1[1] sda3[0] sdb1[2] sdd1[5]
+      157151232 blocks super 1.2 level 5, 512k chunk, algorithm 2 [5/5] [UUUUU]
 ```
 
 **Punto de montaje:**
