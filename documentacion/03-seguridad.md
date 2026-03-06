@@ -196,8 +196,8 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 |-----------|-------------|
 | WAN | Connectivity |
 | LAN | Balancend |
-| DMZ | Balanced |
-| OPT2 | Balanced |
+| OPT1 (DMZ) | Security |
+| OPT2 (SEC) | Balanced |
 
 ### 3.4.3 Preprocesadores
 
