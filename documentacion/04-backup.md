@@ -160,14 +160,59 @@ md0 : active raid5 sde1[3] sdc1[1] sda3[0] sdb1[2] sdd1[5]
 Director {
   Name = bacula-dir
   DIRport = 9101
-  QueryFile = "/etc/bacula/scripts/query.sql"
+  QueryFile = "/etc/bacula/query.sql"
   WorkingDirectory = "/var/lib/bacula"
   PidDirectory = "/run/bacula"
   Maximum Concurrent Jobs = 20
-  Password = "[DIRECTOR_PASSWORD]"
+  Password = "[PASSWORD]"
   Messages = Daemon
   DirAddress = 192.168.40.13
 }
+
+JobDefs {
+  Name = "DefaultJob"
+  Type = Backup
+  Level = Incremental
+  Client = dc02-fd
+  FileSet = "Full Set"
+  Schedule = "WeeklyCycle"
+  Storage = File
+  Messages = Standard
+  Pool = Default
+  Priority = 10
+  Accurate = yes
+  Spool Data = yes
+  Full Backup Pool = Full
+  Incremental Backup Pool = Incremental
+  Differential Backup Pool = Differential
+  Write Bootstrap = "/var/lib/bacula/%c.bsr"
+
+  RunScript {
+    Command = "/usr/local/bin/sync-to-gdrive.sh"
+    RunsWhen = After
+    RunsOnClient = No
+ }
+}
+
+# Ejemplo de un Job al servidor DC01 (resto de servidores se aplica lo mismo)
+Job {
+  Name = "BackupDC01"
+  JobDefs = "DefaultJob"
+  Client = dc01-fd
+}
+
+# 
+Job {
+  Name = "RestoreFiles"
+  Type = Restore
+  Client = dc02-fd
+  FileSet = "Full Set"
+  Storage = File
+  Pool = Default
+  Messages = Standard
+  Where = /raid5/bacula-restore
+}
+
 
 # Catálogo MySQL
 Catalog {
@@ -180,9 +225,9 @@ Catalog {
 # Programación de Backups
 Schedule {
   Name = "WeeklyCycle"
-  Run = Full 1st sun at 23:05
-  Run = Differential 2nd-5th sun at 23:05
-  Run = Incremental mon-sat at 23:05
+  Run = Full 1st sun at 23:00
+  Run = Differential 2nd-5th sun at 23:00
+  Run = Incremental mon-sat at 23:00
 }
 
 # FileSet - Qué respaldar
@@ -196,11 +241,13 @@ FileSet {
     File = /etc
     File = /home
     File = /var/log
+    File = /var/www
   }
   Exclude {
-    File = /var/lib/bacula
     File = /proc
     File = /tmp
+    File = /sys
+    File = /dev
   }
 }
 
@@ -217,8 +264,38 @@ Job {
   Priority = 10
   Write Bootstrap = "/var/lib/bacula/%c.bsr"
 }
-
 # Jobs similares para DC02, FILE01, WEB01, SEC01, MON01...
+
+# Pools para definir y agrupar volumenes de almacenamiento
+Pool {
+  Name = Full
+  Pool Type = Backup
+  Recycle = yes
+  AutoPrune = yes
+  Volume Retention = 365 days
+  Maximum Volume Bytes = 50G
+  Maximum Volumes = 100
+}
+ 
+Pool {
+  Name = Differential
+  Pool Type = Backup
+  Recycle = yes
+  AutoPrune = yes
+  Volume Retention = 90 days
+  Maximum Volume Bytes = 20G
+  Maximum Volumes = 100
+}
+
+Pool {
+  Name = Incremental
+  Pool Type = Backup
+  Recycle = yes
+  AutoPrune = yes
+  Volume Retention = 30 days
+  Maximum Volume Bytes = 10G
+  Maximum Volumes = 100
+}
 ```
 
 ### 4.4.4 Configuración del File Daemon (Cliente)
@@ -228,20 +305,22 @@ Job {
 ```ini
 Director {
   Name = bacula-dir
-  Password = "[FD_PASSWORD]"
+  Password = "BaculaSuperPass123"
 }
 
 FileDaemon {
-  Name = dc01-fd
+  Name = srv-bak01-fd
   FDport = 9102
   WorkingDirectory = /var/lib/bacula
   Pid Directory = /run/bacula
   Maximum Concurrent Jobs = 20
+  Plugin Directory = /usr/lib/bacula
+  FDAddress = 192.168.40.13
 }
 
 Messages {
   Name = Standard
-  director = bacula-dir = all, !skipped, !restored
+  director = bacula-dir = all
 }
 ```
 
@@ -250,29 +329,41 @@ Messages {
 **Archivo:** `/etc/bacula/bacula-sd.conf`
 
 ```ini
+  GNU nano 8.6                                                                                      bacula-sd.conf                                                                                               
 Storage {
   Name = bacula-sd
   SDPort = 9103
   WorkingDirectory = "/var/lib/bacula"
   Pid Directory = "/run/bacula"
   Maximum Concurrent Jobs = 20
+  SDAddress = 192.168.40.13
 }
 
 Director {
   Name = bacula-dir
-  Password = "[SD_PASSWORD]"
+  Password = "[PASSWORD]"
+}
+
+Director {
+  Name = bacula-mon
+  Password = "[PASSWORD]"
+  Monitor = yes
 }
 
 Device {
-  Name = FileChgr1-Dev1
-  Media Type = File1
+  Name = FileStorage
+  Media Type = File
   Archive Device = /raid5/bacula-backups
   LabelMedia = yes
   Random Access = Yes
   AutomaticMount = yes
   RemovableMedia = no
   AlwaysOpen = no
-  Maximum Concurrent Jobs = 5
+}
+
+Messages {
+  Name = Standard
+  director = bacula-dir = all
 }
 ```
 
@@ -288,9 +379,9 @@ Device {
 
 | Día | Tipo | Hora |
 |-----|------|------|
-| 1er Domingo del mes | Full | 23:05 |
-| Domingos 2-5 | Diferencial | 23:05 |
-| Lunes a Sábado | Incremental | 23:05 |
+| 1er Domingo del mes | Full | 23:00 |
+| Domingos 2-5 | Diferencial | 23:00 |
+| Lunes a Sábado | Incremental | 23:00 |
 
 ### 4.4.8 Comandos de Administración
 
@@ -400,10 +491,6 @@ sudo bconsole
 #    - Cliente a restaurar
 #    - Fecha del backup
 #    - Archivos a restaurar
-
-# 4. Confirmar y ejecutar
-*yes
-```
 
 ### 4.6.2 Restauración desde Google Drive
 
