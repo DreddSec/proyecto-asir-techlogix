@@ -54,11 +54,6 @@ Este documento describe el sistema de monitorización implementado en TechLogix 
 ### 5.3.3 Instalación
 
 ```bash
-# Repositorio Zabbix
-wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-1+ubuntu24.04_all.deb
-dpkg -i zabbix-release_7.0-1+ubuntu24.04_all.deb
-apt update
-
 # Instalar componentes
 apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
 
@@ -159,16 +154,6 @@ Template estándar que monitoriza:
 | Red | Tráfico entrante/saliente, errores |
 | Sistema | Uptime, usuarios logueados, procesos |
 
-### 5.5.2 Items Monitorizados
-
-| Item | Key | Descripción |
-|------|-----|-------------|
-| CPU utilization | system.cpu.util | % uso de CPU |
-| Available memory | vm.memory.available | RAM disponible |
-| Free disk space | vfs.fs.size[/,pfree] | % disco libre |
-| Network in | net.if.in[eth0] | Bytes entrantes |
-| System uptime | system.uptime | Tiempo encendido |
-
 ---
 
 ## 5.6 Triggers y Alertas
@@ -195,14 +180,6 @@ Template estándar que monitoriza:
 | Connection security | STARTTLS |
 | Authentication | Username and password |
 
-**Configurar usuario para recibir alertas:**
-
-1. Administration → Users → Admin
-2. Media → Add
-3. Type: Email
-4. Send to: admin@techlogix.com
-5. Severity: Todas marcadas
-
 ---
 
 ## 5.7 Grafana
@@ -220,11 +197,6 @@ Template estándar que monitoriza:
 ### 5.7.2 Instalación
 
 ```bash
-# Añadir repositorio
-apt install -y software-properties-common
-wget -q -O - https://packages.grafana.com/gpg.key | apt-key add -
-add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
-
 # Instalar
 apt update
 apt install grafana
@@ -243,23 +215,6 @@ grafana-cli plugins install alexanderzobnin-zabbix-app
 # Reiniciar Grafana
 systemctl restart grafana-server
 ```
-
-### 5.7.4 Configuración del Datasource
-
-1. Configuration → Plugins → Zabbix → Enable
-2. Configuration → Data Sources → Add data source
-3. Seleccionar **Zabbix**
-4. Configurar:
-
-| Campo | Valor |
-|-------|-------|
-| Name | Zabbix-TechLogix |
-| URL | http://localhost/zabbix/api_jsonrpc.php |
-| Username | Admin |
-| Password | [contraseña de Zabbix] |
-
-5. Save & Test
-
 ---
 
 ## 5.8 Dashboards
@@ -287,14 +242,6 @@ systemctl restart grafana-server
 4. Visualization: Time series
 5. Title: "CPU Utilization - All Servers"
 6. Apply
-
-### 5.8.3 Crear Panel de Problemas
-
-1. Add new panel
-2. Query Mode: **Zabbix Problems**
-3. Visualization: Table
-4. Title: "Active Problems"
-5. Apply
 
 ---
 
