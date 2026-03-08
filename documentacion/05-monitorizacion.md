@@ -345,7 +345,7 @@ ansible-playbook -i hosts.ini securizacion.yml --ask-become-pass
 systemctl status zabbix-agent
 
 # Verificar conectividad
-telnet 192.168.70.10 10050
+nc -nv 192.168.70.10 10050
 
 # Verificar firewall
 ufw status | grep 10050
