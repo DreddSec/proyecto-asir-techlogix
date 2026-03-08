@@ -173,12 +173,12 @@ JobDefs {
   Name = "DefaultJob"
   Type = Backup
   Level = Incremental
-  Client = dc02-fd
+  Client = dc01-fd
   FileSet = "Full Set"
   Schedule = "WeeklyCycle"
   Storage = File
   Messages = Standard
-  Pool = Default
+  Pool = Incremental
   Priority = 10
   Accurate = yes
   Spool Data = yes
@@ -191,28 +191,66 @@ JobDefs {
     Command = "/usr/local/bin/sync-to-gdrive.sh"
     RunsWhen = After
     RunsOnClient = No
- }
+  }
 }
 
-# Ejemplo de un Job al servidor DC01 (resto de servidores se aplica lo mismo)
+# Storage resource - apunta al Storage Daemon
+Storage {
+  Name = File
+  Address = 192.168.40.13
+  SDPort = 9103
+  Password = "[PASSWORD]"
+  Device = FileStorage
+  Media Type = File
+}
+
+# Jobs por servidor
 Job {
   Name = "BackupDC01"
   JobDefs = "DefaultJob"
   Client = dc01-fd
 }
 
-# 
+Job {
+  Name = "BackupDC02"
+  JobDefs = "DefaultJob"
+  Client = dc02-fd
+}
+
+Job {
+  Name = "BackupFILE01"
+  JobDefs = "DefaultJob"
+  Client = file01-fd
+}
+
+Job {
+  Name = "BackupSEC01"
+  JobDefs = "DefaultJob"
+  Client = sec01-fd
+}
+
+Job {
+  Name = "BackupMON01"
+  JobDefs = "DefaultJob"
+  Client = mon01-fd
+}
+
+Job {
+  Name = "BackupWEB01"
+  JobDefs = "DefaultJob"
+  Client = web01-fd
+}
+
 Job {
   Name = "RestoreFiles"
   Type = Restore
-  Client = dc02-fd
+  Client = dc01-fd
   FileSet = "Full Set"
   Storage = File
-  Pool = Default
+  Pool = Full
   Messages = Standard
   Where = /raid5/bacula-restore
 }
-
 
 # Catálogo MySQL
 Catalog {
@@ -251,22 +289,7 @@ FileSet {
   }
 }
 
-# Job para DC01
-Job {
-  Name = "BackupDC01"
-  Type = Backup
-  Level = Incremental
-  Client = dc01-fd
-  FileSet = "Full Set"
-  Schedule = "WeeklyCycle"
-  Storage = File1
-  Pool = Default
-  Priority = 10
-  Write Bootstrap = "/var/lib/bacula/%c.bsr"
-}
-# Jobs similares para DC02, FILE01, WEB01, SEC01, MON01...
-
-# Pools para definir y agrupar volumenes de almacenamiento
+# Pools de almacenamiento
 Pool {
   Name = Full
   Pool Type = Backup
@@ -275,8 +298,9 @@ Pool {
   Volume Retention = 365 days
   Maximum Volume Bytes = 50G
   Maximum Volumes = 100
+  Label Format = "Vol-Full-"
 }
- 
+
 Pool {
   Name = Differential
   Pool Type = Backup
@@ -285,6 +309,7 @@ Pool {
   Volume Retention = 90 days
   Maximum Volume Bytes = 20G
   Maximum Volumes = 100
+  Label Format = "Vol-Diff-"
 }
 
 Pool {
@@ -295,6 +320,7 @@ Pool {
   Volume Retention = 30 days
   Maximum Volume Bytes = 10G
   Maximum Volumes = 100
+  Label Format = "Vol-Inc-"
 }
 ```
 
@@ -302,20 +328,22 @@ Pool {
 
 **Archivo en cada servidor:** `/etc/bacula/bacula-fd.conf`
 
+> Cada servidor tiene su propio nombre e IP. Ejemplo para DC01:
+
 ```ini
 Director {
   Name = bacula-dir
-  Password = "BaculaSuperPass123"
+  Password = "[PASSWORD]"
 }
 
 FileDaemon {
-  Name = srv-bak01-fd
+  Name = dc01-fd
   FDport = 9102
   WorkingDirectory = /var/lib/bacula
   Pid Directory = /run/bacula
   Maximum Concurrent Jobs = 20
   Plugin Directory = /usr/lib/bacula
-  FDAddress = 192.168.40.13
+  FDAddress = 192.168.40.10
 }
 
 Messages {
@@ -324,12 +352,13 @@ Messages {
 }
 ```
 
+> El campo `Name` y `FDAddress` cambian en cada servidor: `dc02-fd / 192.168.40.11`, `file01-fd / 192.168.40.12`, `web01-fd / IP_WEB01`, etc.
+
 ### 4.4.5 Configuración del Storage Daemon
 
 **Archivo:** `/etc/bacula/bacula-sd.conf`
 
 ```ini
-  GNU nano 8.6                                                                                      bacula-sd.conf                                                                                               
 Storage {
   Name = bacula-sd
   SDPort = 9103
@@ -369,11 +398,11 @@ Messages {
 
 ### 4.4.6 Pools de Almacenamiento
 
-| Pool | Tipo | Retención | Descripción |
-|------|------|-----------|-------------|
-| Full | Full | 30 días | Backups completos mensuales |
-| Default | Incremental | 7 días | Backups diarios |
-| Differential | Differential | 14 días | Backups semanales |
+| Pool | Tipo | Retención | Tamaño Máximo |
+|------|------|-----------|---------------|
+| Full | Full | 365 días | 50 GB |
+| Differential | Differential | 90 días | 20 GB |
+| Incremental | Incremental | 30 días | 10 GB |
 
 ### 4.4.7 Programación de Backups
 
@@ -484,13 +513,27 @@ sudo rclone sync /raid5/bacula-backups/ gdrive:backups/bacula --progress
 # 1. Acceder a bconsole
 sudo bconsole
 
-# 2. Iniciar restauración
+# 2. Iniciar restauración interactiva
 *restore
 
-# 3. Seleccionar opciones:
-#    - Cliente a restaurar
-#    - Fecha del backup
-#    - Archivos a restaurar
+# 3. Seleccionar origen (opción más común: 5 - fecha concreta)
+The defined Restore Jobs are:
+     1: RestoreFiles
+Select Restore Job: 1
+
+# 4. Seleccionar cliente a restaurar
+Select the Client: dc01-fd
+
+# 5. Seleccionar fecha del backup
+Enter date as YYYY-MM-DD HH:MM:SS: 2026-03-01 23:00:00
+
+# 6. Marcar archivos a restaurar (modo árbol)
+$ mark /etc
+$ mark /home
+$ done
+
+# 7. Confirmar y lanzar
+OK to run? yes
 ```
 
 ### 4.6.2 Restauración desde Google Drive
@@ -502,19 +545,26 @@ sudo bconsole
 
 if [ "$#" -ne 2 ]; then
     echo "Uso: $0 <nombre_servidor> <ruta_destino>"
+    echo "Ejemplo: $0 dc01 /raid5/bacula-restore"
     exit 1
 fi
 
 SERVIDOR=$1
 DESTINO=$2
 
-echo "Restaurando: $SERVIDOR a $DESTINO"
+echo "Restaurando backups de $SERVIDOR a $DESTINO"
 
-rclone copy "gdrive:backups/bacula" "$DESTINO" \
+# Descarga solo la carpeta del servidor indicado
+rclone copy "gdrive:backups/bacula/$SERVIDOR" "$DESTINO" \
     --progress \
     --transfers 4
 
-echo "Archivos descargados. Use bconsole para restaurar."
+if [ $? -eq 0 ]; then
+    echo "Descarga completada. Use bconsole para restaurar los archivos."
+else
+    echo "ERROR durante la descarga desde Google Drive."
+    exit 1
+fi
 ```
 
 ---
@@ -537,20 +587,22 @@ DISK_USAGE=$(df -h /raid5 | tail -1 | awk '{print $5}' | sed 's/%//')
 echo "Uso RAID5: ${DISK_USAGE}%" >> "$LOG_FILE"
 
 if [ "$DISK_USAGE" -gt 85 ]; then
-    echo "ADVERTENCIA: Disco >85%" >> "$LOG_FILE"
+    echo "ADVERTENCIA: Disco al ${DISK_USAGE}% - revisar limpieza de volúmenes" >> "$LOG_FILE"
 fi
 
-# Contar volúmenes
-BACKUP_COUNT=$(find /raid5/bacula-backups -type f -name "*.vol" | wc -l)
-echo "Volúmenes: $BACKUP_COUNT" >> "$LOG_FILE"
+# Contar volúmenes de Bacula
+BACKUP_COUNT=$(find /raid5/bacula-backups -type f | wc -l)
+echo "Volúmenes en almacenamiento: $BACKUP_COUNT" >> "$LOG_FILE"
 
-# Verificar RAID
-if grep -q "UU" /proc/mdstat; then
-    echo "RAID5: OK" >> "$LOG_FILE"
+# Verificar estado RAID - buscar discos fallidos (símbolo _)
+if grep -q "_" /proc/mdstat; then
+    echo "CRÍTICO: Disco fallido detectado en RAID5 - intervención inmediata requerida" >> "$LOG_FILE"
 else
-    echo "CRÍTICO: Problema RAID5" >> "$LOG_FILE"
+    echo "RAID5: OK - todos los discos operativos" >> "$LOG_FILE"
 fi
 ```
+
+---
 
 ## 4.8 Volúmenes de Backup
 
@@ -562,10 +614,9 @@ ls -la /raid5/bacula-backups/
 
 | Volumen | Tamaño | Fecha | Pool |
 |---------|--------|-------|------|
-| Vol-0001 | 222 B | Feb 3 | Default |
-| Vol-Diff-0001 | 232 B | Feb 3 | Differential |
 | Vol-Full-0001 | 9.6 MB | Feb 3 | Full |
-| Vol-Inc-0001 | 230 B | Feb 3 | Default |
+| Vol-Diff-0001 | 232 B | Feb 3 | Differential |
+| Vol-Inc-0001 | 230 B | Feb 3 | Incremental |
 
 ---
 
