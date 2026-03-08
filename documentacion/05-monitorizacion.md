@@ -191,8 +191,8 @@ Template estándar que monitoriza:
 | Versión | 10.x |
 | Puerto | 3000 |
 | URL | http://192.168.70.10:3000 |
-| Usuario default | admin |
-| Contraseña default | admin |
+| Usuario  | [USERNAME] |
+| Contraseña  | [PASSWORD] |
 
 ### 5.7.2 Instalación
 
