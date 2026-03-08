@@ -491,6 +491,7 @@ sudo bconsole
 #    - Cliente a restaurar
 #    - Fecha del backup
 #    - Archivos a restaurar
+```
 
 ### 4.6.2 Restauración desde Google Drive
 
