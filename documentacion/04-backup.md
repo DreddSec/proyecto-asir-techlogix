@@ -625,8 +625,8 @@ ls -la /raid5/bacula-backups/
 El sistema de backup implementado cumple con:
 
 - ✅ **Estrategia 3-2-1:** 3 copias, 2 medios, 1 offsite
-- ✅ **Automatización:** Backups programados sin intervención
+- ✅ **Automatización:** Backups programados sin intervención midante scripts en bash
 - ✅ **Redundancia local:** RAID 5 protege contra fallo de 1 disco
 - ✅ **Offsite:** Google Drive para recuperación ante desastres
-- ✅ **Granularidad:** Full, Diferencial, Incremental
+- ✅ **Almacenamiento:** Full, Diferencial, Incremental
 - ✅ **Monitorización:** Alertas y verificación de integridad
