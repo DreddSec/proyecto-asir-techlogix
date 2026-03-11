@@ -155,7 +155,7 @@ El servicio DHCP se proporciona desde **pfSense** para cada VLAN de clientes:
 | ADMIN (10) | 192.168.10.100 - .200 | 192.168.10.1 | 192.168.40.10 |
 | PROD (20) | 192.168.20.100 - .200 | 192.168.20.1 | 192.168.40.10 |
 | IT (30) | 192.168.30.100 - .200 | 192.168.30.1 | 192.168.40.10 |
-| WIFI_GUESTS (50) | 192.168.50.10 - .200 | 192.168.50.1 | 8.8.8.8 |
+| WIFI_GUESTS (50) | 192.168.50.10 - .200 | 192.168.50.1 | 8.8.8.8 (Goolge) |
 
  **WIFI_GUESTS** usa *DNS público* (8.8.8.8) para evitar acceso a resolución de nombres internos.
 
