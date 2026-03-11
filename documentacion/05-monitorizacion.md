@@ -191,8 +191,6 @@ Template estándar que monitoriza:
 | Versión | 10.x |
 | Puerto | 3000 |
 | URL | http://192.168.70.10:3000 |
-| Usuario  | [USERNAME] |
-| Contraseña  | [PASSWORD] |
 
 ### 5.7.2 Instalación
 
@@ -257,7 +255,6 @@ SRV-MON01 también funciona como servidor Ansible para gestión de configuració
 /home/ansible/
 ├── hosts.ini           # Inventario
 ├── securizacion.yml    # Playbook de hardening
-├── ufw_granular.yml    # Playbook de firewall
 └── bacula_rclone.yml   # Playbook de backup
 ```
 
