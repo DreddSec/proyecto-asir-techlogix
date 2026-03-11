@@ -474,7 +474,7 @@ rclone sync "$BACKUP_DIR" "$REMOTE" \
 if [ $? -eq 0 ]; then
     echo "Sincronización exitosa: $(date)" >> "$LOG_FILE"
 else
-    echo "ERROR en sincronización: $(date)" >> "$LOG_FILE"
+    echo "ERROR en la sincronización: $(date)" >> "$LOG_FILE"
     exit 1
 fi
 
