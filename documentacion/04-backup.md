@@ -478,6 +478,9 @@ else
     exit 1
 fi
 
+# Limpiar backups antiguos (>30 días)
+find "$BACKUP_DIR" -type f -mtime +30 -delete
+
 echo "=== Fin de sincronización ===" >> "$LOG_FILE"
 ```
 
