@@ -206,7 +206,7 @@ SRV-FILE01 actúa como servidor de archivos utilizando Samba integrado con el do
     path = /srv/compartido/comun
     browseable = yes
     read only = no
-    valid users = @"TECHLOGIX\Domain Users"
+    valid users = @"TECHLOGIX+Domain Users"
     create mask = 0664
     directory mask = 0775
 
