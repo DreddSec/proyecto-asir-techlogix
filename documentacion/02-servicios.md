@@ -148,7 +148,7 @@ Para que las consultas del dominio interno se resuelvan correctamente:
 
 ### 2.4.1 Configuración por VLAN
 
-El servicio DHCP se proporciona desde DC01/02 para cada VLAN de clientes:
+El servicio DHCP se proporciona desde **pfSense** para cada VLAN de clientes:
 
 | VLAN | Rango DHCP | Gateway | DNS |
 |------|------------|---------|-----|
