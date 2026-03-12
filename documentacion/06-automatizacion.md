@@ -434,10 +434,7 @@ ansible-vault encrypt /home/ansible/secrets.yml
 
 **Ejecutar playbooks con ambos cifrados:**
 ```bash
-ansible-playbook -i hosts.ini hardening.yml \
-  -e @secrets.yml \
-  --ask-vault-pass \
-  --ask-become-pass
+ansible-playbook -i hosts.ini hardening.yml -e @secrets.yml --ask-vault-pass --ask-become-pass
 ```
 
 **Editar sin descifrar permanentemente:**
