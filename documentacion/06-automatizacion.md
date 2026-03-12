@@ -418,19 +418,39 @@ chmod 600 /home/ansible/hosts.ini
 chmod 600 /home/ansible/*.yml
 chmod 400 /home/ansible/.ssh/id_rsa_ansible
 ```
-
 ### 6.6.2 Ansible Vault
 
-Para proteger contraseñas y datos sensibles:
+Para proteger información sensible se cifran con **Ansible Vault** (AES-256) 
+dos archivos con propósitos distintos:
 
+- `hosts.ini` — contiene IPs y estructura de red
+- `secrets.yml` — contiene contraseñas y credenciales
+
+**Cifrar ambos archivos con la misma contraseña maestra:**
 ```bash
-# Cifrar archivo con credenciales
-ansible-vault encrypt secrets.yml
-
-# Ejecutar playbook con vault
-ansible-playbook -i hosts.ini playbook.yml --ask-vault-pass --ask-become-pass
+ansible-vault encrypt /home/ansible/hosts.ini
+ansible-vault encrypt /home/ansible/secrets.yml
 ```
 
+**Ejecutar playbooks con ambos cifrados:**
+```bash
+ansible-playbook -i hosts.ini hardening.yml \
+  -e @secrets.yml \
+  --ask-vault-pass \
+  --ask-become-pass
+```
+
+**Editar sin descifrar permanentemente:**
+```bash
+ansible-vault edit /home/ansible/hosts.ini
+ansible-vault edit /home/ansible/secrets.yml
+```
+
+**Descifrar si fuera necesario:**
+```bash
+ansible-vault decrypt /home/ansible/hosts.ini
+ansible-vault decrypt /home/ansible/secrets.yml
+```
 ### 6.6.3 Auditoría
 
 Todas las ejecuciones de Ansible quedan registradas en los logs del sistema y son monitorizadas por auditd.
