@@ -1,4 +1,4 @@
-# 🏢 TechLogix - Infraestructura de Red Empresarial
+# 🏢 TechLogix - Infraestructura de Red Empresarial On-Premise
 
 <p align="center">
   <img src="https://img.shields.io/badge/Plataforma-Ubuntu%20Server%2024.04-orange" alt="Plataforma">
