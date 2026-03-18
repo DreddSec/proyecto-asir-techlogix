@@ -150,7 +150,7 @@ dc02 | SUCCESS => {
 
 ## 6.5 Playbooks Implementados
 
-### 6.5.1 Playbook de Securización (securizacion.yml)
+### 6.5.1 Playbook de Securización (hardening.yml)
 
 Este playbook aplica hardening a todos los servidores de forma automatizada.
 
@@ -169,7 +169,7 @@ Este playbook aplica hardening a todos los servidores de forma automatizada.
 | Banner legal | Mensaje de advertencia en SSH |
 | Deshabilitar servicios | avahi-daemon, cups |
 
-**Archivo: securizacion.yml**
+**Archivo: hardening.yml**
 
 ```yaml
 ---
@@ -211,36 +211,59 @@ Este playbook aplica hardening a todos los servidores de forma automatizada.
         path: /etc/ssh/sshd_config
         regexp: '^#?PermitRootLogin'
         line: 'PermitRootLogin no'
+        state: present
+
+    - name: Configurar SSH - Deshabilitar autenticación por contraseña
+      lineinfile:
+       path: /etc/ssh/sshd_config
+        regexp: '^#?PermitRootLogin'
+        line: 'PermitRootLogin no'
+        state: present
 
     - name: Configurar SSH - Deshabilitar autenticación por contraseña
       lineinfile:
         path: /etc/ssh/sshd_config
         regexp: '^#?PasswordAuthentication'
         line: 'PasswordAuthentication no'
+        state: present
 
     - name: Configurar SSH - Cambiar puerto
       lineinfile:
         path: /etc/ssh/sshd_config
         regexp: '^#?Port'
         line: "Port {{ ssh_port }}"
-
-    - name: Configurar SSH - MaxAuthTries
-      lineinfile:
-        path: /etc/ssh/sshd_config
-        regexp: '^#?MaxAuthTries'
-        line: 'MaxAuthTries 3'
+        state: present
 
     - name: Configurar SSH - Deshabilitar X11 Forwarding
       lineinfile:
         path: /etc/ssh/sshd_config
         regexp: '^#?X11Forwarding'
         line: 'X11Forwarding no'
-      notify: restart ssh
+        state: present
+
+    - name: Configurar SSH - MaxAuthTries
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?MaxAuthTries'
+        line: 'MaxAuthTries 3'
+        state: present
+
+   - name: Reiniciar SSH
+      systemd:
+        name: ssh
+        state: restarted
 
     # 4. PERMISOS DE ARCHIVOS CRÍTICOS
     - name: Configurar permisos /etc/shadow
       file:
         path: /etc/shadow
+        mode: '0600'
+        owner: root
+        group: root
+
+    - name: Configurar permisos /etc/gshadow
+      file:
+        path: /etc/gshadow
         mode: '0600'
         owner: root
         group: root
@@ -252,32 +275,78 @@ Este playbook aplica hardening a todos los servidores de forma automatizada.
         owner: root
         group: root
 
+    - name: Configurar permisos /etc/group
+      file:
+        path: /etc/group
+        mode: '0644'
+        owner: root
+        group: root
+
+
     # 5. POLÍTICAS DE CONTRASEÑAS (PAM)
     - name: Configurar calidad de contraseñas - minlen
       lineinfile:
         path: /etc/security/pwquality.conf
         regexp: '^#?\s*minlen'
         line: 'minlen = 12'
+        state: present
 
     - name: Configurar calidad de contraseñas - minclass
       lineinfile:
         path: /etc/security/pwquality.conf
         regexp: '^#?\s*minclass'
         line: 'minclass = 3'
+        state: present
 
-    # 6. CONFIGURAR AUDITD
-    - name: Crear reglas de auditd
+    - name: Configurar calidad de contraseñas - ucredit
+      lineinfile:
+        path: /etc/security/pwquality.conf
+        regexp: '^#?\s*ucredit'
+        line: 'ucredit = -1'
+        state: present
+
+    - name: Configurar calidad de contraseñas - dcredit
+      lineinfile:
+        path: /etc/security/pwquality.conf
+        regexp: '^#?\s*dcredit'
+        line: 'dcredit = -1'
+        state: present
+
+    - name: Configurar calidad de contraseñas - ocredit
+      lineinfile:
+        path: /etc/security/pwquality.conf
+        regexp: '^#?\s*ocredit'
+        line: 'ocredit = -1'
+        state: present
+
+   # 6. CONFIGURAR AUDITD
+    - name: Crear reglas de auditd para autenticación
       blockinfile:
-        path: /etc/audit/rules.d/hardening.rules
+        path: /etc/audit/rules.d/auth.rules
         create: yes
         block: |
           -w /etc/passwd -p wa -k passwd_changes
           -w /etc/group -p wa -k group_changes
           -w /etc/shadow -p wa -k shadow_changes
+          -w /etc/gshadow -p wa -k gshadow_changes
           -w /etc/sudoers -p wa -k sudoers_changes
-      notify: restart auditd
+          -w /var/log/auth.log -p wa -k auth_log_changes
 
-    # 7. CONFIGURAR FAIL2BAN
+    - name: Crear reglas de auditd para red
+      blockinfile:
+        path: /etc/audit/rules.d/network.rules
+        create: yes
+        block: |
+          -a always,exit -F arch=b64 -S socket -S connect -k network_connections
+          -w /etc/hosts -p wa -k hosts_changes
+          -w /etc/network/ -p wa -k network_changes
+
+    - name: Reiniciar auditd
+      systemd:
+        name: auditd
+        state: restarted
+
+   # 7. CONFIGURAR FAIL2BAN
     - name: Crear configuración local de Fail2ban
       copy:
         dest: /etc/fail2ban/jail.local
@@ -291,9 +360,27 @@ Este playbook aplica hardening a todos los servidores de forma automatizada.
           enabled = true
           port = {{ ssh_port }}
           logpath = /var/log/auth.log
-      notify: restart fail2ban
+
+    - name: Reiniciar Fail2ban
+      systemd:
+        name: fail2ban
+        state: restarted
+        enabled: yes
 
     # 8. ACTUALIZACIONES AUTOMÁTICAS
+    - name: Configurar actualizaciones automáticas de seguridad
+      copy:
+        dest: /etc/apt/apt.conf.d/50unattended-upgrades
+        content: |
+          Unattended-Upgrade::Allowed-Origins {
+              "${distro_id}:${distro_codename}-security";
+          };
+          Unattended-Upgrade::AutoFixInterruptedDpkg "true";
+          Unattended-Upgrade::MinimalSteps "true";
+          Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+          Unattended-Upgrade::Remove-Unused-Dependencies "true";
+          Unattended-Upgrade::Automatic-Reboot "false";
+
     - name: Habilitar actualizaciones automáticas
       copy:
         dest: /etc/apt/apt.conf.d/20auto-upgrades
@@ -302,17 +389,49 @@ Este playbook aplica hardening a todos los servidores de forma automatizada.
           APT::Periodic::Unattended-Upgrade "1";
           APT::Periodic::AutocleanInterval "7";
 
-    # 9. BANNER LEGAL
+    # 9. CONFIGURAR NTP
+    - name: Habilitar y arrancar NTP
+      systemd:
+        name: ntp
+        state: started
+        enabled: yes
+
+    # 10. LÍMITES DE RECURSOS (ULIMITS)
+    - name: Configurar ulimits para seguridad
+      blockinfile:
+        path: /etc/security/limits.conf
+        block: |
+          * soft nofile 65535
+          * hard nofile 65535
+          * soft nproc 4096
+          * hard nproc 4096
+
+
+    # 10. LÍMITES DE RECURSOS (ULIMITS)
+    - name: Configurar ulimits para seguridad
+      blockinfile:
+        path: /etc/security/limits.conf
+        block: |
+          * soft nofile 65535
+          * hard nofile 65535
+          * soft nproc 4096
+          * hard nproc 4096
+
+    # 11. BANNER LEGAL (MOTD)
     - name: Crear banner legal de acceso
       copy:
         dest: /etc/motd
         content: |
-          ****************************************************************
-          ADVERTENCIA: Sistema de uso exclusivo para personal autorizado.
-          Todas las actividades son monitorizadas y registradas.
-          ****************************************************************
+          ********************************************************************************
+          ADVERTENCIA: Este sistema es de uso exclusivo para personal autorizado.
+          
+          El acceso no autorizado está prohibido y será perseguido legalmente.
+          Todas las actividades en este sistema son monitorizadas y registradas.
+          
+          Si no está autorizado, desconéctese inmediatamente.
+          ********************************************************************************
 
-    # 10. DESHABILITAR SERVICIOS INNECESARIOS
+    # 12. DESHABILITAR SERVICIOS INNECESARIOS
     - name: Deshabilitar servicios innecesarios
       systemd:
         name: "{{ item }}"
@@ -328,22 +447,12 @@ Este playbook aplica hardening a todos los servidores de forma automatizada.
       systemd:
         name: ssh
         state: restarted
-
-    - name: restart auditd
-      systemd:
-        name: auditd
-        state: restarted
-
-    - name: restart fail2ban
-      systemd:
-        name: fail2ban
-        state: restarted
 ```
 
 **Ejecución:**
 
 ```bash
-ansible-playbook -i hosts.ini securizacion.yml --ask-become-pass
+ansible-playbook -i hosts.ini hardening.yml --ask-become-pass
 ```
 
 ---
@@ -356,12 +465,13 @@ Este playbook configura los agentes de Bacula en todos los servidores.
 
 ```yaml
 ---
-- name: Configurar Bacula File Daemon
+# INSTALACIÓN DE BACULA CLIENT EN TODOS LOS SERVIDORES
+- name: Instalar Bacula Client en todos los servidores
   hosts: servers
   become: yes
   vars:
-    bacula_director: 192.168.40.13
-    bacula_password: "password_seguro"
+    bacula_director_password: [DIR_PASSWORD]
+    bacula_server_ip: "192.168.40.13"
     
   tasks:
     - name: Instalar Bacula File Daemon
@@ -370,40 +480,303 @@ Este playbook configura los agentes de Bacula en todos los servidores.
         state: present
         update_cache: yes
 
-    - name: Configurar Bacula FD
+    - name: Configurar Bacula File Daemon
       template:
+        src: bacula-fd.conf.j2
         dest: /etc/bacula/bacula-fd.conf
-        content: |
-          Director {
-            Name = bacula-dir
-            Password = "{{ bacula_password }}"
-          }
-          
-          FileDaemon {
-            Name = {{ inventory_hostname }}-fd
-            FDport = 9102
-            WorkingDirectory = /var/lib/bacula
-            Pid Directory = /run/bacula
-            Maximum Concurrent Jobs = 20
-          }
-          
-          Messages {
-            Name = Standard
-            director = bacula-dir = all, !skipped, !restored
-          }
+        mode: '0640'
+        owner: bacula
+        group: bacula
       notify: restart bacula-fd
 
-    - name: Habilitar Bacula FD
+    - name: Habilitar y arrancar Bacula FD
       systemd:
         name: bacula-fd
-        enabled: yes
         state: started
+        enabled: yes
 
   handlers:
     - name: restart bacula-fd
       systemd:
         name: bacula-fd
         state: restarted
+
+# CONFIGURACIÓN DEL SERVIDOR BACULA
+- name: Configurar Servidor Bacula en BAK01
+  hosts: backup_servers
+  become: yes
+  vars:
+    bacula_db_password: [DB_PASWORD]
+    bacula_director_password: [DIR_PASSWORD]
+    
+  tasks:
+    - name: Instalar componentes Bacula Server
+      apt:
+        name:
+          - bacula-director-mysql
+          - bacula-storage-mysql
+          - bacula-client
+          - bacula-console
+          - mysql-server
+          - python3-mysqldb
+        state: present
+        update_cache: yes
+
+    - name: Crear base de datos MySQL para Bacula
+      mysql_db:
+        name: bacula
+        state: present
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+
+    - name: Crear usuario MySQL para Bacula
+      mysql_user:
+        name: bacula
+        password: "{{ bacula_db_password }}"
+        priv: "bacula.*:ALL"
+        state: present
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+
+
+    - name: Importar esquema de Bacula
+      mysql_db:
+        name: bacula
+        state: import
+        target: /usr/share/bacula-director/make_mysql_tables
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+      ignore_errors: yes
+
+    - name: Crear directorio de backups en RAID
+      file:
+        path: /raid5/bacula-backups
+        state: directory
+        owner: bacula
+        group: bacula
+        mode: '0750'
+
+    - name: Crear directorio de restore
+      file:
+        path: /raid5/bacula-restore
+        state: directory
+        owner: bacula
+        group: bacula
+        mode: '0750'
+
+    - name: Configurar Bacula Director
+      template:
+        src: bacula-dir.conf.j2
+        dest: /etc/bacula/bacula-dir.conf
+        mode: '0640'
+        owner: bacula
+        group: bacula
+      notify: restart bacula-director
+
+   - name: Configurar Bacula Storage Daemon
+      template:
+        src: bacula-sd.conf.j2
+        dest: /etc/bacula/bacula-sd.conf
+        mode: '0640'
+        owner: bacula
+        group: bacula
+      notify: restart bacula-sd
+
+    - name: Habilitar y arrancar Bacula Director
+      systemd:
+        name: bacula-director
+        state: started
+        enabled: yes
+
+    - name: Habilitar y arrancar Bacula Storage Daemon
+      systemd:
+        name: bacula-sd
+        state: started
+        enabled: yes
+
+  handlers:
+    - name: restart bacula-director
+      systemd:
+        name: bacula-director
+        state: restarted
+
+    - name: restart bacula-sd
+      systemd:
+        name: bacula-sd
+        state: restarted
+
+# INSTALACIÓN Y CONFIGURACIÓN DE RCLONE
+- name: Instalar y configurar Rclone para Google Drive
+  hosts: backup_servers
+  become: yes
+  vars:
+    rclone_version: "current"
+    
+  tasks:
+    - name: Instalar Rclone
+      apt:
+        name: rclone
+        state: present
+        update_cache: yes
+
+    - name: Crear directorio de configuración Rclone
+      file:
+        path: /root/.config/rclone
+        state: directory
+        mode: '0700'
+        owner: root
+        group: root
+
+    - name: Crear script de sincronización a Google Drive
+      copy:
+        dest: /usr/local/bin/sync-to-gdrive.sh
+        mode: '0750'
+        owner: root
+        group: root
+        content: |
+                 #!/bin/bash
+          
+          # Script de sincronización de backups a Google Drive
+          LOG_FILE="/var/log/rclone-sync.log"
+          BACKUP_DIR="/raid5/bacula-backups"
+          REMOTE="gdrive:backups/bacula"
+          
+          echo "=== Inicio de sincronización: $(date) ===" >> "$LOG_FILE"
+          
+          # Verificar que rclone está configurado
+          if ! rclone listremotes | grep -q "gdrive:"; then
+              echo "ERROR: Rclone no configurado" >> "$LOG_FILE"
+              exit 1
+          fi
+          
+          # Sincronizar backups
+          rclone sync "$BACKUP_DIR" "$REMOTE" \
+              --transfers 4 \
+              --checkers 8 \
+              --contimeout 60s \
+              --timeout 300s \
+              --retries 3 \
+              --log-file="$LOG_FILE" \
+              --log-level INFO
+          
+          if [ $? -eq 0 ]; then
+              echo "Sincronización exitosa: $(date)" >> "$LOG_FILE"
+          else
+              echo "ERROR en la sincronización: $(date)" >> "$LOG_FILE"
+              exit 1
+          fi
+          
+          # Limpiar backups antiguos (>30 días)
+          find "$BACKUP_DIR" -type f -mtime +30 -delete
+          
+          echo "=== Fin de sincronización  ===" >> "$LOG_FILE"
+
+
+    - name: Crear directorio para logs de Rclone
+      file:
+        path: /var/log
+        state: directory
+        mode: '0755'
+
+    - name: Crear cron job para sincronización diaria
+      cron:
+        name: "Sincronización diaria a Google Drive"
+        minute: "0"
+        hour: "3"
+        job: "/usr/local/bin/sync-to-gdrive.sh"
+        user: root
+
+    - name: Crear script de verificación de integridad
+      copy:
+        dest: /usr/local/bin/verify-backups.sh
+        mode: '0750'
+        owner: root
+        group: root
+        content: |
+          #!/bin/bash
+
+            LOG_FILE="/var/log/backup-verification.log"
+
+            echo "=== Verificación: $(date) ===" >> "$LOG_FILE"
+
+            # Verificar espacio RAID
+            DISK_USAGE=$(df -h /raid5 | tail -1 | awk '{print $5}' | sed 's/%//')
+            echo "Uso RAID5: ${DISK_USAGE}%" >> "$LOG_FILE"
+
+            if [ "$DISK_USAGE" -gt 85 ]; then
+              echo "ADVERTENCIA: Disco al ${DISK_USAGE}% - revisar limpieza de volúmenes" >> "$LOG_FILE"
+            fi
+
+            # Contar volúmenes de Bacula
+            BACKUP_COUNT=$(find /raid5/bacula-backups -type f | wc -l)
+            echo "Volúmenes en almacenamiento: $BACKUP_COUNT" >> "$LOG_FILE"
+
+            # Verificar estado RAID - buscar discos fallidos (símbolo _)
+            if grep -q "_" /proc/mdstat; then
+              echo "CRÍTICO: Disco fallido detectado en RAID5 - intervención inmediata requerida" >> "$LOG_FILE"
+            else
+              echo "RAID5: OK - todos los discos operativos" >> "$LOG_FILE"
+            fi
+
+    - name: Crear cron job para verificación semanal
+      cron:
+        name: "Verificación semanal de backups"
+        minute: "0"
+        hour: "4"
+        weekday: "1"
+        job: "/usr/local/bin/verify-backups.sh"
+
+    - name: Crear directorio para logs de Rclone
+      file:
+        path: /var/log
+        state: directory
+        mode: '0755'
+
+    - name: Crear cron job para sincronización diaria
+      cron:
+        name: "Sincronización diaria a Google Drive"
+        minute: "0"
+        hour: "3"
+        job: "/usr/local/bin/sync-to-gdrive.sh"
+        user: root
+
+    - name: Crear script de verificación de integridad
+      copy:
+        dest: /usr/local/bin/verify-backups.sh
+        mode: '0750'
+        owner: root
+        group: root
+        user: root
+
+    - name: Crear script de restauración de emergencia
+      copy:
+        dest: /usr/local/bin/emergency-restore.sh
+        mode: '0750'
+        owner: root
+        group: root
+        content: |
+         #!/bin/bash
+
+            if [ "$#" -ne 2 ]; then
+              echo "Uso: $0 <nombre_servidor> <ruta_destino>"
+              echo "Ejemplo: $0 dc01 /raid5/bacula-restore"
+              exit 1
+            fi
+
+            SERVIDOR=$1
+            DESTINO=$2
+
+            echo "Restaurando backups de $SERVIDOR a $DESTINO"
+
+            # Descarga solo la carpeta del servidor indicado
+            rclone copy "gdrive:backups/bacula/$SERVIDOR" "$DESTINO" \
+              --progress \
+              --transfers 4
+
+            if [ $? -eq 0 ]; then
+              echo "Descarga completada. Use bconsole para restaurar los archivos."
+            else
+              echo "ERROR durante la descarga desde Google Drive."
+              exit 1
+            fi
+
 ```
 
 ---
