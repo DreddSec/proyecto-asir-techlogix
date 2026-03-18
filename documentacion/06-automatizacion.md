@@ -513,8 +513,6 @@ Este playbook configura los agentes de Bacula en todos los servidores.
     - name: Instalar componentes Bacula Server
       apt:
         name:
-          - bacula-director-mysql
-          - bacula-storage-mysql
           - bacula-client
           - bacula-console
           - mysql-server
