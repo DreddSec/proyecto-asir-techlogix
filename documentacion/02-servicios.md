@@ -308,11 +308,16 @@ Los usuarios IT conectan mediante *VPN* y acceden al servidor FTP:
 ```bash
 # Conexion conarchivo .opvn del cliente
 sudo openvpn --config david-vpn.ovpn
+```
+<img width="1781" height="591" alt="david_vpn_conn" src="https://github.com/user-attachments/assets/c516eb7b-b482-4fd9-92a2-71aad6f2fc6b" />
 
+```bash
 # Desde cliente VPN (IP 10.8.0.x)
 ftp 192.168.40.12
 smbclient //192.168.40.12/
 ```
+<img width="765" height="208" alt="smblcient_proof" src="https://github.com/user-attachments/assets/6334072a-e2a0-46d9-a510-2f60c7a68abb" />
+
 
 ---
 
