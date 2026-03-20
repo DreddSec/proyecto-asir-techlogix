@@ -246,5 +246,5 @@ Para un entorno de producción real se recomienda:
 - ✅ **Administración:** Gestión centralizada desde la VLAN de monitorización
 - ✅ **Acceso remoto:** VPN con autenticación contra Active Directory
 
-## Capturas del proyecto
 <img width="1443" height="709" alt="image" src="https://github.com/user-attachments/assets/8690e85f-8766-4f95-99e1-e048ccf75d04" />
+| *Diseño conceptual realizado con Packet Tracer*
