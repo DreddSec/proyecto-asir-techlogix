@@ -81,6 +81,9 @@ Se ha implementado una **topología en estrella** con pfSense como núcleo centr
 | 70 | MON | 192.168.70.0/24 | 192.168.70.1 | Monitorización |
 | 100 | DMZ | 192.168.100.0/24 | 192.168.100.1 | Zona desmilitarizada |
 
+<img width="732" height="414" alt="PFSENSE" src="https://github.com/user-attachments/assets/92556876-9e81-491a-be60-e1e755efdccb" />
+
+
 ### 1.3.2 Justificación de la Segmentación
 
 **VLAN 10 - ADMIN:** 
