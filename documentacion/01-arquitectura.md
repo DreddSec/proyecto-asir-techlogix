@@ -171,6 +171,8 @@ Todas las máquinas virtuales utilizan **Redes Internas (Internal Network)** con
 | ADMIN | 10 | CLI-WIN-ADMIN, pfSense |
 | INTERNET | WAN | pfSense, CLI-DEBIAN-VPN |
 
+<img width="751" height="601" alt="VBox" src="https://github.com/user-attachments/assets/52daad43-99b2-4745-97c2-4167c088a1c2" />
+
 ### 1.5.3 Recursos por Máquina Virtual
 
 | Servidor | RAM | CPU | Disco | Notas |
