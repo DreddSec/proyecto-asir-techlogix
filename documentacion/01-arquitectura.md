@@ -21,6 +21,8 @@ Se ha implementado una **topología en estrella** con pfSense como núcleo centr
 
 ### 1.2.2 Diagrama de Red
 
+<img width="1443" height="709" alt="image" src="https://github.com/user-attachments/assets/8690e85f-8766-4f95-99e1-e048ccf75d04" />
+
 ```
                                           ┌─────────────────┐
                                           │     INTERNET    │
@@ -80,9 +82,6 @@ Se ha implementado una **topología en estrella** con pfSense como núcleo centr
 | 60 | SEC | 192.168.60.0/24 | 192.168.60.1 | VPN y seguridad |
 | 70 | MON | 192.168.70.0/24 | 192.168.70.1 | Monitorización |
 | 100 | DMZ | 192.168.100.0/24 | 192.168.100.1 | Zona desmilitarizada |
-
-<img width="732" height="414" alt="PFSENSE" src="https://github.com/user-attachments/assets/92556876-9e81-491a-be60-e1e755efdccb" />
-
 
 ### 1.3.2 Justificación de la Segmentación
 
@@ -248,6 +247,3 @@ Para un entorno de producción real se recomienda:
 - ✅ **Escalabilidad:** Diseño modular permitiendo agregar VLANs y servidores
 - ✅ **Administración:** Gestión centralizada desde la VLAN de monitorización
 - ✅ **Acceso remoto:** VPN con autenticación contra Active Directory
-
-<img width="1443" height="709" alt="image" src="https://github.com/user-attachments/assets/8690e85f-8766-4f95-99e1-e048ccf75d04" />
-| Diseño conceptual realizado con Packet Tracer
