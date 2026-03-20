@@ -145,6 +145,8 @@ Zona desmilitarizada para servicios públicos (web). Aislada de la red interna.
 | pfSense OPT6 | 192.168.30.1 | em7 | Gateway IT |
 | pfsense OPT7 | 192.168.50.1 | em8 | Gateway WIFI_GUESTS |
 
+<img width="732" height="414" alt="PFSENSE" src="https://github.com/user-attachments/assets/78b2e9b9-61ff-4067-8671-1a4bda109cb8" />
+
 ---
 
 ## 1.5 Entorno de Virtualización
