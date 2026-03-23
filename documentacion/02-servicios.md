@@ -180,6 +180,8 @@ SRV-FILE01 actúa como servidor de archivos utilizando Samba integrado con el do
 ├── it/                 # Acceso: GRP_IT
 └── produccion/         # Acceso: GRP_Produccion
 ```
+<img width="575" height="151" alt="carpetas_permisos_srv" src="https://github.com/user-attachments/assets/349b3471-57af-46d7-a5fd-051db2365cba" />
+
 
 ### 2.5.3 Configuración SMB
 
@@ -273,6 +275,7 @@ drwxrwsr-x /srv/compartido/comun
 smbclient //192.168.40.12/IT -U david.garcia
 mount -t cifs //192.168.40.12/IT /mnt/it -o user=david.garcia
 ```
+<img width="765" height="208" alt="smblcient_proof" src="https://github.com/user-attachments/assets/dbd2c7da-d577-4717-b870-0dec7c31a887" />
 
 ---
 
