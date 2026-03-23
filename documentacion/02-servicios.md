@@ -62,7 +62,8 @@ TECHLOGIX.LOCAL
 | ana.martinez | Ana Martínez | IT | GRP_IT |
 | pedro.sanchez | Pedro Sánchez | Producción | GRP_Produccion |
 | laura.fernandez | Laura Fernández | Producción | GRP_Produccion |
-<img width="398" height="248" alt="user_list" src="https://github.com/user-attachments/assets/165fd9d4-724b-42bc-94a6-a8b991bd5b98" />
+<img width="381" height="216" alt="user_list" src="https://github.com/user-attachments/assets/0bf71670-011b-4452-bb4f-f16cdf43e382" />
+
 
 ### 2.2.6 Archivos de Configuración
 
