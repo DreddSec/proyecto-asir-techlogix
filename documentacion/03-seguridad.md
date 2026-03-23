@@ -58,7 +58,8 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
 | Pass | UDP | * | 192.168.60.10 | 1194 | OpenVPN NAT Port Forward |
-<img width="1045" height="338" alt="WAN_RULESFW" src="https://github.com/user-attachments/assets/750551c4-d9c3-4d63-8a88-3321063f349f" />
+<img width="1025" height="210" alt="WAN_RULESFW" src="https://github.com/user-attachments/assets/7699510d-402f-484e-86b5-b373f2cadca3" />
+
 
 
 #### LAN (Servers - 192.168.40.0/24)
