@@ -49,8 +49,9 @@ TECHLOGIX.LOCAL
     ├── GRP_IT
     └── GRP_Produccion
 
-
 ```
+<img width="366" height="153" alt="ou_list" src="https://github.com/user-attachments/assets/c92b7297-5f0b-4de3-ad6e-e55733c2a496" />
+
 
 ### 2.2.4 Usuarios del Sistema
 
