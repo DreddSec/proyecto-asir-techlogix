@@ -285,7 +285,6 @@ Memory Cap: 10000000
 | ca.crt | /etc/openvpn/server/ | Autoridad Certificadora |
 | server.crt | /etc/openvpn/server/ | Certificado servidor |
 | server.key | /etc/openvpn/server/ | Clave privada servidor |
-| david-vpn.crt | PKI | Certificado cliente |
 <img width="486" height="163" alt="crts" src="https://github.com/user-attachments/assets/a2f3d666-e47f-4f64-aac5-ff4882cedb52" />
 
 ---
