@@ -89,6 +89,9 @@ TECHLOGIX.LOCAL
     path = /var/lib/samba/sysvol/techlogix.local/scripts
     read only = No
 ```
+<img width="398" height="248" alt="user_list" src="https://github.com/user-attachments/assets/165fd9d4-724b-42bc-94a6-a8b991bd5b98" />
+<img width="408" height="704" alt="group_list" src="https://github.com/user-attachments/assets/fc49d5fa-498f-43f6-9a5b-6eac3f970223" />
+
 
 ---
 
