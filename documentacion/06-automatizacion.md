@@ -463,8 +463,9 @@ Este playbook aplica hardening a todos los servidores de forma automatizada.
 **Ejecución:**
 
 ```bash
-ansible-playbook -i hosts.ini hardening.yml --ask-become-pass
+ansible-playbook -i hosts.ini hardening.yml -e @secrets.yml --ask-become-pass --ask-vault-pass
 ```
+<img width="1308" height="781" alt="ansible_hardniung_yml_1" src="https://github.com/user-attachments/assets/92d773d9-3c74-4e50-8aef-5f3cdf877223" />
 
 ---
 
@@ -787,6 +788,8 @@ Este playbook configura los agentes de Bacula en todos los servidores.
             fi
 
 ```
+<img width="1341" height="833" alt="ansible_baucla_1_yml" src="https://github.com/user-attachments/assets/16c4d82f-3c7d-49dd-8144-bc7260e51006" />
+<img width="1335" height="831" alt="ansible_bacula2_yml" src="https://github.com/user-attachments/assets/0de510be-0a34-4ee4-a3c8-ce3c34a17733" />
 
 ---
 
@@ -808,7 +811,7 @@ dos archivos con propósitos distintos:
 - `hosts.ini` — contiene IPs y estructura de red
 - `secrets.yml` — contiene contraseñas y credenciales
 
-**Cifrar ambos archivos con la misma contraseña maestra:**
+**Cifrar ambos archivos con una contraseña maestra:**
 ```bash
 ansible-vault encrypt /home/ansible/hosts.ini
 ansible-vault encrypt /home/ansible/secrets.yml
@@ -816,7 +819,7 @@ ansible-vault encrypt /home/ansible/secrets.yml
 
 **Ejecutar playbooks con ambos cifrados:**
 ```bash
-ansible-playbook -i hosts.ini hardening.yml -e @secrets.yml --ask-vault-pass --ask-become-pass
+ansible-playbook -i hosts.ini update.yml -e @secrets.yml --ask-vault-pass --ask-become-pass
 ```
 
 **Editar sin descifrar permanentemente:**
@@ -845,6 +848,7 @@ Todas las ejecuciones de Ansible quedan registradas en los logs del sistema y so
 | `ansible-playbook -C playbook.yml` | Dry-run (sin aplicar cambios) |
 | `ansible-playbook --limit dc01` | Ejecutar solo en un host |
 | `ansible-inventory --list` | Ver inventario en JSON |
+<img width="533" height="693" alt="ansible_ping" src="https://github.com/user-attachments/assets/683f4fa6-f5d5-4ea6-ac57-87b1f324ed75" />
 
 ---
 
@@ -859,9 +863,5 @@ La implementación de Ansible ha permitido:
 
 ---
 
-## 6.9 Capturas del Proyecto
-
-*[Añadir capturas de pantalla de:]*
-- Ejecución de ansible ping a todos los servidores
 - Resultado de playbook de securización
 - Estado de fail2ban después de aplicar playbook
