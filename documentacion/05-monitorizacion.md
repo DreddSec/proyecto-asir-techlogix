@@ -60,7 +60,7 @@ apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sq
 # Crear base de datos
 mysql -u root -p
 > create database zabbix character set utf8mb4 collate utf8mb4_bin;
-> create user zabbix@localhost identified by 'password';
+> create user zabbix@localhost identified by '[PASSWORD]';
 > grant all privileges on zabbix.* to zabbix@localhost;
 
 # Importar esquema
