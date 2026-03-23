@@ -180,10 +180,26 @@ SRV-FILE01 actúa como servidor de archivos utilizando Samba integrado con el do
 ├── it/                 # Acceso: GRP_IT
 └── produccion/         # Acceso: GRP_Produccion
 ```
+
+### 2.5.3 Permisos de Sistema de Archivos
+
+```bash
+# Propietarios y grupos
+root:grp_administracion /srv/compartido/administracion
+root:grp_it /srv/compartido/it
+root:grp_produccion /srv/compartido/produccion
+root:domain users /srv/compartido/comun
+
+# Permisos
+drwxrws--- /srv/compartido/administracion
+drwxrws--- /srv/compartido/it
+drwxrws--- /srv/compartido/produccion
+drwxrwsr-x /srv/compartido/comun
+```
 <img width="575" height="151" alt="carpetas_permisos_srv" src="https://github.com/user-attachments/assets/349b3471-57af-46d7-a5fd-051db2365cba" />
 
 
-### 2.5.3 Configuración SMB
+### 2.5.4 Configuración SMB
 
 **Archivo:** `/etc/samba/smb.conf`
 
@@ -243,22 +259,6 @@ SRV-FILE01 actúa como servidor de archivos utilizando Samba integrado con el do
     create mask = 0660
     directory mask = 0770
     audit = yes
-```
-
-### 2.5.4 Permisos de Sistema de Archivos
-
-```bash
-# Propietarios y grupos
-root:grp_administracion /srv/compartido/administracion
-root:grp_it /srv/compartido/it
-root:grp_produccion /srv/compartido/produccion
-root:domain users /srv/compartido/comun
-
-# Permisos
-drwxrws--- /srv/compartido/administracion
-drwxrws--- /srv/compartido/it
-drwxrws--- /srv/compartido/produccion
-drwxrwsr-x /srv/compartido/comun
 ```
 
 ### 2.5.5 Acceso desde Clientes
