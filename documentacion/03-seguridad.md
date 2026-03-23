@@ -107,7 +107,7 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | UDP | OPT2 subnets | * | 53 | DNS general |
 | Pass | TCP | OPT2 subnets | * | 80 | HTTP |
 | Pass | TCP | OPT2 subnets | * | 443 | HTTPS |
-<img width="1028" height="675" alt="OPT2_RULES" src="https://github.com/user-attachments/assets/e755abcb-adaa-46c5-b866-f5f919150a33" />
+<img width="1022" height="641" alt="OPT2_RULES" src="https://github.com/user-attachments/assets/c4442665-a275-4522-87c4-1db350be0ae5" />
 
 
 #### OPT3 (Monitoring - 192.168.70.0/24)
@@ -124,7 +124,7 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | UDP | OPT3 subnets | * | 53 | DNS |
 | Pass | TCP | OPT3 subnets | * | 80 | HTTP |
 | Pass | TCP | OPT3 subnets | * | 443 | HTTPS |
-<img width="914" height="690" alt="OPT3_RULES" src="https://github.com/user-attachments/assets/459f375f-4e60-4a1a-985b-da2037f39bd4" />
+<img width="1024" height="528" alt="OPT3_RULES" src="https://github.com/user-attachments/assets/1026fff4-d97d-4428-ae63-5e391777b598" />
 
 
 #### OPT4 (Admin - 192.168.10.0/24)
