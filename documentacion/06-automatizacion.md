@@ -777,7 +777,6 @@ Este playbook configura los agentes de Bacula en todos los servidores.
             fi
 
 ```
-<img width="1341" height="833" alt="ansible_baucla_1_yml" src="https://github.com/user-attachments/assets/16c4d82f-3c7d-49dd-8144-bc7260e51006" />
 <img width="1335" height="831" alt="ansible_bacula2_yml" src="https://github.com/user-attachments/assets/0de510be-0a34-4ee4-a3c8-ce3c34a17733" />
 
 ---
