@@ -81,6 +81,15 @@ La regla 3-2-1 establece:
 
 ### 4.3.2 Configuración RAID 5
 
+Una empresa logística depende de acceso **rápido y confiable** a datos como:
+- **Inventario en tiempo real** — ubicación de paquetes, stock de almacenes
+- **Bases de datos de rutas** — optimización de entregas
+
+> **RAID 5 ofrece un buen equilibrio:**
+- ✅ Redundancia (si falla un disco, no pierdes nada)
+- ✅ Buen rendimiento de lectura (muchas consultas simultáneas)
+- ✅ Costo razonable (no necesitas gastar como en RAID 10)
+
 ```bash
 # Verificar estado del RAID
 cat /proc/mdstat
