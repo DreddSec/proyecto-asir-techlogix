@@ -73,7 +73,6 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | TCP | 192.168.40.13 | OPT1 subnets | 9102 | Bacula Director → FD WEB01 |
 | Pass | TCP | 192.168.40.13 | OPT2 subnets | 9102 | Bacula Director → FD SEC01 |
 | Pass | TCP | 192.168.40.13 | OPT3 subnets | 9102 | Bacula Director → FD MON01 |
-<img width="1024" height="530" alt="LAN_RULES" src="https://github.com/user-attachments/assets/c5b32ed4-4e56-46f2-b7ac-8c2bf028d381" />
 
 
 #### OPT1 (DMZ - 192.168.100.0/24)
