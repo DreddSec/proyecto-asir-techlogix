@@ -276,12 +276,9 @@ Memory Cap: 10000000
     </Group>
 </Authorization>
 ```
+> Solo los miembros del grupo **GRP_IT** pueden conectarse via VPN. Otros usuarios del dominio son rechazados.
 
-### 3.5.3 Restricción de Acceso
-
-Solo los miembros del grupo **GRP_IT** pueden conectarse via VPN. Otros usuarios del dominio son rechazados.
-
-### 3.5.4 Certificados
+### 3.5.3 Certificados
 
 | Archivo | Ubicación | Propósito |
 |---------|-----------|-----------|
