@@ -275,6 +275,7 @@ drwxrwsr-x /srv/compartido/comun
 
 - **Carlos Ruiz** inicio sesion en su workstation y pudo acceder sin problemas a la carpeta administracion debido a sus permisos.
 
+
 <img width="885" height="727" alt="acceso_deny_smb" src="https://github.com/user-attachments/assets/b84a284c-977a-4628-ba20-6c2d1761a9e2" />
 
 - Intentando acceder a una carpeta sin los permisos necesarios.
@@ -349,6 +350,9 @@ smbclient //192.168.40.12/
 | MySQL | 8.0.x | Base de Datos |
 | PHP | 8.3.x | Lenguaje Backend |
 | WordPress | Latest | CMS |
+<img width="1660" height="901" alt="home_page_techlogix" src="https://github.com/user-attachments/assets/9999ca8d-9b56-4093-bd04-c7f737f454cc" />
+<img width="1261" height="925" alt="dashboard_WP" src="https://github.com/user-attachments/assets/f96bfee8-6330-4c2e-8400-8f72a33192a2" />
+
 
 ### 2.7.2 Configuración Apache
 
@@ -375,15 +379,19 @@ smbclient //192.168.40.12/
 
 ```sql
 CREATE DATABASE wordpress;
-CREATE USER 'wp_user'@'localhost' IDENTIFIED BY 'password';
+CREATE USER 'wp_user'@'localhost' IDENTIFIED BY '[PASSWORD]';
 GRANT ALL PRIVILEGES ON wordpress.* TO 'wp_user'@'localhost';
 FLUSH PRIVILEGES;
 ```
+<img width="636" height="704" alt="mysql" src="https://github.com/user-attachments/assets/7f6fcaf7-8c7f-4d20-919a-4d9cdb8dbcbc" />
+
 
 ### 2.7.4 Acceso
 
 - **Interno:** http://192.168.100.8
 - **Dominio:** http://srv-web01.techlogix.local (desde red interna)
+<img width="599" height="138" alt="curl_web" src="https://github.com/user-attachments/assets/656efca0-2c7e-4293-abcf-d9726a2eca12" />
+
 
 ---
 
@@ -405,6 +413,8 @@ Todos los servidores sincronizan contra pfSense, que a su vez sincroniza contra 
 timedatectl status
 ntpq -p
 ```
+<img width="842" height="316" alt="ntp" src="https://github.com/user-attachments/assets/80afa799-11b8-4cad-b80b-54a9922117b1" />
+
 
 ---
 
