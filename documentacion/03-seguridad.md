@@ -434,7 +434,7 @@ Unattended-Upgrade::Automatic-Reboot "false";
 ********************************************************************************
 ADVERTENCIA: Este sistema es de uso exclusivo para personal autorizado.
 
-El acceso no autorizado está prohibido.
+El acceso no autorizado está prohibido y séra perseguido legalmente.
 Todas las actividades en este sistema son monitorizadas y registradas.
 
 Si no está autorizado, desconéctese inmediatamente.
