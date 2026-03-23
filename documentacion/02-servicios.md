@@ -144,6 +144,7 @@ Para que las consultas del dominio interno se resuelvan correctamente:
 | srv-web01.techlogix.local | A | 192.168.100.8 |
 | srv-sec01.techlogix.local | A | 192.168.60.10 |
 | srv-mon01.techlogix.local | A | 192.168.70.10 |
+<img width="805" height="592" alt="dns_query" src="https://github.com/user-attachments/assets/b5e12e46-4a7b-4255-9156-0c531477bb17" />
 
 ---
 
@@ -329,9 +330,8 @@ sudo openvpn --config david-vpn.ovpn
 <img width="1781" height="591" alt="david_vpn_conn" src="https://github.com/user-attachments/assets/c516eb7b-b482-4fd9-92a2-71aad6f2fc6b" />
 
 ```bash
-# Desde cliente VPN (IP 10.8.0.x)
-ftp 192.168.40.12
-smbclient //192.168.40.12/
+# Desde cliente VPN como David Garcia (IP 10.8.0.x)
+smbclient //192.168.40.12/it
 ```
 <img width="765" height="208" alt="smblcient_proof" src="https://github.com/user-attachments/assets/6334072a-e2a0-46d9-a510-2f60c7a68abb" />
 
