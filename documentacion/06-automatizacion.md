@@ -88,7 +88,7 @@ SRV-MON01 también funciona como servidor **Ansible** para gestión de configura
 /home/ansible/
 ├── hosts.ini           # Inventario
 ├── securizacion.yml    # Playbook de hardening
-├── secrets.yml 
+├── secrets.yml         # Proteger datos sensibles
 └── bacula_rclone.yml   # Playbook de backup
 ```
 
