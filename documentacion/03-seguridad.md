@@ -501,6 +501,12 @@ ufw allow 1194/udp comment "OpenVPN"
 ufw allow in on tun0 comment "VPN Traffic"
 ufw allow from 192.168.70.10 to any port 10050 proto tcp comment "Zabbix Agent"
 ufw allow from 192.168.40.13 to any port 9101:9104 proto tcp comment "Bacula"
+ufw route allow in on tun0 to 192.168.40.12 port 445 proto tcp comment "VPN → SMB FILE01"
+ufw route allow in on tun0 to 192.168.40.12 port 21 proto tcp comment "VPN → FTP FILE01"
+ufw route allow in on tun0 to 192.168.40.10 port 389 proto tcp comment "VPN → LDAP DC01"
+ufw route allow in on tun0 to 192.168.40.10 port 88 proto tcp comment "VPN → Kerberos DC01"
+ufw route allow in on tun0 to 192.168.40.10 port 636 proto tcp comment "VPN → LDAPS DC01"
+ufw route allow in on tun0 to 192.168.40.10 port 53 proto tcp comment "VPN → DNS DC01"
 ```
 
 #### Servidor Web (WEB01)
