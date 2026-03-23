@@ -141,7 +141,6 @@ Template estándar que monitoriza:
 | Disco | Espacio usado, inodos, I/O |
 | Red | Tráfico entrante/saliente, errores |
 | Sistema | Uptime, usuarios logueados, procesos |
-<img width="1730" height="812" alt="datos_recientes_zabbix" src="https://github.com/user-attachments/assets/b37819fc-d44e-4e82-814f-5f7a78dbe9da" />
 
 ---
 
@@ -208,18 +207,8 @@ systemctl restart grafana-server
 | Server Status | Stat | Group: *, Host: *, Item: Agent availability |
 <img width="1921" height="932" alt="grafana_dashboard" src="https://github.com/user-attachments/assets/3ce43929-5e9d-42b3-92a9-901e0e63d011" />
 
+<img width="1730" height="812" alt="datos_recientes_zabbix" src="https://github.com/user-attachments/assets/d7d01450-ce36-4085-ad3b-6b314c4565c1" />
 
-### 5.8.2 Crear Panel de CPU
-
-1. Dashboard → New Dashboard → Add new panel
-2. Data source: Zabbix-TechLogix
-3. Query:
-   - Group: `/.*/` (todos)
-   - Host: `/.*/` (todos)
-   - Item: `CPU utilization`
-4. Visualization: Time series
-5. Title: "CPU Utilization - All Servers"
-6. Apply
 
 ---
 
