@@ -141,21 +141,10 @@ security_servers
 
 ```bash
 # Desde usuario ansible en MON01
-ansible all -i hosts.ini -m ping --ask-become-pass
+ansible all -i hosts.ini -m ping -e @secrets.yml --ask-become-pass --ask-vault-pass
 ```
+<img width="533" height="693" alt="ansible_ping" src="https://github.com/user-attachments/assets/c61568bf-e950-4075-91a1-46805553e78b" />
 
-Resultado esperado:
-```
-dc01 | SUCCESS => {
-    "changed": false,
-    "ping": "pong"
-}
-dc02 | SUCCESS => {
-    "changed": false,
-    "ping": "pong"
-}
-...
-```
 
 ---
 
@@ -848,7 +837,6 @@ Todas las ejecuciones de Ansible quedan registradas en los logs del sistema y so
 | `ansible-playbook -C playbook.yml` | Dry-run (sin aplicar cambios) |
 | `ansible-playbook --limit dc01` | Ejecutar solo en un host |
 | `ansible-inventory --list` | Ver inventario en JSON |
-<img width="533" height="693" alt="ansible_ping" src="https://github.com/user-attachments/assets/683f4fa6-f5d5-4ea6-ac57-87b1f324ed75" />
 
 ---
 
