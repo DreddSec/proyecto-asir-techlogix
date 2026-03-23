@@ -208,6 +208,8 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 - **Ubicación:** Integrado en pfSense
 - **Modo:** IDS
 - **Interfaces monitorizadas:** WAN, LAN, OPT1 (DMZ), OPT2 (VPN)
+<img width="1026" height="316" alt="SNORT" src="https://github.com/user-attachments/assets/62d2aa53-71e2-419b-888a-4670bb068046" />
+
 
 ### 3.4.2 Reglas Activadas (IPS Policy)
 
@@ -287,7 +289,7 @@ Solo los miembros del grupo **GRP_IT** pueden conectarse via VPN. Otros usuarios
 | server.crt | /etc/openvpn/server/ | Certificado servidor |
 | server.key | /etc/openvpn/server/ | Clave privada servidor |
 | david-vpn.crt | PKI | Certificado cliente |
-| ta.key | /etc/openvpn/server/ | TLS Auth |
+<img width="486" height="163" alt="crts" src="https://github.com/user-attachments/assets/a2f3d666-e47f-4f64-aac5-ff4882cedb52" />
 
 ---
 
@@ -406,6 +408,8 @@ chmod 600 /etc/gshadow
 chmod 644 /etc/passwd
 chmod 644 /etc/group
 ```
+<img width="606" height="106" alt="critic_files" src="https://github.com/user-attachments/assets/c126bf99-cdb1-492c-a6f8-fb2cdb13bae4" />
+
 
 ### 3.6.6 Actualizaciones Automáticas
 
@@ -436,13 +440,7 @@ Todas las actividades en este sistema son monitorizadas y registradas.
 Si no está autorizado, desconéctese inmediatamente.
 ********************************************************************************
 ```
-
-### 3.6.8 Servicios Deshabilitados
-
-```bash
-systemctl disable avahi-daemon
-systemctl disable cups
-```
+<img width="766" height="689" alt="motd" src="https://github.com/user-attachments/assets/99412b76-4bf6-4e36-b197-3ca29290b716" />
 
 ---
 
@@ -477,6 +475,8 @@ ufw allow from 192.168.40.0/24 to any port 49152:65535 proto tcp comment "RPC Dy
 ufw allow from 192.168.70.10 to any port 10050 proto tcp comment "Zabbix Agent"
 ufw allow from 192.168.40.13 to any port 9101:9104 proto tcp comment "Bacula"
 ```
+<img width="779" height="575" alt="ufw_status" src="https://github.com/user-attachments/assets/f6c9fc12-08dc-483e-8092-a410f263b2ff" />
+
 
 #### Servidor de Archivos (FILE01)
 
@@ -492,6 +492,8 @@ ufw allow from 10.8.0.0/24 to any port 21 proto tcp comment "FTP VPN"
 ufw allow from 192.168.70.10 to any port 10050 proto tcp comment "Zabbix Agent"
 ufw allow from 192.168.40.13 to any port 9101:9104 proto tcp comment "Bacula"
 ```
+<img width="723" height="304" alt="ufw_status" src="https://github.com/user-attachments/assets/f7ba9480-6d71-4022-8f4d-ce26cfae4a9c" />
+
 
 #### Servidor VPN (SEC01)
 
@@ -508,6 +510,8 @@ ufw route allow in on tun0 to 192.168.40.10 port 88 proto tcp comment "VPN → K
 ufw route allow in on tun0 to 192.168.40.10 port 636 proto tcp comment "VPN → LDAPS DC01"
 ufw route allow in on tun0 to 192.168.40.10 port 53 proto tcp comment "VPN → DNS DC01"
 ```
+<img width="704" height="262" alt="ufw_status" src="https://github.com/user-attachments/assets/c272f92e-c998-4939-9156-2698d588bea3" />
+
 
 #### Servidor Web (WEB01)
 
@@ -519,6 +523,8 @@ ufw allow from 192.168.40.0/24 to any port 3306 proto tcp comment "MySQL"
 ufw allow from 192.168.70.10 to any port 10050 proto tcp comment "Zabbix"
 ufw allow from 192.168.40.13 to any port 9102 proto tcp comment "Bacula"
 ```
+<img width="709" height="290" alt="ufw_status" src="https://github.com/user-attachments/assets/1657f012-4eb4-4727-bbdb-a03e1cbedb45" />
+
 
 #### Servidor Backup (BAK01)
 
@@ -532,6 +538,8 @@ ufw allow from 192.168.60.0/24 to any port 9103 proto tcp comment "Bacula SD des
 ufw allow from 192.168.70.0/24 to any port 9103 proto tcp comment "Bacula SD desde MON"
 ufw allow from 192.168.70.10 to any port 10050 proto tcp comment "Zabbix Agent"
 ```
+<img width="768" height="259" alt="ufw_status" src="https://github.com/user-attachments/assets/a80db49d-7359-45b3-8d2a-b06ad8a3f156" />
+
 
 #### Servidor Monitorización (MON01)
 
@@ -546,23 +554,7 @@ ufw allow from 192.168.50.0/24 to any port 3000 proto tcp comment "Grafana IT"
 ufw allow 10051/tcp comment "Zabbix Server active checks"
 ufw allow from 192.168.40.13 to any port 9101:9104 proto tcp comment "Bacula"
 ```
-
----
-
-## 3.8 Matriz de Acceso
-
-### 3.8.1 Acceso entre VLANs
-
-| Origen \ Destino | ADMIN | PROD | IT | SERVERS | DMZ | VPN | MON | WIFI |
-|------------------|-------|------|-----|---------|-----|-----|-----|------|
-| ADMIN | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ |
-| PROD | ❌ | ✅ | ❌ | SMB | ❌ | ❌ | ❌ | ❌ |
-| IT | ❌ | ❌ | ✅ | SSH,SMB | ❌ | ❌ | ✅ | ❌ |
-| SERVERS | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | Zabbix | ❌ |
-| DMZ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | Zabbix | ❌ |
-| VPN | ❌ | ❌ | ❌ | FTP | ❌ | ✅ | ❌ | ❌ |
-| MON | SSH | ❌ | ❌ | SSH,Zabbix | SSH | SSH | ✅ | ❌ |
-| WIFI | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | Internet |
+<img width="819" height="283" alt="ufw_status" src="https://github.com/user-attachments/assets/32d3e3a0-ae6b-4a8e-8e53-84b95fe84347" />
 
 ---
 
