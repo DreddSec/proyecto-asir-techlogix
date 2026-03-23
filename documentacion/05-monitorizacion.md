@@ -86,6 +86,9 @@ systemctl enable zabbix-server zabbix-agent apache2
 | SRV-WEB01 | 192.168.100.8 | DMZ | Linux by Zabbix agent | ✅ |
 | SRV-SEC01 | 192.168.60.10 | Security | Linux by Zabbix agent | ✅ |
 | SRV-MON01 | 192.168.70.10 | Monitoring | Linux by Zabbix agent | ✅ |
+<img width="1915" height="495" alt="zabbix_web_equipos" src="https://github.com/user-attachments/assets/288c13c9-2636-444e-890a-524a4caacdf2" />
+
+
 
 ### 5.4.2 Configuración del Agente
 
@@ -113,21 +116,6 @@ LogFileSize=0
 AllowKey=system.run[*]
 ```
 
-### 5.4.3 Instalación del Agente
-
-```bash
-# En cada servidor a monitorizar
-apt install zabbix-agent
-
-# Editar configuración
-nano /etc/zabbix/zabbix_agentd.conf
-# Cambiar: Server, ServerActive, Hostname
-
-# Reiniciar
-systemctl restart zabbix-agent
-systemctl enable zabbix-agent
-```
-
 ### 5.4.4 Verificación de Conectividad
 
 ```bash
@@ -153,6 +141,7 @@ Template estándar que monitoriza:
 | Disco | Espacio usado, inodos, I/O |
 | Red | Tráfico entrante/saliente, errores |
 | Sistema | Uptime, usuarios logueados, procesos |
+<img width="1730" height="812" alt="datos_recientes_zabbix" src="https://github.com/user-attachments/assets/b37819fc-d44e-4e82-814f-5f7a78dbe9da" />
 
 ---
 
@@ -179,6 +168,7 @@ Template estándar que monitoriza:
 | SMTP email | alertas@techlogix.com |
 | Connection security | STARTTLS |
 | Authentication | Username and password |
+<img width="1913" height="884" alt="email_alert" src="https://github.com/user-attachments/assets/e9e78906-f9d1-4a3c-a499-2e0b7370bd72" />
 
 ---
 
@@ -191,18 +181,6 @@ Template estándar que monitoriza:
 | Versión | 10.x |
 | Puerto | 3000 |
 | URL | http://192.168.70.10:3000 |
-
-### 5.7.2 Instalación
-
-```bash
-# Instalar
-apt update
-apt install grafana
-
-# Arrancar
-systemctl start grafana-server
-systemctl enable grafana-server
-```
 
 ### 5.7.3 Plugin de Zabbix
 
@@ -228,6 +206,8 @@ systemctl restart grafana-server
 | Disk Space | Bar gauge | Group: *, Host: *, Item: Free disk space |
 | Active Problems | Table | Mode: Problems |
 | Server Status | Stat | Group: *, Host: *, Item: Agent availability |
+<img width="1921" height="932" alt="grafana_dashboard" src="https://github.com/user-attachments/assets/3ce43929-5e9d-42b3-92a9-901e0e63d011" />
+
 
 ### 5.8.2 Crear Panel de CPU
 
@@ -255,6 +235,7 @@ SRV-MON01 también funciona como servidor Ansible para gestión de configuració
 /home/ansible/
 ├── hosts.ini           # Inventario
 ├── securizacion.yml    # Playbook de hardening
+├── secrets.yml 
 └── bacula_rclone.yml   # Playbook de backup
 ```
 
