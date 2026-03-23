@@ -92,7 +92,7 @@ Aislamiento de equipos de administradores con acceso privilegiado a todos los re
 Departamento de producción con acceso limitado a servidor de archivos (SMB) y servicios de dominio.
 
 **VLAN 30 - IT:**
-Personal técnico con acceso a DMZ y servidores vía SSH, SMB y herramientas de monitorización.
+Personal técnico con acceso a DMZ y servidores vía SSH, SMB y herramientas de monitorización, ademas de acceso remoto mediante VPN.
 
 **VLAN 40 - SERVERS:**
 Red de servidores internos protegida. Solo accesible desde VLANs autorizadas en puertos específicos.
