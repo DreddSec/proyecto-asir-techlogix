@@ -38,11 +38,11 @@ TECHLOGIX.LOCAL
 │   │
 │   ├── OU=IT
 │   │   └── david.garcia
-│   │   └── ana.martinez
+│   │   └── laura.fernandez
 │   │
 │   └── OU=Produccion
 │       └── pedro.sanchez
-│       └── laura.fernandez
+│       └── jorge.navarro
 │
 ├── OU=Grupos
     ├── GRP_Administracion
