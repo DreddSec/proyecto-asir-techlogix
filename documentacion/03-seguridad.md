@@ -534,7 +534,7 @@ ufw allow from 192.168.60.0/24 to any port 9103 proto tcp comment "Bacula SD des
 ufw allow from 192.168.70.0/24 to any port 9103 proto tcp comment "Bacula SD desde MON"
 ufw allow from 192.168.70.10 to any port 10050 proto tcp comment "Zabbix Agent"
 ```
-<img width="768" height="259" alt="ufw_status" src="https://github.com/user-attachments/assets/a80db49d-7359-45b3-8d2a-b06ad8a3f156" />
+<img width="771" height="257" alt="ufw_status" src="https://github.com/user-attachments/assets/e8c73d49-710b-4768-812c-515e88cfdb81" />
 
 
 #### Servidor Monitorización (MON01)
@@ -550,7 +550,8 @@ ufw allow from 192.168.30.0/24 to any port 3000 proto tcp comment "Grafana IT"
 ufw allow 10051/tcp comment "Zabbix Server active checks"
 ufw allow from 192.168.40.13 to any port 9101:9104 proto tcp comment "Bacula"
 ```
-<img width="819" height="283" alt="ufw_status" src="https://github.com/user-attachments/assets/32d3e3a0-ae6b-4a8e-8e53-84b95fe84347" />
+<img width="828" height="277" alt="ufw_status" src="https://github.com/user-attachments/assets/3931f34c-d379-4c42-87f1-26ab6ca236b9" />
+
 
 ---
 
