@@ -848,8 +848,3 @@ La implementación de Ansible ha permitido:
 - ✅ Reducir tiempo de configuración de horas a minutos
 - ✅ Garantizar configuraciones homogéneas
 - ✅ Manipular la infraestructura como código
-
----
-
-- Resultado de playbook de securización
-- Estado de fail2ban después de aplicar playbook
