@@ -66,7 +66,7 @@ TECHLOGIX.LOCAL
 <img width="381" height="216" alt="user_list" src="https://github.com/user-attachments/assets/0bf71670-011b-4452-bb4f-f16cdf43e382" />
 
 
-### 2.2.6 Archivos de Configuración
+### 2.2.5 Archivos de Configuración
 
 **Ubicación: DC01** `/etc/samba/smb.conf`
 
@@ -182,7 +182,7 @@ SRV-FILE01 actúa como servidor de archivos utilizando Samba integrado con el do
 └── produccion/         # Acceso: GRP_Produccion
 ```
 
-### 2.5.3 Permisos de Sistema de Archivos
+### 2.5.2 Permisos de Sistema de Archivos
 
 ```bash
 # Propietarios y grupos
@@ -200,7 +200,7 @@ drwxrwsr-x /srv/compartido/comun
 <img width="575" height="151" alt="carpetas_permisos_srv" src="https://github.com/user-attachments/assets/349b3471-57af-46d7-a5fd-051db2365cba" />
 
 
-### 2.5.4 Configuración SMB
+### 2.5.3 Configuración SMB
 
 **Archivo:** `/etc/samba/smb.conf`
 
@@ -262,7 +262,7 @@ drwxrwsr-x /srv/compartido/comun
     audit = yes
 ```
 
-### 2.5.5 Acceso desde Clientes
+### 2.5.4 Acceso desde Clientes
 
 **Windows:**
 ```
@@ -318,7 +318,7 @@ pasv_min_port=10000
 pasv_max_port=10100
 ```
 
-### 2.6.4 Acceso via VPN
+### 2.6.3 Acceso via VPN
 
 Los usuarios IT conectan mediante *VPN* y acceden al servidor FTP:
 
