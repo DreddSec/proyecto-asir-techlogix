@@ -623,22 +623,6 @@ fi
 
 ---
 
-## 4.8 Volúmenes de Backup
-
-### 4.8.1 Estado Actual
-
-```bash
-ls -la /raid5/bacula-backups/
-```
-
-| Volumen | Tamaño | Fecha | Pool |
-|---------|--------|-------|------|
-| Vol-Full-0001 | 9.6 MB | Feb 3 | Full |
-| Vol-Diff-0001 | 232 B | Feb 3 | Differential |
-| Vol-Inc-0001 | 230 B | Feb 3 | Incremental |
-
----
-
 ## 4.9 Conclusiones
 
 El sistema de backup implementado cumple con:
