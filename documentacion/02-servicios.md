@@ -390,6 +390,7 @@ FLUSH PRIVILEGES;
 - **Interno:** http://192.168.100.8
 - **Dominio:** http://srv-web01.techlogix.local (desde red interna)
 <img width="599" height="138" alt="curl_web" src="https://github.com/user-attachments/assets/656efca0-2c7e-4293-abcf-d9726a2eca12" />
+<img width="1337" height="467" alt="web_dns" src="https://github.com/user-attachments/assets/a5a806cf-ee57-4d64-b940-08792af51157" />
 
 
 ---
