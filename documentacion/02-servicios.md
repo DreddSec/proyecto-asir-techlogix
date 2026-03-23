@@ -24,6 +24,7 @@ Se ha implementado un dominio Active Directory utilizando **Samba 4** como alter
 | Nombre de Dominio | TECHLOGIX.LOCAL |
 | Controlador Primario | SRV-DC01 (192.168.40.10) |
 | Controlador Secundario | SRV-DC02 (192.168.40.14) |
+<img width="488" height="173" alt="domain_info" src="https://github.com/user-attachments/assets/2269eb28-b291-40cb-a1a4-665f4b9887b3" />
 
 ### 2.2.3 Estructura Organizativa (OUs)
 
@@ -61,7 +62,7 @@ TECHLOGIX.LOCAL
 | ana.martinez | Ana Martínez | IT | GRP_IT |
 | pedro.sanchez | Pedro Sánchez | Producción | GRP_Produccion |
 | laura.fernandez | Laura Fernández | Producción | GRP_Produccion |
-
+<img width="398" height="248" alt="user_list" src="https://github.com/user-attachments/assets/165fd9d4-724b-42bc-94a6-a8b991bd5b98" />
 
 ### 2.2.6 Archivos de Configuración
 
@@ -89,9 +90,6 @@ TECHLOGIX.LOCAL
     path = /var/lib/samba/sysvol/techlogix.local/scripts
     read only = No
 ```
-<img width="398" height="248" alt="user_list" src="https://github.com/user-attachments/assets/165fd9d4-724b-42bc-94a6-a8b991bd5b98" />
-<img width="408" height="704" alt="group_list" src="https://github.com/user-attachments/assets/fc49d5fa-498f-43f6-9a5b-6eac3f970223" />
-
 
 ---
 
