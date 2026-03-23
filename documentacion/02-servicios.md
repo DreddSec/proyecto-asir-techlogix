@@ -285,7 +285,6 @@ drwxrwsr-x /srv/compartido/comun
 smbclient //192.168.40.12/IT -U david.garcia
 mount -t cifs //192.168.40.12/IT /mnt/it -o user=david.garcia
 ```
-<img width="765" height="208" alt="smblcient_proof" src="https://github.com/user-attachments/assets/dbd2c7da-d577-4717-b870-0dec7c31a887" />
 
 ---
 
