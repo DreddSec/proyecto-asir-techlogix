@@ -115,17 +115,6 @@ LogFileSize=0
 # Seguridad
 AllowKey=system.run[*]
 ```
-
-### 5.4.4 Verificación de Conectividad
-
-```bash
-# Desde MON01, verificar agente de DC01
-zabbix_get -s 192.168.40.10 -k system.hostname
-
-# Verificar que el agente está escuchando
-ss -tlnp | grep 10050
-```
-
 ---
 
 ## 5.5 Templates Utilizados
@@ -181,7 +170,7 @@ Template estándar que monitoriza:
 | Puerto | 3000 |
 | URL | http://192.168.70.10:3000 |
 
-### 5.7.3 Plugin de Zabbix
+### 5.7.2 Plugin de Zabbix
 
 ```bash
 # Instalar plugin
