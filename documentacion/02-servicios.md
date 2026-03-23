@@ -272,9 +272,11 @@ drwxrwsr-x /srv/compartido/comun
 ```
 <img width="1132" height="638" alt="win_smb" src="https://github.com/user-attachments/assets/dc886afd-7f89-4525-9385-6337b7257053" />
 <img width="1219" height="638" alt="carlos_smb_admin" src="https://github.com/user-attachments/assets/8eba804d-8269-4663-86ba-65d3a91d91ff" />
-- *Carlos Ruiz* inicio sesion en su workstation y pudo acceder sin problemas a la carpeta administracion debido a sus permisos.
+
+- **Carlos Ruiz** inicio sesion en su workstation y pudo acceder sin problemas a la carpeta administracion debido a sus permisos.
 
 <img width="885" height="727" alt="acceso_deny_smb" src="https://github.com/user-attachments/assets/b84a284c-977a-4628-ba20-6c2d1761a9e2" />
+
 - Intentando acceder a una carpeta sin los permisos necesarios.
 
 **Linux:**
