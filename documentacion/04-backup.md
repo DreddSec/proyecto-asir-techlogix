@@ -84,16 +84,16 @@ La regla 3-2-1 establece:
 ```bash
 # Verificar estado del RAID
 cat /proc/mdstat
-
-# Ejemplo de salida
-md0 : active raid5 sde1[3] sdc1[1] sda3[0] sdb1[2] sdd1[5]
-      157151232 blocks super 1.2 level 5, 512k chunk, algorithm 2 [5/5] [UUUUU]
 ```
+<img width="652" height="122" alt="proc_mdstat" src="https://github.com/user-attachments/assets/3440cbf5-e2d0-4a78-ba75-bc5f78c71cd7" />
+
 
 **Punto de montaje:**
 ```bash
 /dev/md0 on /raid5 type ext4 (rw,relatime)
 ```
+<img width="579" height="214" alt="mount_point" src="https://github.com/user-attachments/assets/3ede76fd-7fe5-4e23-9340-df21f7d1249b" />
+
 
 **Estructura de directorios:**
 ```
@@ -101,6 +101,7 @@ md0 : active raid5 sde1[3] sdc1[1] sda3[0] sdb1[2] sdd1[5]
 ├── bacula-backups/    # Volúmenes de Bacula
 └── bacula-restore/    # Restauraciones temporales
 ```
+<img width="520" height="132" alt="volumenes_bacula_baks" src="https://github.com/user-attachments/assets/566a2153-dfd6-407e-88e9-59324f2f6ba0" />
 
 ---
 
@@ -417,7 +418,11 @@ Messages {
 ```bash
 # Acceder a la consola de Bacula
 sudo bconsole
+```
+<img width="779" height="803" alt="bconsole" src="https://github.com/user-attachments/assets/ebdb06db-2d4c-4fc4-9758-47101d348271" />
 
+
+```bash
 # Dentro de bconsole:
 *status director          # Estado del director
 *status client            # Estado de clientes
@@ -426,7 +431,6 @@ sudo bconsole
 *restore                  # Iniciar restauración
 *messages                 # Ver mensajes
 ```
-
 ---
 
 ## 4.5 Sincronización a la Nube (Rclone)
@@ -441,6 +445,8 @@ type = drive
 scope = drive
 token = {"access_token":"...","token_type":"Bearer","expiry":"..."}
 ```
+<img width="1280" height="156" alt="token_rclone" src="https://github.com/user-attachments/assets/d0a811ca-f860-4977-8a1a-f889d928f5f7" />
+
 
 ### 4.5.2 Script de Sincronización
 
