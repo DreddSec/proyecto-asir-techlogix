@@ -506,7 +506,8 @@ ufw route allow in on tun0 to 192.168.40.10 port 88 proto tcp comment "VPN → K
 ufw route allow in on tun0 to 192.168.40.10 port 636 proto tcp comment "VPN → LDAPS DC01"
 ufw route allow in on tun0 to 192.168.40.10 port 53 proto tcp comment "VPN → DNS DC01"
 ```
-<img width="704" height="262" alt="ufw_status" src="https://github.com/user-attachments/assets/c272f92e-c998-4939-9156-2698d588bea3" />
+<img width="694" height="369" alt="image" src="https://github.com/user-attachments/assets/63ba8cba-76a4-4c1e-a350-71e361ad86b8" />
+
 
 
 #### Servidor Web (WEB01)
