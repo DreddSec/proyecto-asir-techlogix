@@ -58,6 +58,8 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
 | Pass | UDP | * | 192.168.60.10 | 1194 | OpenVPN NAT Port Forward |
+<img width="1045" height="338" alt="WAN_RULESFW" src="https://github.com/user-attachments/assets/750551c4-d9c3-4d63-8a88-3321063f349f" />
+
 
 #### LAN (Servers - 192.168.40.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
@@ -70,6 +72,8 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | TCP | 192.168.40.13 | OPT1 subnets | 9102 | Bacula Director → FD WEB01 |
 | Pass | TCP | 192.168.40.13 | OPT2 subnets | 9102 | Bacula Director → FD SEC01 |
 | Pass | TCP | 192.168.40.13 | OPT3 subnets | 9102 | Bacula Director → FD MON01 |
+<img width="1024" height="530" alt="LAN_RULES" src="https://github.com/user-attachments/assets/c5b32ed4-4e56-46f2-b7ac-8c2bf028d381" />
+
 
 #### OPT1 (DMZ - 192.168.100.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
@@ -85,6 +89,8 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | UDP | OPT1 subnets | * | 53 | DNS |
 | Pass | TCP | OPT1 subnets | * | 80 | HTTP |
 | Pass | TCP | OPT1 subnets | * | 443 | HTTPS |
+<img width="1022" height="499" alt="OPT1_RULES" src="https://github.com/user-attachments/assets/f3bdb585-e5b5-4851-862c-2e7bb8df97bc" />
+
 
 #### OPT2 (Security/VPN - 192.168.60.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
@@ -101,6 +107,8 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | UDP | OPT2 subnets | * | 53 | DNS general |
 | Pass | TCP | OPT2 subnets | * | 80 | HTTP |
 | Pass | TCP | OPT2 subnets | * | 443 | HTTPS |
+<img width="1028" height="675" alt="OPT2_RULES" src="https://github.com/user-attachments/assets/e755abcb-adaa-46c5-b866-f5f919150a33" />
+
 
 #### OPT3 (Monitoring - 192.168.70.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
@@ -116,6 +124,8 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | UDP | OPT3 subnets | * | 53 | DNS |
 | Pass | TCP | OPT3 subnets | * | 80 | HTTP |
 | Pass | TCP | OPT3 subnets | * | 443 | HTTPS |
+<img width="914" height="690" alt="OPT3_RULES" src="https://github.com/user-attachments/assets/459f375f-4e60-4a1a-985b-da2037f39bd4" />
+
 
 #### OPT4 (Admin - 192.168.10.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
@@ -133,6 +143,8 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | TCP | OPT4 subnets | OPT3 subnets | 3000 | Grafana → MON01 |
 | Pass | UDP | OPT4 subnets | * | 53 | DNS general |
 | Pass | TCP | OPT4 subnets | * | 443 | HTTPS |
+<img width="910" height="556" alt="OPT4_RULES" src="https://github.com/user-attachments/assets/b1b9359a-2f99-4d87-8013-23926bd2716e" />
+
 
 #### OPT5 (Producción - 192.168.20.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
@@ -149,6 +161,8 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | UDP | OPT5 subnets | * | 53 | DNS general |
 | Pass | TCP | OPT5 subnets | * | 80 | HTTP |
 | Pass | TCP | OPT5 subnets | * | 443 | HTTPS |
+<img width="1025" height="504" alt="OPT5_RULES" src="https://github.com/user-attachments/assets/bf69b2c6-9429-4ae6-b5f9-ca5dfbf0f470" />
+
 
 #### OPT6 (IT — 192.168.30.0/24)
 
@@ -169,6 +183,7 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | UDP | OPT6 subnets | * | 53 | DNS general |
 | Pass | TCP | OPT6 subnets | * | 80 | HTTP |
 | Pass | TCP | OPT6 subnets | * | 443 | HTTPS |
+<img width="1022" height="532" alt="OPT6_RULES" src="https://github.com/user-attachments/assets/e40816c2-5409-4317-b99d-e75dfc7bc957" />
 
 
 #### OPT7 (WiFi Guests — 192.168.50.0/24)
@@ -181,6 +196,8 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | TCP | OPT7 subnets | * | 80 | HTTP |
 | Pass | TCP | OPT7 subnets | * | 443 | HTTPS |
 | Block | * | OPT7 subnets | * | * | Block resto (catch-all) |
+<img width="1024" height="373" alt="OPT7_RULES" src="https://github.com/user-attachments/assets/5047aae2-afc5-4c1b-98fe-118ffc35c3d6" />
+
 ---
 
 ## 3.4 Sistema de Detección de Intrusiones (Snort)
