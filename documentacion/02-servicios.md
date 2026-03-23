@@ -60,9 +60,9 @@ TECHLOGIX.LOCAL
 | carlos.ruiz | Carlos Ruiz | Administración | GRP_Administracion |
 | maria.lopez | María López | Administración | GRP_Administracion |
 | david.garcia | David García | IT | GRP_IT |
-| ana.martinez | Ana Martínez | IT | GRP_IT |
+| laura.fernandez | Laura Fernández | IT | GRP_IT |
 | pedro.sanchez | Pedro Sánchez | Producción | GRP_Produccion |
-| laura.fernandez | Laura Fernández | Producción | GRP_Produccion |
+| jorge.navarro | Jorge Navarro | Producción | GRP_Produccion |
 <img width="381" height="216" alt="user_list" src="https://github.com/user-attachments/assets/0bf71670-011b-4452-bb4f-f16cdf43e382" />
 
 
