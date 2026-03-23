@@ -520,6 +520,7 @@ sudo rclone size gdrive:backups/bacula
 # Sincronización manual
 sudo rclone sync /raid5/bacula-backups/ gdrive:backups/bacula --progress
 ```
+<img width="776" height="356" alt="verificacion bacula" src="https://github.com/user-attachments/assets/a5ad28ca-ff11-4ea5-850c-c19b63b134b8" />
 
 ---
 
