@@ -2,7 +2,7 @@
 
 ## 6.1 Introducción
 
-Este documento describe la implementación de Ansible como herramienta de automatización para la gestión centralizada de configuraciones en la infraestructura TechLogix.
+Este documento describe la implementación de **Ansible** como herramienta de automatización para la gestión centralizada de configuraciones en la infraestructura TechLogix.
 
 **Ansible** permite ejecutar tareas de forma consistente en múltiples servidores simultáneamente, garantizando configuraciones homogéneas y reduciendo errores humanos.
 
@@ -74,6 +74,22 @@ sudo passwd ansible
 
 # Generar clave SSH
 sudo -u ansible ssh-keygen -t rsa -b 4096 -f /home/ansible/.ssh/id_rsa_ansible -N ""
+```
+
+## 5.9 Ansible para Monitorización
+
+### 5.9.1 Gestión Centralizada
+
+SRV-MON01 también funciona como servidor **Ansible** para gestión de configuración de todos los servidores.
+
+**Estructura:**
+
+```
+/home/ansible/
+├── hosts.ini           # Inventario
+├── securizacion.yml    # Playbook de hardening
+├── secrets.yml 
+└── bacula_rclone.yml   # Playbook de backup
 ```
 
 ### 6.3.3 Distribuir Clave SSH
