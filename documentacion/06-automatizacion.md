@@ -80,12 +80,7 @@ sudo -u ansible ssh-keygen -t rsa -b 4096 -f /home/ansible/.ssh/id_rsa_ansible -
 
 ```bash
 # Copiar clave a cada servidor (ejecutar para cada uno)
-sudo -u ansible ssh-copy-id -i /home/ansible/.ssh/id_rsa_ansible.pub -p 2222 sysadmin@192.168.40.10
-sudo -u ansible ssh-copy-id -i /home/ansible/.ssh/id_rsa_ansible.pub -p 2222 sysadmin@192.168.40.14
-sudo -u ansible ssh-copy-id -i /home/ansible/.ssh/id_rsa_ansible.pub -p 2222 sysadmin@192.168.40.12
-sudo -u ansible ssh-copy-id -i /home/ansible/.ssh/id_rsa_ansible.pub -p 2222 sysadmin@192.168.40.13
-sudo -u ansible ssh-copy-id -i /home/ansible/.ssh/id_rsa_ansible.pub -p 2222 sysadmin@192.168.100.8
-sudo -u ansible ssh-copy-id -i /home/ansible/.ssh/id_rsa_ansible.pub -p 2222 sysadmin@192.168.60.10
+sudo -u ansible ssh-copy-id -i /home/ansible/.ssh/id_rsa_ansible.pub -p 2222 sysadmin@IP_SERVIDOR
 ```
 
 ---
