@@ -148,11 +148,11 @@ TECHLOGIX.LOCAL
 
 ---
 
-## 2.4 DHCP
+## 2.4 DHCP Server
 
 ### 2.4.1 Configuración por VLAN
 
-> El servicio DHCP se proporciona desde **pfSense** para cada VLAN de clientes:
+> El servicio **DHCP** se proporciona desde pfSense mediante *DHCP Server* para cada VLAN de clientes:
 
 | VLAN | Rango DHCP | Gateway | DNS |
 |------|------------|---------|-----|
