@@ -388,6 +388,8 @@ ocredit = -1
 ausearch -k passwd_changes
 aureport --summary
 ```
+<img width="573" height="477" alt="aureport" src="https://github.com/user-attachments/assets/f29388c2-e7b0-4b8e-99d2-f88d706ab1e1" />
+
 
 ### 3.6.5 Permisos de Archivos Críticos
 
