@@ -1,5 +1,7 @@
-# 🏢 <img width="435" height="478" alt="lgo_tech" src="https://github.com/user-attachments/assets/ca750213-57c9-4e90-94b9-84a5ef6fa465" />
-TechLogix - Infraestructura de Red Empresarial
+
+<img width="435" height="478" alt="lgo_tech" src="https://github.com/user-attachments/assets/fedf8b10-88ab-4566-9a8a-9c2fad9e5539" />
+
+# 🏢 TechLogix - Infraestructura de Red Empresarial
 
 <p align="center">
   <img src="https://img.shields.io/badge/Plataforma-Ubuntu%20Server%2024.04-orange" alt="Plataforma">
