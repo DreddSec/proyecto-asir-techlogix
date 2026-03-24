@@ -196,75 +196,9 @@ systemctl restart grafana-server
 
 ---
 
-## 5.9 Ansible para Monitorización
+## 5.9 Métricas y KPIs
 
-### 5.9.1 Gestión Centralizada
-
-> **SRV-MON01** también funciona como servidor Ansible para gestión de configuración de todos los servidores.
-
-**Estructura:**
-
-```
-/home/ansible/
-├── hosts.ini           # Inventario
-├── securizacion.yml    # Playbook de hardening
-├── secrets.yml 
-└── bacula_rclone.yml   # Playbook de backup
-```
-
-### 5.9.2 Inventario
-
-**Archivo:** `/home/ansible/hosts.ini`
-
-```ini
-[all:vars]
-ansible_user=sysadmin
-ansible_ssh_private_key_file=/home/ansible/.ssh/id_rsa_ansible
-ansible_port=2222
-ansible_become=yes
-
-[domain_controllers]
-dc01 ansible_host=192.168.40.10
-dc02 ansible_host=192.168.40.14
-
-[file_servers]
-file01 ansible_host=192.168.40.12
-
-[backup_servers]
-bak01 ansible_host=192.168.40.13
-
-[web_servers]
-web01 ansible_host=192.168.100.8
-
-[security_servers]
-sec01 ansible_host=192.168.60.10
-
-[monitoring]
-mon01 ansible_host=192.168.70.10
-
-[servers:children]
-domain_controllers
-file_servers
-backup_servers
-web_servers
-security_servers
-```
-
-### 5.9.3 Ejecución de Playbooks
-
-```bash
-# Verificar conectividad
-ansible all -i hosts.ini -m ping --ask-become-pass
-
-# Ejecutar playbook
-ansible-playbook -i hosts.ini securizacion.yml --ask-become-pass
-```
-
----
-
-## 5.10 Métricas y KPIs
-
-### 5.10.1 KPIs de Infraestructura
+### 5.9.1 KPIs de Infraestructura
 
 | KPI | Umbral Warning | Umbral Critical |
 |-----|----------------|-----------------|
@@ -274,21 +208,11 @@ ansible-playbook -i hosts.ini securizacion.yml --ask-become-pass
 | Network Utilization | > 70% | > 90% |
 | Response Time | > 1s | > 5s |
 
-### 5.10.2 Disponibilidad Objetivo
-
-| Servicio | SLA Objetivo |
-|----------|--------------|
-| Active Directory | 99.9% |
-| Servidor de Archivos | 99.5% |
-| Servidor Web | 99.0% |
-| VPN | 99.0% |
-| Backup | 99.0% |
-
 ---
 
-## 5.11 Troubleshooting
+## 5.10 Troubleshooting
 
-### 5.11.1 Problemas Comunes
+### 5.10.1 Problemas Comunes
 
 **Agente no responde:**
 ```bash
@@ -323,7 +247,7 @@ echo "Test" | mail -s "Zabbix Test" admin@techlogix.com
 
 ## 5.12 Conclusiones
 
-El sistema de monitorización implementado proporciona:
+> El sistema de monitorización implementado proporciona:
 
 - ✅ **Visibilidad completa:** Todos los servidores monitorizados
 - ✅ **Métricas en tiempo real:** CPU, RAM, Disco, Red
