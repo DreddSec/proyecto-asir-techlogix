@@ -81,22 +81,22 @@ Aislamiento de equipos de administradores con acceso privilegiado a todos los re
 > **VLAN 20 - PROD:**
 Departamento de producción con acceso limitado a servidor de archivos (SMB) y servicios de dominio.
 
-**VLAN 30 - IT:**
-> Personal técnico con acceso a DMZ y servidores vía SSH, SMB y herramientas de monitorización, ademas de acceso remoto mediante VPN.
+> **VLAN 30 - IT:**
+ Personal técnico con acceso a DMZ y servidores vía SSH, SMB y herramientas de monitorización, ademas de acceso remoto mediante VPN.
 
-**VLAN 40 - SERVERS:**
+> **VLAN 40 - SERVERS:**
 Red de servidores internos protegida. Solo accesible desde VLANs autorizadas en puertos específicos.
 
-**VLAN 50 - WIFI_GUESTS:**
+> **VLAN 50 - WIFI_GUESTS:**
 Red completamente aislada para invitados. Solo permite acceso a Internet (HTTP/HTTPS y DNS). Bloqueada de toda red interna.
 
-**VLAN 60 - SEC:**
+> **VLAN 60 - SEC:**
 Servicios de seguridad (OpenVPN). Acceso controlado hacia recursos internos mediante protocolo VPN.
 
-**VLAN 70 - MON:**
+> **VLAN 70 - MON:**
 Servidor de monitorización con acceso de sondeo (polling) a todos los servidores.
 
-**VLAN 100 - DMZ:**
+> **VLAN 100 - DMZ:**
 Zona desmilitarizada para servicios públicos (web). Aislada de la red interna.
 
 ---
@@ -150,7 +150,7 @@ Zona desmilitarizada para servicios públicos (web). Aislada de la red interna.
 
 ### 1.5.2 Configuración de Red en VirtualBox
 
-Todas las máquinas virtuales utilizan **Redes Internas (Internal Network)** conectadas a pfSense para enrutamiento entre VLANs.
+> Todas las máquinas virtuales utilizan **Redes Internas (Internal Network)** conectadas a pfSense para enrutamiento entre VLANs.
 
 | Red Interna | VLAN | Máquinas Conectadas |
 |-------------|------|---------------------|
@@ -225,7 +225,7 @@ Usuario Remoto → Internet → pfSense:1194 → NAT → SRV-SEC01:1194
 
 ### 1.7.2 Consideraciones Futuras
 
-Para un entorno de producción real se recomienda:
+> Para un entorno de producción real se recomienda:
 - CARP/VRRP para redundancia de pfSense
 - Cluster de almacenamiento (GlusterFS, Ceph)
 - Balanceador de carga para servicios web
