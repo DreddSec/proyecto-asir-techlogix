@@ -165,16 +165,16 @@ Todas las máquinas virtuales utilizan **Redes Internas (Internal Network)** con
 
 ### 1.5.3 Recursos por Máquina Virtual
 
-| Servidor | RAM | CPU | Disco | Notas |
+| Servidor | RAM | CPU | Disco | Servicios |
 |----------|-----|-----|-------|-------|
-| pfSense | 2 GB | 1 | 20 GB | FreeBSD |
+| pfSense | 2 GB | 1 | 20 GB | Router/Firewall |
 | DC01 | 2 GB | 1 | 100 GB | Samba AD |
 | DC02 | 2 GB | 1 | 40 GB | Samba AD réplica |
 | FILE01 | 2 GB | 1 | 100 GB | SMB + FTP |
 | BAK01 | 2 GB | 1 | 40 GB/RAID 5 | Bacula |
 | WEB01 | 2 GB | 1 | 40 GB | LAMP + WordPress |
 | SEC01 | 2 GB | 1 | 40 GB | OpenVPN |
-| MON01 | 2 GB | 2 | 50 GB | Zabbix + Grafana |
+| MON01 | 2 GB | 2 | 50 GB | Zabbix + Grafana + Ansible|
 
 ---
 
