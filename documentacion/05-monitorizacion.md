@@ -192,8 +192,6 @@ systemctl restart grafana-server
 | CPU - All Servers | Time series | Group: *, Host: *, Item: CPU utilization |
 | Memory Usage | Gauge | Group: *, Host: *, Item: Available memory |
 | Disk Space | Bar gauge | Group: *, Host: *, Item: Free disk space |
-| Active Problems | Table | Mode: Problems |
-| Server Status | Stat | Group: *, Host: *, Item: Agent availability |
 <img width="1921" height="932" alt="grafana_dashboard" src="https://github.com/user-attachments/assets/3ce43929-5e9d-42b3-92a9-901e0e63d011" />
 
 <img width="1730" height="812" alt="datos_recientes_zabbix" src="https://github.com/user-attachments/assets/d7d01450-ce36-4085-ad3b-6b314c4565c1" />
@@ -205,7 +203,7 @@ systemctl restart grafana-server
 
 ### 5.9.1 Gestión Centralizada
 
-SRV-MON01 también funciona como servidor Ansible para gestión de configuración de todos los servidores.
+> **SRV-MON01** también funciona como servidor Ansible para gestión de configuración de todos los servidores.
 
 **Estructura:**
 
@@ -332,7 +330,6 @@ El sistema de monitorización implementado proporciona:
 
 - ✅ **Visibilidad completa:** Todos los servidores monitorizados
 - ✅ **Métricas en tiempo real:** CPU, RAM, Disco, Red
-- ✅ **Alertas proactivas:** Email ante problemas
+- ✅ **Alertas proactivas:** Alerta mediante email ante problemas
 - ✅ **Dashboards visuales:** Grafana con datos de Zabbix
-- ✅ **Automatización:** Ansible desde el mismo servidor
 - ✅ **Escalabilidad:** Fácil añadir nuevos hosts y métricas
