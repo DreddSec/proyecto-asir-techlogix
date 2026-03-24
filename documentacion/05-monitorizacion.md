@@ -51,7 +51,7 @@
 | Base de Datos | MySQL 8.0 |
 | URL | http://192.168.70.10/zabbix |
 
-### 5.3.3 Instalación
+### 5.3.2 Instalación
 
 ```bash
 # Instalar componentes
@@ -247,7 +247,7 @@ echo "Test" | mail -s "Zabbix Test" admin@techlogix.com
 
 ---
 
-## 5.12 Conclusiones
+## 5.11 Conclusiones
 
 > El sistema de monitorización implementado proporciona:
 
