@@ -84,7 +84,7 @@
 | Pass | UDP | OPT1 subnets | * | 53 | DNS |
 | Pass | TCP | OPT1 subnets | * | 80 | HTTP |
 | Pass | TCP | OPT1 subnets | * | 443 | HTTPS |
-<img width="1031" height="477" alt="OPT1_RULES" src="https://github.com/user-attachments/assets/c5df65b5-9571-46be-8bd1-3c7e949185fa" />
+<img width="1025" height="537" alt="OPT1_RULES" src="https://github.com/user-attachments/assets/90822d0b-5acd-4d78-9f30-80d39cca37a1" />
 
 
 ---
