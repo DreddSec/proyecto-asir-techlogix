@@ -415,19 +415,12 @@ ntpq -p
 
 ---
 
-## 2.9 Resumen de Puertos por Servicio
+## 2.9 Conclusiones
 
-| Servicio | Puerto | Protocolo | Servidor |
-|----------|--------|-----------|----------|
-| DNS | 53 | TCP/UDP | DC01, DC02 |
-| Kerberos | 88 | TCP/UDP | DC01, DC02 |
-| LDAP | 389 | TCP | DC01, DC02 |
-| LDAPS | 636 | TCP | DC01, DC02 |
-| SMB | 445 | TCP | DC01, DC02, FILE01 |
-| NetBIOS | 139 | TCP | DC01, DC02, FILE01 |
-| FTP | 21 | TCP | FILE01 |
-| FTP Pasivo | 40000-50000 | TCP | FILE01 |
-| HTTP | 80 | TCP | WEB01, MON01 |
-| HTTPS | 443 | TCP | ALL |
-| MySQL | 3306 | TCP | WEB01, MON01 |
-| SSH | 2222 | TCP | ALL |
+> Los servicios de red implementados en la infraestructura cumplen con:
+
+- ✅ Active Directory: Gestión centralizada de identidades, autenticación y políticas de dominio
+- ✅ Servidor DNS: Resolución de nombres confiable y redundante para toda la infraestructura
+- ✅ Servidor DHCP: Asignación automática y eficiente de direcciones IP
+- ✅ Servidor SMB/FTP: Transferencia segura de archivos con autenticación y control de acceso
+- ✅ Servidor Web (LAMP + WordPress): Plataforma web funcional con base de datos MySQL integrada
