@@ -246,12 +246,12 @@ Configurado en cada servidor con reglas específicas por rol:
 
 ## 🤖 Automatización con Ansible
 
-Desde SRV-MON01 se gestionan todos los servidores mediante playbooks:
+Desde **SRV-MON01** se gestionan todos los servidores mediante playbooks:
 
 - **securizacion.yml:** Hardening completo de servidores
 - **bacula_rclone.yml:** Configuración de sistema de backup
 
-`> Autenticación mediante claves SSH desde usuario `ansible` hacia `sysadmin` en todos los servidores.
+> `Autenticación mediante claves SSH desde usuario `ansible` hacia `sysadmin` en todos los servidores.
 
 ---
 
