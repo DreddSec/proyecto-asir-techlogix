@@ -2,7 +2,7 @@
 
 ## 4.1 Introducción
 
-Este documento describe el sistema de backup implementado en TechLogix siguiendo la **estrategia 3-2-1**, reconocida como una de las mejores prácticas en protección de datos.
+> Este documento describe el sistema de backup implementado en TechLogix siguiendo la **estrategia 3-2-1**, reconocida como una de las mejores prácticas en protección de datos.
 
 ---
 
@@ -10,7 +10,7 @@ Este documento describe el sistema de backup implementado en TechLogix siguiendo
 
 ### 4.2.1 Concepto
 
-La regla 3-2-1 establece:
+> La regla 3-2-1 establece:
 - **3** copias de los datos (original + 2 backups)
 - **2** tipos de almacenamiento diferentes
 - **1** copia offsite (fuera del sitio)
@@ -81,7 +81,7 @@ La regla 3-2-1 establece:
 
 ### 4.3.2 Configuración RAID 5
 
-Una empresa logística depende de acceso **rápido y confiable** a datos como:
+> Una empresa logística depende de acceso **rápido y confiable** a datos como:
 - **Inventario en tiempo real** — ubicación de paquetes, stock de almacenes
 - **Bases de datos de rutas** — optimización de entregas
 
