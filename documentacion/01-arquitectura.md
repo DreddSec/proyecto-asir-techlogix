@@ -66,7 +66,7 @@
 |---------|--------|--------|---------|-----------|
 | 10 | ADMIN | 192.168.10.0/24 | 192.168.10.1 | Administradores de sistemas |
 | 20 | PROD | 192.168.20.0/24 | 192.168.20.1 | Departamento de producción |
-| 30 | IT | 192.168.30.0/24 | 192.168.30.1 | Departamento técnico |
+| 30 | IT | 192.168.30.0/24 | 192.168.30.1 | Departamento IT |
 | 40 | SERVERS | 192.168.40.0/24 | 192.168.40.1 | Servidores internos |
 | 50 | WIFI_GUESTS | 192.168.50.0/24 | 192.168.50.1 | Red WiFi invitados |
 | 60 | SEC | 192.168.60.0/24 | 192.168.60.1 | VPN y seguridad |
