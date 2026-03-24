@@ -1,9 +1,7 @@
 <div align="center">
-<img width="435" height="478" alt="lgo_tech" src="https://github.com/user-attachments/assets/fedf8b10-88ab-4566-9a8a-9c2fad9e5539" alt="TechLogix" width="200"/>
-<h1>TechLogix - Infraestructura de Red Empresarial</h1>
+<img width="435" height="478" alt="lgo_tech" src="https://github.com/user-attachments/assets/fedf8b10-88ab-4566-9a8a-9c2fad9e5539" alt="TechLogix" width="150"/>
+<h1>🏢 TechLogix - Infraestructura de Red Empresarial</h1>
 </div>
-
-# 🏢 TechLogix - Infraestructura de Red Empresarial
 
 <p align="center">
   <img src="https://img.shields.io/badge/Plataforma-Ubuntu%20Server%2024.04-orange" alt="Plataforma">
