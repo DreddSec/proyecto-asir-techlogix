@@ -2,7 +2,7 @@
 
 ## 6.1 Introducción
 
-> Este documento describe la implementación de **Ansible** como herramienta de automatización para la gestión centralizada de configuraciones en la infraestructura TechLogix, implementado en el SRV-MON01 junto con el sistema de monitorización.
+> Este documento describe la implementación de **Ansible** como herramienta de automatización para la gestión centralizada de configuraciones en la infraestructura TechLogix.
 
 > **Ansible** permite ejecutar tareas de forma consistente en múltiples servidores simultáneamente, garantizando configuraciones homogéneas y reduciendo errores humanos.
 
@@ -80,7 +80,7 @@ sudo -u ansible ssh-keygen -t rsa -b 4096 -f /home/ansible/.ssh/id_rsa_ansible -
 
 ### 5.9.1 Gestión Centralizada
 
-SRV-MON01 también funciona como servidor **Ansible** para gestión de configuración de todos los servidores.
+> **SRV-MON01** también funciona como servidor **Ansible** para gestión de configuración de todos los servidores.
 
 **Estructura:**
 
@@ -152,7 +152,7 @@ ansible all -i hosts.ini -m ping -e @secrets.yml --ask-become-pass --ask-vault-p
 
 ### 6.5.1 Playbook de Securización (hardening.yml)
 
-Este playbook aplica hardening a todos los servidores de forma automatizada.
+> Este playbook aplica hardening a todos los servidores de forma automatizada.
 
 **Tareas incluidas:**
 
@@ -460,7 +460,7 @@ ansible-playbook -i hosts.ini hardening.yml -e @secrets.yml --ask-become-pass --
 
 ### 6.5.3 Playbook de Backup (bacula_rclone.yml)
 
-Este playbook configura los agentes de Bacula en todos los servidores.
+> Este playbook configura los agentes de Bacula en todos los servidores.
 
 **Archivo: bacula_rclone.yml**
 
@@ -793,8 +793,7 @@ chmod 400 /home/ansible/.ssh/id_rsa_ansible
 ```
 ### 6.6.2 Ansible Vault
 
-Para proteger información sensible se cifran con **Ansible Vault** (AES-256) 
-dos archivos con propósitos distintos:
+> Para proteger información sensible se cifran con **Ansible Vault** (AES-256) dos archivos con propósitos distintos:
 
 - `hosts.ini` — contiene IPs y estructura de red
 - `secrets.yml` — contiene contraseñas y credenciales
@@ -823,7 +822,7 @@ ansible-vault decrypt /home/ansible/secrets.yml
 ```
 ### 6.6.3 Auditoría
 
-Todas las ejecuciones de Ansible quedan registradas en los logs del sistema y son monitorizadas por auditd.
+> Todas las ejecuciones de Ansible quedan registradas en los logs del sistema y son monitorizadas por auditd.
 
 ---
 
@@ -841,7 +840,7 @@ Todas las ejecuciones de Ansible quedan registradas en los logs del sistema y so
 
 ## 6.8 Resultados
 
-La implementación de Ansible ha permitido:
+> La implementación de Ansible ha permitido:
 
 - ✅ Aplicar hardening consistente en todos los servidores
 - ✅ Reducir tiempo de configuración de horas a minutos
