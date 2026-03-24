@@ -156,6 +156,8 @@ Template estándar que monitoriza:
 | SMTP email | alertas@techlogix.com |
 | Connection security | STARTTLS |
 | Authentication | Username and password |
+
+> Ejemplo de una alerta por email por uso elevado de CPU (CPU > 80%):
 <img width="1913" height="884" alt="email_alert" src="https://github.com/user-attachments/assets/e9e78906-f9d1-4a3c-a499-2e0b7370bd72" />
 
 ---
