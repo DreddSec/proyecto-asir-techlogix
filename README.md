@@ -239,7 +239,7 @@
 
 ### Firewall Host-based (UFW)
 
-Configurado en cada servidor con reglas específicas por rol:
+> Configurado en cada servidor con reglas específicas por rol:
 - Controladores de dominio: Puertos AD/Kerberos (53, 88, 389, 445, 464, 636)
 - Servidor de archivos: SMB (445) + FTP (21)
 - Servidor VPN: OpenVPN (1194) + LDAP hacia DC
@@ -249,13 +249,13 @@ Configurado en cada servidor con reglas específicas por rol:
 
 ## 🤖 Automatización con Ansible
 
-Desde **SRV-MON01** se gestionan todos los servidores mediante playbooks:
+> Desde **SRV-MON01** se gestionan todos los servidores mediante playbooks:
  
 
 - **securizacion.yml:** Hardening completo de servidores
 - **bacula_rclone.yml:** Configuración de sistema de backup
 
- Autenticación mediante claves SSH desde usuario `ansible` hacia `sysadmin` en todos los servidores.
+ > Autenticación mediante claves SSH desde usuario `ansible` hacia `sysadmin` en todos los servidores.
 
 
 ---
