@@ -362,7 +362,7 @@ Messages {
 }
 ```
 
-> El campo `Name` y `FDAddress` cambian en cada servidor: `dc02-fd / 192.168.40.11`, `file01-fd / 192.168.40.12`, `web01-fd / IP_WEB01`, etc.
+> El campo `Name` y `FDAddress` cambian en cada servidor: [ej.`dc02-fd / 192.168.40.14`].
 
 ### 4.4.5 Configuración del Storage Daemon
 
@@ -625,7 +625,7 @@ fi
 
 ## 4.9 Conclusiones
 
-El sistema de backup implementado cumple con:
+> El sistema de backup implementado cumple con:
 
 - ✅ **Estrategia 3-2-1:** 3 copias, 2 medios, 1 offsite
 - ✅ **Automatización:** Backups programados sin intervención midante scripts en bash
