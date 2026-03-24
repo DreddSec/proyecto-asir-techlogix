@@ -396,7 +396,7 @@ FLUSH PRIVILEGES;
 
 ### 2.8.1 Importancia
 
-La sincronización horaria es crítica para:
+> La sincronización horaria es crítica para:
 - Autenticación Kerberos (tolerancia de 5 minutos)
 - Correlación de logs
 - Certificados y timestamps
@@ -428,6 +428,6 @@ ntpq -p
 | FTP | 21 | TCP | FILE01 |
 | FTP Pasivo | 40000-50000 | TCP | FILE01 |
 | HTTP | 80 | TCP | WEB01, MON01 |
-| HTTPS | 443 | TCP | WEB01 |
-| MySQL | 3306 | TCP | WEB01 |
-| SSH | 2222 | TCP | Todos |
+| HTTPS | 443 | TCP | ALL |
+| MySQL | 3306 | TCP | WEB01, MON01 |
+| SSH | 2222 | TCP | ALL |
