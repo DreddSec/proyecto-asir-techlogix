@@ -283,7 +283,7 @@ Desde SRV-MON01 se gestionan todos los servidores mediante playbooks:
 
 ## 👤 Autor
 
-**Viktor Paulauskis**
+> **Viktor Paulauskis**
 - Ciclo Formativo: *ASIR* (Administración de Sistemas Informáticos en Red)
 - Curso impartido por: **CEAC**, respaldado por la *Asociación de Técnicos de Informática* (ATI) y el *Instituto Nebrija*.
 ---
