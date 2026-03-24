@@ -194,9 +194,6 @@ systemctl restart grafana-server
 | Disk Space | Bar gauge | Group: *, Host: *, Item: Free disk space |
 <img width="1921" height="932" alt="grafana_dashboard" src="https://github.com/user-attachments/assets/3ce43929-5e9d-42b3-92a9-901e0e63d011" />
 
-<img width="1730" height="812" alt="datos_recientes_zabbix" src="https://github.com/user-attachments/assets/d7d01450-ce36-4085-ad3b-6b314c4565c1" />
-
-
 ---
 
 ## 5.9 Ansible para Monitorización
