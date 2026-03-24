@@ -295,7 +295,7 @@
 ---
 
 ## Conclusión final del proyecto:
-> Durante este ciclo formativo de ASIR, he comprendido que la administración de sistemas informáticos en red no se reduce a la configuración de herramientas, sino a la construcción de infraestructuras confiables que equilibren seguridad, disponibilidad y eficiencia operacional. Este proyecto ha evidenciado una verdad fundamental: la seguridad no es un componente aislado, sino un principio que debe permear cada capa de la infraestructura, desde la segmentación de redes hasta la protección de datos y la continuidad del servicio.
+> Durante este ciclo formativo de ASIR, he comprendido que la administración de sistemas informáticos en red no se reduce a la configuración de herramientas, sino a la construcción de infraestructuras confiables que equilibren seguridad, disponibilidad y eficiencia operacional. Este proyecto me ha evidenciado una verdad fundamental: la seguridad no es un componente aislado, sino un principio que debe permear cada capa de la infraestructura, desde la segmentación de redes hasta la protección de datos y la continuidad del servicio.
 
 > He aprendido que la disponibilidad de los sistemas es un compromiso con los usuarios y el negocio, y que la redundancia, la automatización y el monitoreo constante son pilares indispensables para cumplir con ese compromiso. Asimismo, reconozco que la resiliencia de una infraestructura depende más de decisiones arquitectónicas conscientes que de la cantidad de recursos invertidos. Un administrador de sistemas debe pensar como un gestor de riesgos, anticipando fallos y diseñando soluciones que minimicen el impacto de lo inevitable.
 
