@@ -2,7 +2,7 @@
 
 ## 2.1 Introducción
 
-Este documento describe los servicios de red implementados en la infraestructura TechLogix, incluyendo Active Directory, DNS, DHCP, servidor de archivos (SMB/FTP) y servidor web.
+> Este documento describe los servicios de red implementados en la infraestructura TechLogix, incluyendo **Active Directory**, **DNS**, **DHCP**, servidor de archivos SMB/FTP y servidor web.
 
 ---
 
@@ -10,7 +10,7 @@ Este documento describe los servicios de red implementados en la infraestructura
 
 ### 2.2.1 Descripción General
 
-Se ha implementado un dominio Active Directory utilizando **Samba 4** como alternativa open source a Windows Server. Esto proporciona:
+> Se ha implementado un dominio Active Directory utilizando **Samba 4** como alternativa open source a Windows Server. Esto proporciona:
 
 - Autenticación centralizada
 - Políticas de grupo (GPO)
