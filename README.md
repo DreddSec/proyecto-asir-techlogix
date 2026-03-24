@@ -283,6 +283,7 @@ Desde **SRV-MON01** se gestionan todos los servidores mediante playbooks:
 - [Seguridad](documentacion/03-seguridad.md)
 - [Sistema de Backup](documentacion/04-backup.md)
 - [Monitorización](documentacion/05-monitorizacion.md)
+- [Automatización](documentacion/06-automaticacion.md)
 
 ---
 
