@@ -1,5 +1,6 @@
 <div align="center">
 <img width="435" height="478" alt="lgo_tech" src="https://github.com/user-attachments/assets/fedf8b10-88ab-4566-9a8a-9c2fad9e5539" alt="TechLogix" width="200"/>
+<p><strong>TechLogix - Infraestructura de Red Empresarial</strong></p>
 </div>
 
 # 🏢 TechLogix - Infraestructura de Red Empresarial
