@@ -117,13 +117,13 @@ Zona desmilitarizada para servicios públicos (web). Aislada de la red interna.
 
 | Servidor | Hostname | IP | VLAN |
 |----------|----------|-----|------|
-| Controlador Dominio 1 | SRV-DC01 | 192.168.40.10 | 40 |
-| Controlador Dominio 2 | SRV-DC02 | 192.168.40.14 | 40 |
-| Servidor Archivos | SRV-FILE01 | 192.168.40.12 | 40 |
-| Servidor Backup | SRV-BAK01 | 192.168.40.13 | 40 |
-| Servidor Web | SRV-WEB01 | 192.168.100.8 | 100 |
-| Servidor Seguridad | SRV-SEC01 | 192.168.60.10 | 60 |
-| Servidor Monitorización | SRV-MON01 | 192.168.70.10 | 70 |
+| Controlador Dominio 1 | SRV-DC01 | 192.168.40.10 | SERVERS |
+| Controlador Dominio 2 | SRV-DC02 | 192.168.40.14 | SERVERS |
+| Servidor Archivos | SRV-FILE01 | 192.168.40.12 | SERVERS |
+| Servidor Backup | SRV-BAK01 | 192.168.40.13 | SERVERS |
+| Servidor Web | SRV-WEB01 | 192.168.100.8 | DMZ |
+| Servidor Seguridad | SRV-SEC01 | 192.168.60.10 | SEC |
+| Servidor Monitorización | SRV-MON01 | 192.168.70.10 | MON |
 
 ### 1.4.2 Clientes
 
@@ -142,8 +142,8 @@ Zona desmilitarizada para servicios públicos (web). Aislada de la red interna.
 | pfSense OPT1 | 192.168.100.1 | em2 | Gateway DMZ |
 | pfSense OPT2 | 192.168.60.1 | em3 | Gateway Security |
 | pfSense OPT3 | 192.168.70.1 | em4 | Gateway Monitoring |
-| pfSense OPT4 | 192.168.10.1 | em5 | Gateway Admin |
-| pfSense OPT5 | 192.168.20.1 | em6 | Gateway Prod |
+| pfSense OPT4 | 192.168.10.1 | em5 | Gateway Administration |
+| pfSense OPT5 | 192.168.20.1 | em6 | Gateway Producction |
 | pfSense OPT6 | 192.168.30.1 | em7 | Gateway IT |
 | pfsense OPT7 | 192.168.50.1 | em8 | Gateway WIFI_GUESTS |
 
