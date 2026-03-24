@@ -2,7 +2,7 @@
 
 ## 3.1 Introducción
 
-Este documento describe las medidas de seguridad implementadas en la infraestructura TechLogix siguiendo el principio de **defensa en profundidad** con múltiples capas de protección.
+> Este documento describe las medidas de seguridad implementadas en la infraestructura TechLogix siguiendo el principio de **defensa en profundidad** con múltiples capas de protección.
 
 ---
 
@@ -34,12 +34,6 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 │           Autenticación AD + Permisos Granulares                │
 │                    Cifrado (TLS/SSL)                            │
 └─────────────────────────────────────────────────────────────────┘
-                                │
-┌─────────────────────────────────────────────────────────────────┐
-│                       CAPA 5: DATOS                             │
-│              Backup 3-2-1 + RAID + Cifrado                      │
-│                   Permisos de Archivos                          │
-└─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -61,7 +55,7 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 <img width="1025" height="210" alt="WAN_RULESFW" src="https://github.com/user-attachments/assets/7699510d-402f-484e-86b5-b373f2cadca3" />
 
 
-
+---
 #### LAN (Servers - 192.168.40.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
@@ -73,8 +67,9 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | TCP | 192.168.40.13 | OPT1 subnets | 9102 | Bacula Director → FD WEB01 |
 | Pass | TCP | 192.168.40.13 | OPT2 subnets | 9102 | Bacula Director → FD SEC01 |
 | Pass | TCP | 192.168.40.13 | OPT3 subnets | 9102 | Bacula Director → FD MON01 |
+<img width="1022" height="506" alt="LAN_RULES" src="https://github.com/user-attachments/assets/5edfdc0d-1172-4335-a791-47b1d9942c00" />
 
-
+---
 #### OPT1 (DMZ - 192.168.100.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
@@ -91,7 +86,7 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | TCP | OPT1 subnets | * | 443 | HTTPS |
 <img width="1022" height="499" alt="OPT1_RULES" src="https://github.com/user-attachments/assets/f3bdb585-e5b5-4851-862c-2e7bb8df97bc" />
 
-
+---
 #### OPT2 (Security/VPN - 192.168.60.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
@@ -109,7 +104,7 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | TCP | OPT2 subnets | * | 443 | HTTPS |
 <img width="1022" height="641" alt="OPT2_RULES" src="https://github.com/user-attachments/assets/c4442665-a275-4522-87c4-1db350be0ae5" />
 
-
+---
 #### OPT3 (Monitoring - 192.168.70.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
@@ -126,7 +121,7 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | TCP | OPT3 subnets | * | 443 | HTTPS |
 <img width="1024" height="528" alt="OPT3_RULES" src="https://github.com/user-attachments/assets/1026fff4-d97d-4428-ae63-5e391777b598" />
 
-
+---
 #### OPT4 (Admin - 192.168.10.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
@@ -145,7 +140,7 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | TCP | OPT4 subnets | * | 443 | HTTPS |
 <img width="910" height="556" alt="OPT4_RULES" src="https://github.com/user-attachments/assets/b1b9359a-2f99-4d87-8013-23926bd2716e" />
 
-
+---
 #### OPT5 (Producción - 192.168.20.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
@@ -163,9 +158,8 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | TCP | OPT5 subnets | * | 443 | HTTPS |
 <img width="1025" height="504" alt="OPT5_RULES" src="https://github.com/user-attachments/assets/bf69b2c6-9429-4ae6-b5f9-ca5dfbf0f470" />
 
-
+---
 #### OPT6 (IT — 192.168.30.0/24)
-
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
 | Block | * | OPT6 subnets | OPT1 subnets | * | Block → DMZ |
@@ -185,9 +179,8 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 | Pass | TCP | OPT6 subnets | * | 443 | HTTPS |
 <img width="1022" height="532" alt="OPT6_RULES" src="https://github.com/user-attachments/assets/e40816c2-5409-4317-b99d-e75dfc7bc957" />
 
-
+----
 #### OPT7 (WiFi Guests — 192.168.50.0/24)
-
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
 | Block | * | OPT7 subnets | 192.168.0.0/16 | * | Block → red privada |
@@ -212,7 +205,7 @@ Este documento describe las medidas de seguridad implementadas en la infraestruc
 
 ### 3.4.2 Reglas Activadas (IPS Policy)
 
-- Politicas IPS predefenidas en las siguientes interfaces:
+> Politicas IPS predefenidas en las siguientes interfaces:
 
 | Interfaz | Politica |
 |-----------|-------------|
@@ -557,7 +550,7 @@ ufw allow from 192.168.40.13 to any port 9101:9104 proto tcp comment "Bacula"
 
 ## 3.9 Conclusiones
 
-La implementación de seguridad sigue las mejores prácticas:
+> La implementación de seguridad sigue las mejores prácticas:
 
 - ✅ **Defensa en profundidad:** Múltiples capas de seguridad
 - ✅ **Mínimo privilegio:** Solo se conceden los permisos necesarios
