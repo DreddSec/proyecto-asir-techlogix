@@ -419,8 +419,8 @@ ntpq -p
 
 > Los servicios de red implementados en la infraestructura cumplen con:
 
-- ✅ Active Directory: Gestión centralizada de identidades, autenticación y políticas de dominio
-- ✅ Servidor DNS: Resolución de nombres confiable y redundante para toda la infraestructura
-- ✅ Servidor DHCP: Asignación automática y eficiente de direcciones IP
+- ✅ Active Directory: Autenticacion centralizada con Samba 4 y GPO
+- ✅ Servidor DNS: Resolución de nombres mediante DNS Resolver y Overrides
+- ✅ Servidor DHCP: Asignación automática de direcciones IP por VLAN
 - ✅ Servidor SMB/FTP: Transferencia segura de archivos con autenticación y control de acceso
-- ✅ Servidor Web (LAMP + WordPress): Plataforma web funcional con base de datos MySQL integrada
+- ✅ Servidor Web (LAMP + WordPress): Stack LAMP con Wordpress y base de datos MySQL integrada
