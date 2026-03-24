@@ -1,5 +1,5 @@
 <div align="center">
-<img width="435" height="478" alt="lgo_tech" src="https://github.com/user-attachments/assets/fedf8b10-88ab-4566-9a8a-9c2fad9e5539" alt="TechLogix" width="150" height="150"/>
+<img width="435" height="478" alt="lgo_tech" src="https://github.com/user-attachments/assets/fedf8b10-88ab-4566-9a8a-9c2fad9e5539" alt="TechLogix" width="150" height="150" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"/>
 <h1>🏢 TechLogix - Infraestructura de Red Empresarial</h1>
 </div>
 
