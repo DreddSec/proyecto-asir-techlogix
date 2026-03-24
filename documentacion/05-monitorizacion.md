@@ -2,7 +2,7 @@
 
 ## 5.1 Introducción
 
-Este documento describe el sistema de monitorización implementado en TechLogix utilizando **Zabbix** como plataforma principal y **Grafana** para visualización avanzada.
+> Este documento describe el sistema de monitorización implementado en TechLogix utilizando **Zabbix** como plataforma principal y **Grafana** para visualización avanzada.
 
 ---
 
