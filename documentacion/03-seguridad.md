@@ -53,6 +53,7 @@
 |--------|-----------|--------|---------|--------|-------------|
 | Pass | UDP | * | 192.168.60.10 | 1194 | OpenVPN NAT Port Forward |
 <img width="1025" height="210" alt="WAN_RULESFW" src="https://github.com/user-attachments/assets/7699510d-402f-484e-86b5-b373f2cadca3" />
+<img width="1023" height="212" alt="port_forward_vpn" src="https://github.com/user-attachments/assets/7ccccf25-a278-4ef9-885c-ad9290fb519b" />
 
 
 ---
