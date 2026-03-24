@@ -2,9 +2,9 @@
 
 ## 6.1 Introducción
 
-Este documento describe la implementación de **Ansible** como herramienta de automatización para la gestión centralizada de configuraciones en la infraestructura TechLogix.
+> Este documento describe la implementación de **Ansible** como herramienta de automatización para la gestión centralizada de configuraciones en la infraestructura TechLogix, implementado en el SRV-MON01 junto con el sistema de monitorización.
 
-**Ansible** permite ejecutar tareas de forma consistente en múltiples servidores simultáneamente, garantizando configuraciones homogéneas y reduciendo errores humanos.
+> **Ansible** permite ejecutar tareas de forma consistente en múltiples servidores simultáneamente, garantizando configuraciones homogéneas y reduciendo errores humanos.
 
 ---
 
