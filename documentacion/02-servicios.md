@@ -124,7 +124,7 @@ TECHLOGIX.LOCAL
 
 ### 2.3.2 Domain Override en pfSense
 
-- Para que las consultas del dominio interno se resuelvan correctamente:
+> Para que las consultas del dominio interno se resuelvan correctamente:
 
 **Services → DNS Resolver → Domain Overrides:**
 
