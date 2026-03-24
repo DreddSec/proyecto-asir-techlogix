@@ -12,7 +12,7 @@
 
 ## 📋 Descripción del Proyecto
 
-La empresa **TechLogix**, dedicada a la gestión logística, ha decidido modernizar su infraestructura de red para mejorar la eficiencia operativa y garantizar la seguridad de sus datos. Este proyecto se centra en el diseño e implementación de una red informática que soporte sus operaciones, incluyendo la configuración de servidores (On-Premise), dispositivos de red, y la implementación de políticas de seguridad.
+> La empresa **TechLogix**, dedicada a la gestión logística, ha decidido modernizar su infraestructura de red para mejorar la eficiencia operativa y garantizar la seguridad de sus datos. Este proyecto se centra en el diseño e implementación de una red informática que soporte sus operaciones, incluyendo la configuración de servidores (On-Premise), dispositivos de red, y la implementación de políticas de seguridad.
 
 ---
 
