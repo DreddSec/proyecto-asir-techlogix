@@ -375,8 +375,8 @@ smbclient //192.168.40.12/it
 
 ```sql
 CREATE DATABASE wordpress;
-CREATE USER 'wp_user'@'localhost' IDENTIFIED BY '[PASSWORD]';
-GRANT ALL PRIVILEGES ON wordpress.* TO 'wp_user'@'localhost';
+CREATE USER 'wpuser'@'localhost' IDENTIFIED BY '[PASSWORD]';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'wpuser'@'localhost';
 FLUSH PRIVILEGES;
 ```
 <img width="636" height="704" alt="mysql" src="https://github.com/user-attachments/assets/7f6fcaf7-8c7f-4d20-919a-4d9cdb8dbcbc" />
