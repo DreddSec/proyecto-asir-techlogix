@@ -91,19 +91,21 @@
 #### OPT2 (Security/VPN - 192.168.60.0/24)
 | Acción | Protocolo | Origen | Destino | Puerto | Descripción |
 |--------|-----------|--------|---------|--------|-------------|
-| Pass | ICMP | OPT2 subnets | 192.168.40.10 | * | ICMP → DC01 |
-| Pass | TCP/UDP | OPT2 subnets | 192.168.40.10 | 88 | Kerberos → DC01 |
+| Pass | TCP/UDP | 10.8.0.0/24 | 192.168.40.10 | 88 | VPN to Kerberos |
 | Pass | TCP/UDP | OPT2 subnets | 192.168.40.10 | 389 | LDAP → DC01 |
+| Pass | TCP/UDP | 10.8.0.0/24 | 192.168.40.10 | 389 | VPN to DC |
 | Pass | TCP/UDP | OPT2 subnets | 192.168.40.10 | 636 | LDAPS → DC01 |
-| Pass | TCP/UDP | OPT2 subnets | 192.168.40.10 | 53 | DNS → DC01 |
-| Pass | TCP | OPT2 subnets | 192.168.40.12 | 445 | SMB → FILE01 |
-| Pass | TCP | OPT2 subnets | 192.168.40.12 | 21 | FTP → FILE01 |
+| Pass | TCP/UDP | 10.8.0.0/24 | 192.168.40.10 | 636 | VPN to DC |
+| Pass | TCP/UDP | 10.8.0.0/24 | 192.168.40.10 | 53 | VPN to DNS |
+| Pass | TCP | 10.8.0.0/24 | 192.168.40.12 | 445 | VPN to SMB |
+| Pass | TCP | 10.8.0.0/24 | 192.168.40.12 | 21 | VPN to FTP |
 | Pass | TCP | OPT2 subnets | OPT3 subnets | 10051 | Zabbix active checks (SEC01 → MON01) |
 | Pass | TCP | OPT2 subnets | 192.168.40.13 | 9103 | Bacula FD → SD (SEC01 → BAK01) |
 | Pass | UDP | OPT2 subnets | * | 53 | DNS general |
 | Pass | TCP | OPT2 subnets | * | 80 | HTTP |
 | Pass | TCP | OPT2 subnets | * | 443 | HTTPS |
-<img width="1022" height="641" alt="OPT2_RULES" src="https://github.com/user-attachments/assets/c4442665-a275-4522-87c4-1db350be0ae5" />
+<img width="1027" height="598" alt="OPT2_RULES" src="https://github.com/user-attachments/assets/3ca70679-9f19-4908-b6c9-39755eab550c" />
+
 
 ---
 #### OPT3 (Monitoring - 192.168.70.0/24)
