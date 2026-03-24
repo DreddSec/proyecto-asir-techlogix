@@ -76,9 +76,9 @@ sudo passwd ansible
 sudo -u ansible ssh-keygen -t rsa -b 4096 -f /home/ansible/.ssh/id_rsa_ansible -N ""
 ```
 
-## 5.9 Ansible para Monitorización
+## 6.4 Ansible para Monitorización
 
-### 5.9.1 Gestión Centralizada
+### 6.4.1 Gestión Centralizada
 
 > **SRV-MON01** también funciona como servidor **Ansible** para gestión de configuración de todos los servidores.
 
@@ -92,7 +92,7 @@ sudo -u ansible ssh-keygen -t rsa -b 4096 -f /home/ansible/.ssh/id_rsa_ansible -
 └── bacula_rclone.yml   # Playbook de backup
 ```
 
-### 6.3.3 Distribuir Clave SSH
+### 6.4.2 Distribuir Clave SSH
 
 ```bash
 # Copiar clave a cada servidor (ejecutar para cada uno)
@@ -101,9 +101,9 @@ sudo -u ansible ssh-copy-id -i /home/ansible/.ssh/id_rsa_ansible.pub -p 2222 sys
 
 ---
 
-## 6.4 Inventario
+## 6.5 Inventario
 
-### 6.4.1 Archivo hosts.ini
+### 6.5.1 Archivo hosts.ini
 
 ```ini
 [all:vars]
@@ -137,7 +137,7 @@ web_servers
 security_servers
 ```
 
-### 6.4.2 Verificar Conectividad
+### 6.5.2 Verificar Conectividad
 
 ```bash
 # Desde usuario ansible en MON01
@@ -148,9 +148,9 @@ ansible all -i hosts.ini -m ping -e @secrets.yml --ask-become-pass --ask-vault-p
 
 ---
 
-## 6.5 Playbooks Implementados
+## 6.6 Playbooks Implementados
 
-### 6.5.1 Playbook de Securización (hardening.yml)
+### 6.6.1 Playbook de Securización (hardening.yml)
 
 > Este playbook aplica hardening a todos los servidores de forma automatizada.
 
@@ -458,7 +458,7 @@ ansible-playbook -i hosts.ini hardening.yml -e @secrets.yml --ask-become-pass --
 
 ---
 
-### 6.5.3 Playbook de Backup (bacula_rclone.yml)
+### 6.6.3 Playbook de Backup (bacula_rclone.yml)
 
 > Este playbook configura los agentes de Bacula en todos los servidores.
 
@@ -781,9 +781,9 @@ ansible-playbook -i hosts.ini hardening.yml -e @secrets.yml --ask-become-pass --
 
 ---
 
-## 6.6 Seguridad de Ansible
+## 6.7 Seguridad de Ansible
 
-### 6.6.1 Protección de Archivos
+### 6.7.1 Protección de Archivos
 
 ```bash
 # Permisos restrictivos
@@ -791,7 +791,7 @@ chmod 600 /home/ansible/hosts.ini
 chmod 600 /home/ansible/*.yml
 chmod 400 /home/ansible/.ssh/id_rsa_ansible
 ```
-### 6.6.2 Ansible Vault
+### 6.7.2 Ansible Vault
 
 > Para proteger información sensible se cifran con **Ansible Vault** (AES-256) dos archivos con propósitos distintos:
 
@@ -820,13 +820,13 @@ ansible-vault edit /home/ansible/secrets.yml
 ansible-vault decrypt /home/ansible/hosts.ini
 ansible-vault decrypt /home/ansible/secrets.yml
 ```
-### 6.6.3 Auditoría
+### 6.7.3 Auditoría
 
 > Todas las ejecuciones de Ansible quedan registradas en los logs del sistema y son monitorizadas por auditd.
 
 ---
 
-## 6.7 Comandos Útiles
+## 6.8 Comandos Útiles
 
 | Comando | Descripción |
 |---------|-------------|
@@ -838,7 +838,7 @@ ansible-vault decrypt /home/ansible/secrets.yml
 
 ---
 
-## 6.8 Resultados
+## 6.9 Resultados
 
 > La implementación de Ansible ha permitido:
 
