@@ -204,9 +204,9 @@
 <img width="1026" height="316" alt="SNORT" src="https://github.com/user-attachments/assets/62d2aa53-71e2-419b-888a-4670bb068046" />
 
 
-### 3.4.2 Reglas Activadas (IPS Policy)
+### 3.4.2 Reglas Activadas (IDS Policy)
 
-> Politicas IPS predefenidas en las siguientes interfaces:
+> Politicas IDS predefenidas en las siguientes interfaces:
 
 | Interfaz | Politica |
 |-----------|-------------|
