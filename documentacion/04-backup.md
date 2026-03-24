@@ -632,4 +632,4 @@ El sistema de backup implementado cumple con:
 - ✅ **Redundancia local:** RAID 5 protege contra fallo de 1 disco
 - ✅ **Offsite:** Google Drive para recuperación ante desastres
 - ✅ **Almacenamiento:** Full, Diferencial, Incremental
-- ✅ **Monitorización:** Alertas y verificación de integridad
+- ✅ **Restauración:** Restaurar datos mediante Bacula
