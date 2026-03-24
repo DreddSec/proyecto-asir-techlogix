@@ -124,7 +124,7 @@ TECHLOGIX.LOCAL
 
 ### 2.3.2 Domain Override en pfSense
 
-Para que las consultas del dominio interno se resuelvan correctamente:
+- Para que las consultas del dominio interno se resuelvan correctamente:
 
 **Services → DNS Resolver → Domain Overrides:**
 
@@ -152,7 +152,7 @@ Para que las consultas del dominio interno se resuelvan correctamente:
 
 ### 2.4.1 Configuración por VLAN
 
-El servicio DHCP se proporciona desde **pfSense** para cada VLAN de clientes:
+- El servicio DHCP se proporciona desde **pfSense** para cada VLAN de clientes:
 
 | VLAN | Rango DHCP | Gateway | DNS |
 |------|------------|---------|-----|
@@ -164,14 +164,14 @@ El servicio DHCP se proporciona desde **pfSense** para cada VLAN de clientes:
 
 <img width="761" height="719" alt="dhcp-server-opt7" src="https://github.com/user-attachments/assets/54a00925-594a-44e1-9c10-4eb98b499ff2" />
  
- **WIFI_GUESTS** usa *DNS público* (8.8.8.8) para evitar acceso a resolución de nombres internos.
+ > **WIFI_GUESTS** usa *DNS público* (8.8.8.8) para evitar acceso a resolución de nombres internos.
 
 
 ## 2.5 Servidor de Archivos (SMB)
 
 ### 2.5.1 Descripción
 
-SRV-FILE01 actúa como servidor de archivos utilizando Samba integrado con el dominio Active Directory para autenticación y permisos basados en grupos.
+> **SRV-FILE01** actúa como servidor de archivos utilizando Samba integrado con el dominio Active Directory para autenticación y permisos basados en grupos.
 
 ### 2.5.2 Estructura de Carpetas
 
@@ -274,12 +274,12 @@ drwxrwsr-x /srv/compartido/comun
 <img width="1132" height="638" alt="win_smb" src="https://github.com/user-attachments/assets/dc886afd-7f89-4525-9385-6337b7257053" />
 <img width="1219" height="638" alt="carlos_smb_admin" src="https://github.com/user-attachments/assets/8eba804d-8269-4663-86ba-65d3a91d91ff" />
 
-- **Carlos Ruiz** inicio sesion en su workstation y pudo acceder sin problemas a la carpeta administracion debido a sus permisos.
+> **Carlos Ruiz** inicio sesion en su workstation y pudo acceder sin problemas a la carpeta administracion debido a sus permisos.
 
 
 <img width="885" height="727" alt="acceso_deny_smb" src="https://github.com/user-attachments/assets/b84a284c-977a-4628-ba20-6c2d1761a9e2" />
 
-- Intentando acceder a una carpeta sin los permisos necesarios.
+> Intentando acceder a una carpeta sin los permisos necesarios.
 
 **Linux:**
 ```bash
@@ -293,7 +293,7 @@ mount -t cifs //192.168.40.12/IT /mnt/it -o user=david.garcia
 
 ### 2.6.1 Descripción
 
-Configurado en SRV-FILE01 *vsftpd* para transferencias de archivos seguras, principalmente utilizado por personal IT mediante acceso VPN.
+> Configurado en SRV-FILE01 *vsftpd* para transferencias de archivos seguras, principalmente utilizado por personal IT mediante acceso VPN.
 
 ### 2.6.2 Configuración
 
@@ -321,7 +321,7 @@ pasv_max_port=10100
 
 ### 2.6.3 Acceso via VPN
 
-Los usuarios IT conectan mediante *VPN* y acceden al servidor FTP:
+Los usuarios IT se conectan mediante **VPN** y acceden al servidor FTP:
 
 ```bash
 # Conexion conarchivo .opvn del cliente
@@ -406,7 +406,7 @@ La sincronización horaria es crítica para:
 
 ### 2.8.2 Configuración
 
-Todos los servidores sincronizan contra pfSense, que a su vez sincroniza contra servidores NTP públicos.
+> Todos los servidores sincronizan contra pfSense, que a su vez sincroniza contra servidores NTP públicos.
 
 ```bash
 # Verificar sincronización
