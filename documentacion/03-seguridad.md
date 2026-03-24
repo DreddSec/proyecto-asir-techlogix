@@ -84,7 +84,8 @@
 | Pass | UDP | OPT1 subnets | * | 53 | DNS |
 | Pass | TCP | OPT1 subnets | * | 80 | HTTP |
 | Pass | TCP | OPT1 subnets | * | 443 | HTTPS |
-<img width="1022" height="499" alt="OPT1_RULES" src="https://github.com/user-attachments/assets/f3bdb585-e5b5-4851-862c-2e7bb8df97bc" />
+<img width="1031" height="477" alt="OPT1_RULES" src="https://github.com/user-attachments/assets/c5df65b5-9571-46be-8bd1-3c7e949185fa" />
+
 
 ---
 #### OPT2 (Security/VPN - 192.168.60.0/24)
