@@ -2,9 +2,9 @@
 
 ## 1.1 Introducción
 
-Este documento describe la arquitectura de red diseñada e implementada para la empresa ***TechLogix***, una compañía dedicada a la gestión logística que requiere una infraestructura moderna, segura y escalable.
+> Este documento describe la arquitectura de red diseñada e implementada para la empresa ***TechLogix***, una compañía dedicada a la gestión logística que requiere una infraestructura moderna, segura y escalable.
 
-La arquitectura sigue un modelo de defensa en profundidad con múltiples capas de seguridad, segmentación mediante VLANs, y servicios centralizados para facilitar la administración.
+> La arquitectura sigue un modelo de defensa en profundidad con múltiples capas de seguridad, segmentación mediante VLANs, y servicios centralizados para facilitar la administración.
 
 ---
 
@@ -12,7 +12,7 @@ La arquitectura sigue un modelo de defensa en profundidad con múltiples capas d
 
 ### 1.2.1 Diseño General
 
-Se ha implementado una **topología en estrella** con pfSense como núcleo central de enrutamiento y seguridad. Esta topología facilita:
+> Se ha implementado una **topología en estrella** con pfSense como núcleo central de enrutamiento y seguridad. Esta topología facilita:
 
 - Mantenimiento centralizado
 - Escalabilidad horizontal
@@ -75,14 +75,14 @@ Se ha implementado una **topología en estrella** con pfSense como núcleo centr
 
 ### 1.3.2 Justificación de la Segmentación
 
-**VLAN 10 - ADMIN:** 
+> **VLAN 10 - ADMIN:** 
 Aislamiento de equipos de administradores con acceso privilegiado a todos los recursos internos excepto DMZ y WiFi Guests.
 
-**VLAN 20 - PROD:**
+> **VLAN 20 - PROD:**
 Departamento de producción con acceso limitado a servidor de archivos (SMB) y servicios de dominio.
 
 **VLAN 30 - IT:**
-Personal técnico con acceso a DMZ y servidores vía SSH, SMB y herramientas de monitorización, ademas de acceso remoto mediante VPN.
+> Personal técnico con acceso a DMZ y servidores vía SSH, SMB y herramientas de monitorización, ademas de acceso remoto mediante VPN.
 
 **VLAN 40 - SERVERS:**
 Red de servidores internos protegida. Solo accesible desde VLANs autorizadas en puertos específicos.
