@@ -280,8 +280,8 @@ drwxrwsr-x /srv/compartido/comun
 
 **Linux:**
 ```bash
-smbclient //192.168.40.12/IT -U david.garcia
-mount -t cifs //192.168.40.12/IT /mnt/it -o user=david.garcia
+smbclient //192.168.40.12/ -U [USER]
+mount -t cifs //192.168.40.12/IT /mnt/it -o user=[USER]
 ```
 
 ---
