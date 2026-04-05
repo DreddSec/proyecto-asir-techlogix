@@ -260,7 +260,7 @@
 
 ---
 
-## 🚀 Tecnologías Utilizadas
+## 🛠 Tecnologías Utilizadas
 
 <p align="center">
   <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" alt="Ubuntu">
